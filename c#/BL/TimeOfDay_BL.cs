@@ -10,13 +10,7 @@ namespace BL
 {
     public class TimeOfDay_BL
     {
-         TimeOfDay_DAL _TimeOfDay_DAL = new TimeOfDay_DAL();
-
-        public TimeOfDay Get()
-        {
-            return _TimeOfDay_DAL.Get();
-        }
-
+        TimeOfDay_DAL _TimeOfDay_DAL = new TimeOfDay_DAL();
         public void AddOrEdit(TimeOfDay details)
         {
             if (details.timeId == 0)
@@ -28,6 +22,11 @@ namespace BL
                 _TimeOfDay_DAL.Edit(details);
             }
         }
+        public TimeOfDay Get()
+        {
+            return _TimeOfDay_DAL.Get();
+        }
+        
 
         //public void Delete()
         //{

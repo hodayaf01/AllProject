@@ -9,12 +9,11 @@ namespace DAL.HMO_DB_DAL
 {
     public class KingOfDosageDAL
     {
-        Models.HMO_DBEntities _DB = new HMO_DBEntities();
+        HMO_DBEntities _DB = new HMO_DBEntities();
 
-        public KingOfDosage Get()
+        public List<KingOfDosage> Get()
         {
-            var res = _DB.KingOfDosages.ToList().FirstOrDefault();
-            res = res == null ? new KingOfDosage() : res;
+            var res = _DB.KingOfDosages.ToList();
             return res;
         }
     }

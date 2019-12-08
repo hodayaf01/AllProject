@@ -11,10 +11,10 @@ namespace DAL.HMO_DB_DAL
     {
         HMO_DBEntities _DB = new HMO_DBEntities();
 
-        public Medicine Get()
+        public List<Medicine> Get()
         {
-            var res = _DB.Medicines.ToList().FirstOrDefault();
-            res = res == null ? new Medicine() : res;
+            var res = _DB.Medicines.ToList();
+            //res = res == null ? new Medicine() : res;
             return res;
         }
     }

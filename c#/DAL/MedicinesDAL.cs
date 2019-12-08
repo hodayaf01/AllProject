@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using DAL.HMO_DB_DAL;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,17 @@ namespace DAL
     public class MedicinesDAL
     {
         MediDBEntities _DB = new MediDBEntities();
+        //HMO_DBEntities _HMO_DB = new HMO_DBEntities();
+        Medicines_DAL _MedicinesInHMO_DAL = new HMO_DB_DAL.Medicines_DAL();
+        public void Add()
+        {
+            List<Medicine> medicines = _MedicinesInHMO_DAL.Get();
+            foreach (var item in medicines)
+            {
+                _DB.Medicines.Add(new Medicine() {medicineId= item.medicineId, midicineName=item.midicineName});
+            }           
+            _DB.SaveChanges();
+        }
 
         public Medicine Get()
         {
@@ -17,13 +29,7 @@ namespace DAL
             res = res == null ? new Medicine() : res;
             return res;
         }
-
-        public void Add(Medicine details)
-        {
-            _DB.Medicines.Add(details);
-            _DB.SaveChanges();
-        }
-
+       
         public void Edit(Medicine details)
         {
             _DB.Entry(details);

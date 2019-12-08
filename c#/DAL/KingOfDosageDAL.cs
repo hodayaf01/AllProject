@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using DAL.HMO_DB_DAL;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace DAL
     public class KingOfDosageDAL
     {
         MediDBEntities _DB = new MediDBEntities();
-
+        DAL.HMO_DB_DAL.KingOfDosageDAL _KingOfDosageInHMO_DAL = new DAL.HMO_DB_DAL.KingOfDosageDAL();
         public KingOfDosage Get()
         {
             var res = _DB.KingOfDosages.ToList().FirstOrDefault();
@@ -18,9 +19,13 @@ namespace DAL
             return res;
         }
 
-        public void Add(KingOfDosage details)
+        public void Add()
         {
-            _DB.KingOfDosages.Add(details);
+            List<KingOfDosage> KingOfDosage = _KingOfDosageInHMO_DAL.Get();
+            foreach (var item in KingOfDosage)
+            {
+                _DB.KingOfDosages.Add(new KingOfDosage() { kindOfDosageId = item.kindOfDosageId, kindOfDosageName = item.kindOfDosageName });
+            }
             _DB.SaveChanges();
         }
 
@@ -33,5 +38,6 @@ namespace DAL
         {
            // _DB.Guardians.First().DeleteRow = false;
         }
+
     }
 }

@@ -10,6 +10,7 @@ namespace DAL
     public class TimeToMedicinesForChild_DAL
     {
         MediDBEntities _DB = new MediDBEntities();
+      //  DAL.HMO_DB_DAL.
 
         public void Add(TimeToMedicinesForChild details)
         {
