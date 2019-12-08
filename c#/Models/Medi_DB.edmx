@@ -1,0 +1,600 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MediDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ArchiveTakeMedicines">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="bigint" Nullable="false" />
+          <Property Name="medicineToChild" Type="bigint" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="time" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Guardian">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="guardianName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="guardiansToUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="bigint" Nullable="false" />
+          <Property Name="guardianId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HMO">
+          <Key>
+            <PropertyRef Name="IdHMO" />
+          </Key>
+          <Property Name="IdHMO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameHMO" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KingOfDosage">
+          <Key>
+            <PropertyRef Name="kindOfDosageId" />
+          </Key>
+          <Property Name="kindOfDosageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kindOfDosageName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Medicines">
+          <Key>
+            <PropertyRef Name="medicineId" />
+          </Key>
+          <Property Name="medicineId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="midicineName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MedicinesToChild">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="medicineId" Type="bigint" Nullable="false" />
+          <Property Name="childId" Type="bigint" Nullable="false" />
+          <Property Name="Dosage" Type="int" Nullable="false" />
+          <Property Name="kindOfDosage" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TimeOfDay">
+          <Key>
+            <PropertyRef Name="timeId" />
+          </Key>
+          <Property Name="timeId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="timeCode" Type="int" Nullable="false" />
+          <Property Name="theTime" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TimeToMedicinesForChild">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idMedicineToChild" Type="bigint" Nullable="false" />
+          <Property Name="idTimeOfDay" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="userHMO" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_childId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="MedicinesToChild" Type="Self.MedicinesToChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MedicinesToChild">
+              <PropertyRef Name="childId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_guardianId">
+          <End Role="Guardian" Type="Self.Guardian" Multiplicity="1" />
+          <End Role="guardiansToUser" Type="Self.guardiansToUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guardian">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="guardiansToUser">
+              <PropertyRef Name="guardianId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KingOfDosage">
+          <End Role="KingOfDosage" Type="Self.KingOfDosage" Multiplicity="1" />
+          <End Role="MedicinesToChild" Type="Self.MedicinesToChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KingOfDosage">
+              <PropertyRef Name="kindOfDosageId" />
+            </Principal>
+            <Dependent Role="MedicinesToChild">
+              <PropertyRef Name="Dosage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_medicineId">
+          <End Role="Medicines" Type="Self.Medicines" Multiplicity="1" />
+          <End Role="MedicinesToChild" Type="Self.MedicinesToChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicines">
+              <PropertyRef Name="medicineId" />
+            </Principal>
+            <Dependent Role="MedicinesToChild">
+              <PropertyRef Name="medicineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_MedicineToChild">
+          <End Role="MedicinesToChild" Type="Self.MedicinesToChild" Multiplicity="1" />
+          <End Role="TimeToMedicinesForChild" Type="Self.TimeToMedicinesForChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicinesToChild">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeToMedicinesForChild">
+              <PropertyRef Name="idMedicineToChild" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_timeOfDay">
+          <End Role="TimeOfDay" Type="Self.TimeOfDay" Multiplicity="1" />
+          <End Role="TimeToMedicinesForChild" Type="Self.TimeToMedicinesForChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TimeOfDay">
+              <PropertyRef Name="timeId" />
+            </Principal>
+            <Dependent Role="TimeToMedicinesForChild">
+              <PropertyRef Name="idTimeOfDay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_userHMO">
+          <End Role="HMO" Type="Self.HMO" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HMO">
+              <PropertyRef Name="IdHMO" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="userHMO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_userId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="guardiansToUser" Type="Self.guardiansToUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="guardiansToUser">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MediDBModelStoreContainer">
+          <EntitySet Name="ArchiveTakeMedicines" EntityType="Self.ArchiveTakeMedicines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Guardian" EntityType="Self.Guardian" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="guardiansToUser" EntityType="Self.guardiansToUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HMO" EntityType="Self.HMO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KingOfDosage" EntityType="Self.KingOfDosage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medicines" EntityType="Self.Medicines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedicinesToChild" EntityType="Self.MedicinesToChild" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimeOfDay" EntityType="Self.TimeOfDay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimeToMedicinesForChild" EntityType="Self.TimeToMedicinesForChild" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_childId" Association="Self.fk_childId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="MedicinesToChild" EntitySet="MedicinesToChild" />
+          </AssociationSet>
+          <AssociationSet Name="fk_guardianId" Association="Self.fk_guardianId">
+            <End Role="Guardian" EntitySet="Guardian" />
+            <End Role="guardiansToUser" EntitySet="guardiansToUser" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KingOfDosage" Association="Self.fk_KingOfDosage">
+            <End Role="KingOfDosage" EntitySet="KingOfDosage" />
+            <End Role="MedicinesToChild" EntitySet="MedicinesToChild" />
+          </AssociationSet>
+          <AssociationSet Name="fk_medicineId" Association="Self.fk_medicineId">
+            <End Role="Medicines" EntitySet="Medicines" />
+            <End Role="MedicinesToChild" EntitySet="MedicinesToChild" />
+          </AssociationSet>
+          <AssociationSet Name="fk_MedicineToChild" Association="Self.fk_MedicineToChild">
+            <End Role="MedicinesToChild" EntitySet="MedicinesToChild" />
+            <End Role="TimeToMedicinesForChild" EntitySet="TimeToMedicinesForChild" />
+          </AssociationSet>
+          <AssociationSet Name="fk_timeOfDay" Association="Self.fk_timeOfDay">
+            <End Role="TimeOfDay" EntitySet="TimeOfDay" />
+            <End Role="TimeToMedicinesForChild" EntitySet="TimeToMedicinesForChild" />
+          </AssociationSet>
+          <AssociationSet Name="fk_userHMO" Association="Self.fk_userHMO">
+            <End Role="HMO" EntitySet="HMO" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="fk_userId" Association="Self.fk_userId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="guardiansToUser" EntitySet="guardiansToUser" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MediDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ArchiveTakeMedicine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int64" Nullable="false" />
+          <Property Name="medicineToChild" Type="Int64" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="time" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Guardian">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="guardianName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="guardiansToUsers" Relationship="Self.fk_guardianId" FromRole="Guardian" ToRole="guardiansToUser" />
+        </EntityType>
+        <EntityType Name="guardiansToUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int64" Nullable="false" />
+          <Property Name="guardianId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Guardian" Relationship="Self.fk_guardianId" FromRole="guardiansToUser" ToRole="Guardian" />
+          <NavigationProperty Name="User" Relationship="Self.fk_userId" FromRole="guardiansToUser" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="HMO">
+          <Key>
+            <PropertyRef Name="IdHMO" />
+          </Key>
+          <Property Name="IdHMO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameHMO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.fk_userHMO" FromRole="HMO" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="KingOfDosage">
+          <Key>
+            <PropertyRef Name="kindOfDosageId" />
+          </Key>
+          <Property Name="kindOfDosageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kindOfDosageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="MedicinesToChilds" Relationship="Self.fk_KingOfDosage" FromRole="KingOfDosage" ToRole="MedicinesToChild" />
+        </EntityType>
+        <EntityType Name="Medicine">
+          <Key>
+            <PropertyRef Name="medicineId" />
+          </Key>
+          <Property Name="medicineId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="midicineName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="MedicinesToChilds" Relationship="Self.fk_medicineId" FromRole="Medicines" ToRole="MedicinesToChild" />
+        </EntityType>
+        <EntityType Name="MedicinesToChild">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="medicineId" Type="Int64" Nullable="false" />
+          <Property Name="childId" Type="Int64" Nullable="false" />
+          <Property Name="Dosage" Type="Int32" Nullable="false" />
+          <Property Name="kindOfDosage" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="KingOfDosage" Relationship="Self.fk_KingOfDosage" FromRole="MedicinesToChild" ToRole="KingOfDosage" />
+          <NavigationProperty Name="Medicine" Relationship="Self.fk_medicineId" FromRole="MedicinesToChild" ToRole="Medicines" />
+          <NavigationProperty Name="User" Relationship="Self.fk_childId" FromRole="MedicinesToChild" ToRole="Users" />
+          <NavigationProperty Name="TimeToMedicinesForChilds" Relationship="Self.fk_MedicineToChild" FromRole="MedicinesToChild" ToRole="TimeToMedicinesForChild" />
+        </EntityType>
+        <EntityType Name="TimeOfDay">
+          <Key>
+            <PropertyRef Name="timeId" />
+          </Key>
+          <Property Name="timeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="timeCode" Type="Int32" Nullable="false" />
+          <Property Name="theTime" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="TimeToMedicinesForChilds" Relationship="Self.fk_timeOfDay" FromRole="TimeOfDay" ToRole="TimeToMedicinesForChild" />
+        </EntityType>
+        <EntityType Name="TimeToMedicinesForChild">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idMedicineToChild" Type="Int64" Nullable="false" />
+          <Property Name="idTimeOfDay" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="MedicinesToChild" Relationship="Self.fk_MedicineToChild" FromRole="TimeToMedicinesForChild" ToRole="MedicinesToChild" />
+          <NavigationProperty Name="TimeOfDay" Relationship="Self.fk_timeOfDay" FromRole="TimeToMedicinesForChild" ToRole="TimeOfDay" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userHMO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="guardiansToUsers" Relationship="Self.fk_userId" FromRole="Users" ToRole="guardiansToUser" />
+          <NavigationProperty Name="HMO" Relationship="Self.fk_userHMO" FromRole="Users" ToRole="HMO" />
+          <NavigationProperty Name="MedicinesToChilds" Relationship="Self.fk_childId" FromRole="Users" ToRole="MedicinesToChild" />
+        </EntityType>
+        <Association Name="fk_guardianId">
+          <End Role="Guardian" Type="Self.Guardian" Multiplicity="1" />
+          <End Role="guardiansToUser" Type="Self.guardiansToUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guardian">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="guardiansToUser">
+              <PropertyRef Name="guardianId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_userId">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="guardiansToUser" Type="Self.guardiansToUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="guardiansToUser">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_userHMO">
+          <End Role="HMO" Type="Self.HMO" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HMO">
+              <PropertyRef Name="IdHMO" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="userHMO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KingOfDosage">
+          <End Role="KingOfDosage" Type="Self.KingOfDosage" Multiplicity="1" />
+          <End Role="MedicinesToChild" Type="Self.MedicinesToChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KingOfDosage">
+              <PropertyRef Name="kindOfDosageId" />
+            </Principal>
+            <Dependent Role="MedicinesToChild">
+              <PropertyRef Name="Dosage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_medicineId">
+          <End Role="Medicines" Type="Self.Medicine" Multiplicity="1" />
+          <End Role="MedicinesToChild" Type="Self.MedicinesToChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicines">
+              <PropertyRef Name="medicineId" />
+            </Principal>
+            <Dependent Role="MedicinesToChild">
+              <PropertyRef Name="medicineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_childId">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="MedicinesToChild" Type="Self.MedicinesToChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MedicinesToChild">
+              <PropertyRef Name="childId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_MedicineToChild">
+          <End Role="MedicinesToChild" Type="Self.MedicinesToChild" Multiplicity="1" />
+          <End Role="TimeToMedicinesForChild" Type="Self.TimeToMedicinesForChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicinesToChild">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeToMedicinesForChild">
+              <PropertyRef Name="idMedicineToChild" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_timeOfDay">
+          <End Role="TimeOfDay" Type="Self.TimeOfDay" Multiplicity="1" />
+          <End Role="TimeToMedicinesForChild" Type="Self.TimeToMedicinesForChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TimeOfDay">
+              <PropertyRef Name="timeId" />
+            </Principal>
+            <Dependent Role="TimeToMedicinesForChild">
+              <PropertyRef Name="idTimeOfDay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MediDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ArchiveTakeMedicines" EntityType="Self.ArchiveTakeMedicine" />
+          <EntitySet Name="Guardians" EntityType="Self.Guardian" />
+          <EntitySet Name="guardiansToUsers" EntityType="Self.guardiansToUser" />
+          <EntitySet Name="HMOes" EntityType="Self.HMO" />
+          <EntitySet Name="KingOfDosages" EntityType="Self.KingOfDosage" />
+          <EntitySet Name="Medicines" EntityType="Self.Medicine" />
+          <EntitySet Name="MedicinesToChilds" EntityType="Self.MedicinesToChild" />
+          <EntitySet Name="TimeOfDays" EntityType="Self.TimeOfDay" />
+          <EntitySet Name="TimeToMedicinesForChilds" EntityType="Self.TimeToMedicinesForChild" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="fk_guardianId" Association="Self.fk_guardianId">
+            <End Role="Guardian" EntitySet="Guardians" />
+            <End Role="guardiansToUser" EntitySet="guardiansToUsers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_userId" Association="Self.fk_userId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="guardiansToUser" EntitySet="guardiansToUsers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_userHMO" Association="Self.fk_userHMO">
+            <End Role="HMO" EntitySet="HMOes" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KingOfDosage" Association="Self.fk_KingOfDosage">
+            <End Role="KingOfDosage" EntitySet="KingOfDosages" />
+            <End Role="MedicinesToChild" EntitySet="MedicinesToChilds" />
+          </AssociationSet>
+          <AssociationSet Name="fk_medicineId" Association="Self.fk_medicineId">
+            <End Role="Medicines" EntitySet="Medicines" />
+            <End Role="MedicinesToChild" EntitySet="MedicinesToChilds" />
+          </AssociationSet>
+          <AssociationSet Name="fk_childId" Association="Self.fk_childId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="MedicinesToChild" EntitySet="MedicinesToChilds" />
+          </AssociationSet>
+          <AssociationSet Name="fk_MedicineToChild" Association="Self.fk_MedicineToChild">
+            <End Role="MedicinesToChild" EntitySet="MedicinesToChilds" />
+            <End Role="TimeToMedicinesForChild" EntitySet="TimeToMedicinesForChilds" />
+          </AssociationSet>
+          <AssociationSet Name="fk_timeOfDay" Association="Self.fk_timeOfDay">
+            <End Role="TimeOfDay" EntitySet="TimeOfDays" />
+            <End Role="TimeToMedicinesForChild" EntitySet="TimeToMedicinesForChilds" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MediDBModelStoreContainer" CdmEntityContainer="MediDBEntities">
+          <EntitySetMapping Name="ArchiveTakeMedicines">
+            <EntityTypeMapping TypeName="MediDBModel.ArchiveTakeMedicine">
+              <MappingFragment StoreEntitySet="ArchiveTakeMedicines">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="medicineToChild" ColumnName="medicineToChild" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="time" ColumnName="time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Guardians">
+            <EntityTypeMapping TypeName="MediDBModel.Guardian">
+              <MappingFragment StoreEntitySet="Guardian">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="guardianName" ColumnName="guardianName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="guardiansToUsers">
+            <EntityTypeMapping TypeName="MediDBModel.guardiansToUser">
+              <MappingFragment StoreEntitySet="guardiansToUser">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="guardianId" ColumnName="guardianId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HMOes">
+            <EntityTypeMapping TypeName="MediDBModel.HMO">
+              <MappingFragment StoreEntitySet="HMO">
+                <ScalarProperty Name="IdHMO" ColumnName="IdHMO" />
+                <ScalarProperty Name="nameHMO" ColumnName="nameHMO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KingOfDosages">
+            <EntityTypeMapping TypeName="MediDBModel.KingOfDosage">
+              <MappingFragment StoreEntitySet="KingOfDosage">
+                <ScalarProperty Name="kindOfDosageId" ColumnName="kindOfDosageId" />
+                <ScalarProperty Name="kindOfDosageName" ColumnName="kindOfDosageName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medicines">
+            <EntityTypeMapping TypeName="MediDBModel.Medicine">
+              <MappingFragment StoreEntitySet="Medicines">
+                <ScalarProperty Name="medicineId" ColumnName="medicineId" />
+                <ScalarProperty Name="midicineName" ColumnName="midicineName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedicinesToChilds">
+            <EntityTypeMapping TypeName="MediDBModel.MedicinesToChild">
+              <MappingFragment StoreEntitySet="MedicinesToChild">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="medicineId" ColumnName="medicineId" />
+                <ScalarProperty Name="childId" ColumnName="childId" />
+                <ScalarProperty Name="Dosage" ColumnName="Dosage" />
+                <ScalarProperty Name="kindOfDosage" ColumnName="kindOfDosage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeOfDays">
+            <EntityTypeMapping TypeName="MediDBModel.TimeOfDay">
+              <MappingFragment StoreEntitySet="TimeOfDay">
+                <ScalarProperty Name="timeId" ColumnName="timeId" />
+                <ScalarProperty Name="timeCode" ColumnName="timeCode" />
+                <ScalarProperty Name="theTime" ColumnName="theTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeToMedicinesForChilds">
+            <EntityTypeMapping TypeName="MediDBModel.TimeToMedicinesForChild">
+              <MappingFragment StoreEntitySet="TimeToMedicinesForChild">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="idMedicineToChild" ColumnName="idMedicineToChild" />
+                <ScalarProperty Name="idTimeOfDay" ColumnName="idTimeOfDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MediDBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="userHMO" ColumnName="userHMO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
