@@ -13,7 +13,7 @@ namespace Project.Controllers
     {
         Registration_BL _registration_BL = new Registration_BL();
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/Registration/Add")]
         public long Add(Registration registration)
         {
