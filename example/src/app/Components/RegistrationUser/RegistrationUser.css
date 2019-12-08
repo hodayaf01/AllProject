@@ -1,0 +1,25 @@
+header{
+    display: flex;
+    background-color:dimgray;
+}
+
+.title{
+    font-size: 80px;
+    box-align: center;
+}
+
+label{
+    font-size: 150%;
+    color:rgb(35, 100, 100);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+button{
+    font-size: 150%;
+    color:rgb(42, 65, 65);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+input{
+    font-size: 150%;
+    color:rgb(42, 65, 65);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
