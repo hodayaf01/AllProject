@@ -18,7 +18,7 @@ namespace DAL
             List<Medicine> medicines = _MedicinesInHMO_DAL.Get();
             foreach (var item in medicines)
             {
-                _DB.Medicines.Add(new Medicine() {medicineId= item.medicineId, midicineName=item.midicineName});
+                _DB.Medicines.Add(new Medicine() { medicineId= item.medicineId, midicineName=item.midicineName});
             }           
             _DB.SaveChanges();
         }

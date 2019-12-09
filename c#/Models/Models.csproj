@@ -84,7 +84,7 @@
       <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="HMO.cs">
-      <DependentUpon>Medi_DB.tt</DependentUpon>
+      <DependentUpon>HMO_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="HMO_DB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -102,10 +102,10 @@
       <DependentUpon>HMO_DB.edmx</DependentUpon>
     </Compile>
     <Compile Include="KingOfDosage.cs">
-      <DependentUpon>Medi_DB.tt</DependentUpon>
+      <DependentUpon>HMO_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Medicine.cs">
-      <DependentUpon>Medi_DB.tt</DependentUpon>
+      <DependentUpon>HMO_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="MedicinesToChild.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
@@ -132,7 +132,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setting.cs" />
     <Compile Include="TimeOfDay.cs">
-      <DependentUpon>Medi_DB.tt</DependentUpon>
+      <DependentUpon>HMO_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="TimeToForClient.cs">
       <DependentUpon>HMO_DB.tt</DependentUpon>
@@ -149,6 +149,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
+    <EntityDeploy Include="Medi_DB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Medi_DB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <EntityDeploy Include="HMO_DB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>HMO_DB.Designer.cs</LastGenOutput>
@@ -156,10 +160,6 @@
     <None Include="HMO_DB.edmx.diagram">
       <DependentUpon>HMO_DB.edmx</DependentUpon>
     </None>
-    <EntityDeploy Include="Medi_DB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Medi_DB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="Medi_DB.edmx.diagram">
       <DependentUpon>Medi_DB.edmx</DependentUpon>
     </None>

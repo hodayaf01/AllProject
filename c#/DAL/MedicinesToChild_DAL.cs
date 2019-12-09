@@ -11,6 +11,7 @@ namespace DAL
     {
         MediDBEntities _DB = new MediDBEntities();
         DAL.HMO_DB_DAL.MedicinesToClient_DAL _MedicinesToClient_DAL = new HMO_DB_DAL.MedicinesToClient_DAL();
+        TimeToMedicinesForChild _TimeToMedicinesForChild = new TimeToMedicinesForChild();
         public MedicinesToChild Get()
         {
             var res = _DB.MedicinesToChilds.ToList().FirstOrDefault();
@@ -18,12 +19,20 @@ namespace DAL
             return res;
         }
 
-        public void Add(long userId)
+        public void Add(long userId, long timeCode)
         {
             List<MedicinesToClient> medicinesToClients = _MedicinesToClient_DAL.Get(userId);
             foreach (var item in medicinesToClients)
             {
-                _DB.MedicinesToChilds.Add(new MedicinesToChild() { medicineId=item.medicineId,childId=userId,kindOfDosage=item.kindOfDosage,Dosage=item.Dosage});
+                MedicinesToChild medicinesToChild = new MedicinesToChild()
+                {
+                    medicineId = item.medicineId,
+                    childId = userId,
+                    kindOfDosage = item.kindOfDosage,
+                    Dosage = item.Dosage
+                };
+                _DB.MedicinesToChilds.Add(medicinesToChild);
+                _DB.TimeToMedicinesForChilds.Add(new TimeToMedicinesForChild() { idMedicineToChild = medicinesToChild.Id, idTimeOfDay = timeCode });
             }
             _DB.SaveChanges();
         }

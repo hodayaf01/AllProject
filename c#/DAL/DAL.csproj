@@ -74,6 +74,7 @@
     <Compile Include="GuardiansDAL.cs" />
     <Compile Include="GurdiansToUser_DAL.cs" />
     <Compile Include="HMO_DAL.cs" />
+    <Compile Include="HMO_DB_DAL\HMO_DAL.cs" />
     <Compile Include="HMO_DB_DAL\KingOfDosageDAL.cs" />
     <Compile Include="HMO_DB_DAL\MedicinesToClient_DAL.cs" />
     <Compile Include="HMO_DB_DAL\Medicines_DAL.cs" />
