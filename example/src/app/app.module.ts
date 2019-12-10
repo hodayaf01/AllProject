@@ -7,9 +7,11 @@ import {HttpClientModule} from '@angular/common/http';
 import {UserService} from './Services/UserService';
 import {RegistrationUserComponent} from './Components/RegistrationUser/RegistrationUser';
 import { RouterModule, Routes } from '@angular/router';
+import { TimeOfAlertComponent } from './Components/TimeOfAlert/TimeOfAlert';
 
 const appRoutes: Routes = [
   {path: 'registration', component: RegistrationUserComponent},
+  {path: 'timeOfAlert', component: TimeOfAlertComponent},
 ];
 
 
@@ -17,7 +19,8 @@ const appRoutes: Routes = [
   declarations: [
     //כל קומפוננטה חייבת להיות כאן
     AppComponent, 
-    RegistrationUserComponent
+    RegistrationUserComponent,
+    TimeOfAlertComponent
   ],
   
   imports: [
