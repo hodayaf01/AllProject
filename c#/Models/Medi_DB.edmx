@@ -35,21 +35,21 @@
           <Key>
             <PropertyRef Name="IdHMO" />
           </Key>
-          <Property Name="IdHMO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdHMO" Type="int" Nullable="false" />
           <Property Name="nameHMO" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="KingOfDosage">
           <Key>
             <PropertyRef Name="kindOfDosageId" />
           </Key>
-          <Property Name="kindOfDosageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kindOfDosageId" Type="int" Nullable="false" />
           <Property Name="kindOfDosageName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Medicines">
           <Key>
             <PropertyRef Name="medicineId" />
           </Key>
-          <Property Name="medicineId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="medicineId" Type="bigint" Nullable="false" />
           <Property Name="midicineName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="MedicinesToChild">
@@ -267,7 +267,7 @@
           <Key>
             <PropertyRef Name="IdHMO" />
           </Key>
-          <Property Name="IdHMO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdHMO" Type="Int32" Nullable="false" />
           <Property Name="nameHMO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="Self.fk_userHMO" FromRole="HMO" ToRole="Users" />
         </EntityType>
@@ -275,7 +275,7 @@
           <Key>
             <PropertyRef Name="kindOfDosageId" />
           </Key>
-          <Property Name="kindOfDosageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kindOfDosageId" Type="Int32" Nullable="false" />
           <Property Name="kindOfDosageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="MedicinesToChilds" Relationship="Self.fk_KingOfDosage" FromRole="KingOfDosage" ToRole="MedicinesToChild" />
         </EntityType>
@@ -283,7 +283,7 @@
           <Key>
             <PropertyRef Name="medicineId" />
           </Key>
-          <Property Name="medicineId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="medicineId" Type="Int64" Nullable="false" />
           <Property Name="midicineName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="MedicinesToChilds" Relationship="Self.fk_medicineId" FromRole="Medicines" ToRole="MedicinesToChild" />
         </EntityType>

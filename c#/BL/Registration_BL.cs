@@ -32,14 +32,14 @@ namespace BL
                 }
 
                 //Medicines To child
-                List<MedicinesToClient> medicinesList = _medicinesToClient_DAL.Get(_details.NewUser.Id);
-                for (int i = 0; i < medicinesList.Count; i++)
-                {
-                    _medicinesToChild_DAL.Add(new MedicinesToChild() { medicineId=medicinesList[i].medicineId,
-                    childId= medicinesList[i].clientId,
-                    Dosage= medicinesList[i].Dosage,
-                    kindOfDosage= medicinesList[i].kindOfDosage});
-                }
+                //List<MedicinesToClient> medicinesList = _medicinesToClient_DAL.Get(_details.NewUser.Id);
+                //for (int i = 0; i < medicinesList.Count; i++)
+                //{
+                //    _medicinesToChild_DAL.Add(new MedicinesToChild() { medicineId=medicinesList[i].medicineId,
+                //    childId= medicinesList[i].clientId,
+                //    Dosage= medicinesList[i].Dosage,
+                //    kindOfDosage= medicinesList[i].kindOfDosage});
+                //}
                 //time of day?--------------
                 return code;
             }

@@ -10,7 +10,7 @@ namespace DAL
     public class HMO_DAL
     {
         MediDBEntities _DB = new MediDBEntities();
-
+        DAL.HMO_DB_DAL.HMO_DAL _HMO_DAL=new DAL.HMO_DB_DAL.HMO_DAL();
         public HMO Get()
         {
             var res = _DB.HMOes.ToList().FirstOrDefault();
@@ -20,7 +20,11 @@ namespace DAL
 
         public void Add(HMO details)
         {
-            _DB.HMOes.Add(details);
+            List<HMO> hMOs = _HMO_DAL.Get();
+            foreach (var item in hMOs)
+            {
+                _DB.HMOes.Add(new HMO() { IdHMO=item.IdHMO,nameHMO=item.nameHMO});
+            }         
             _DB.SaveChanges();
         }
 

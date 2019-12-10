@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace DAL.HMO_DB_DAL
 {
-    public class KingOfDosageDAL
+    public class HMO_DAL
     {
         HMO_DBEntities _DB = new HMO_DBEntities();
 
-        public List<KingOfDosage> Get()
+        public List<HMO> Get()
         {
-            var res = _DB.KingOfDosages.ToList();
+            var res = _DB.HMOes.ToList();
             return res;
         }
     }

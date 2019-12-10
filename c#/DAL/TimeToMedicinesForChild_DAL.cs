@@ -10,7 +10,6 @@ namespace DAL
     public class TimeToMedicinesForChild_DAL
     {
         MediDBEntities _DB = new MediDBEntities();
-
         public void Add(TimeToMedicinesForChild details)
         {
             _DB.TimeToMedicinesForChilds.Add(details);

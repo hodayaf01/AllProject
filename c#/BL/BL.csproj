@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddTime_BL.cs" />
     <Compile Include="GuardianBL.cs" />
     <Compile Include="GurdiansToUser_BL.cs" />
     <Compile Include="HMO_BL.cs" />
