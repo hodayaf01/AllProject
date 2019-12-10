@@ -14,14 +14,19 @@ namespace BL
         MedicinesDAL _medicinesDAL = new MedicinesDAL();
         KingOfDosageDAL _KingOfDosageDAL = new KingOfDosageDAL();
         MedicinesToChild_DAL _MedicinesToChild_DAL = new MedicinesToChild_DAL();
-        public void Add(long userId,TimeOfDay _details)
+        public void Add(long userId,List<TimeOfDay> _details)
         {
+            //הפעולה מקבלת את הקוד של המשתמש ורשימה של זמנים ביום         
+
             //צריך להיות במקום אחר, כי אנחנו רוצות שהוא התבצע פעם אחת- הוספת כל התרופות והמינונים        
             _medicinesDAL.Add();
             _KingOfDosageDAL.Add();
             //מתבצע כל פעם כי שולחים כל פעם זמן אחר
-            _TimeOfDay_DAL.Add(_details);
-            _MedicinesToChild_DAL.Add(userId,_details.timeId);
+            foreach (var item in _details)
+            {
+                _TimeOfDay_DAL.Add(item);
+                _MedicinesToChild_DAL.Add(userId, item.timeId);
+            }          
         }
     }
 }
