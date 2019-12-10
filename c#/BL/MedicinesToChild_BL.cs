@@ -17,16 +17,9 @@ namespace BL
             return _MedicinesToChild_DAL.Get();
         }
 
-        public void AddOrEdit(MedicinesToChild details)
-        {
-            if (details.Id == 0)
-            {
-                _MedicinesToChild_DAL.Add(details);
-            }
-            else
-            {
-                _MedicinesToChild_DAL.Edit(details);
-            }
+        public bool Add(long userId, long codeTime)
+        {                   
+            return _MedicinesToChild_DAL.Add(userId, codeTime);                    
         }
     }
 }

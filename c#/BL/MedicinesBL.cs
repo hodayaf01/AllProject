@@ -21,7 +21,7 @@ namespace BL
         {
             if (details.medicineId == 0)
             {
-                _medicinesDAL.Add(details);
+                _medicinesDAL.Add();
             }
             else
             {
