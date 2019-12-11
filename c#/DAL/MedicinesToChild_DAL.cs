@@ -19,7 +19,7 @@ namespace DAL
             return res;
         }
 
-        public void Add(long userId, long timeCode)
+        public bool Add(long userId, long timeCode)
         {
             List<MedicinesToClient> medicinesToClients = _MedicinesToClient_DAL.Get(userId);
             foreach (var item in medicinesToClients)
@@ -34,7 +34,9 @@ namespace DAL
                 _DB.MedicinesToChilds.Add(medicinesToChild);
                 _DB.TimeToMedicinesForChilds.Add(new TimeToMedicinesForChild() { idMedicineToChild = medicinesToChild.Id, idTimeOfDay = timeCode });
             }
-            _DB.SaveChanges();
+            if (_DB.SaveChanges() == 0)
+                return false;
+            return true;
         }
 
         public void Edit(MedicinesToChild details)

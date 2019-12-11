@@ -21,7 +21,7 @@ namespace BL
         {
             if (details.kindOfDosageId == 0)
             {
-                kingOfDosageDAL.Add(details);
+                kingOfDosageDAL.Add();
             }
             else
             {
