@@ -8,6 +8,7 @@ import {UserService} from './Services/UserService';
 import {RegistrationUserComponent} from './Components/RegistrationUser/RegistrationUser';
 import { RouterModule, Routes } from '@angular/router';
 import { TimeOfAlertComponent } from './Components/TimeOfAlert/TimeOfAlert';
+import { TimeOfAlertForUserService } from './Services/TimeOfDayForUser.service';
 
 const appRoutes: Routes = [
   {path: 'registration', component: RegistrationUserComponent},
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
 
   //מכיל את כל הסרויסים
   providers: [
-    UserService
+    UserService,
+    TimeOfAlertForUserService
   ],
   
   bootstrap: [AppComponent]
