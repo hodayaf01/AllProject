@@ -17,6 +17,7 @@ namespace BL
         GurdiansToUser_DAL _guardiansToUserDAL = new GurdiansToUser_DAL();
         MedicinesToChild_DAL _medicinesToChild_DAL = new MedicinesToChild_DAL();
         MedicinesToClient_DAL _medicinesToClient_DAL = new DAL.HMO_DB_DAL.MedicinesToClient_DAL();
+        //SMSCOMMS SMSEngine;
         public long Add(Registration _details)
         {
             //func get in client!!!!!!!!
@@ -41,10 +42,34 @@ namespace BL
                 //    kindOfDosage= medicinesList[i].kindOfDosage});
                 //}
                 //time of day?--------------
+              
+                
+                //שליחת מייל 
+                //SendEmailModel model = new SendEmailModel()
+                //{
+                //    Body = "הסיסמא שלך לאפליקציה היא: ",
+                //    Subject = "הרשמה לאפליקציית Medi",
+                //};
+                CreateMail(new SendEmailModel() {
+                    Body = "הסיסמא שלך לאפליקציה היא: ",
+                    Subject = "הרשמה לאפליקציית Medi"});               
                 return code;
             }
             // else
             return 404;
+        }
+        public  bool CreateMail(SendEmailModel model)
+        {
+
+            //שליחת מייל
+            MessageGmail mg = new MessageGmail();
+            mg.Body = model.Body;
+            mg.Subject = model.Subject;
+            //mg.Body = "הסיסמא שלך לאפליקציה היא: ";
+            //mg.Subject = "הרשמה לאפליקציית Medi";
+
+            //model.Email="shiralulvi1@gmail.com";
+            return SendMail.SendEMail(mg);
         }
 
 

@@ -27,5 +27,17 @@ namespace Project.Controllers
         {
             //_registration_BL.Edit(registration);
         }
+
+        //[Route("api/SendEmail")]
+        //[HttpGet]
+        //public bool SendEmail()
+        //{
+        //    //SendEmailModel model = new SendEmailModel()
+        //    //{
+        //    //    Body =  "הסיסמא שלך לאפליקציה היא: ",
+        //    //    Subject = "הרשמה לאפליקציית Medi",
+        //    //};
+        //    return _registration_BL.CreateMail();
+        //}
     }
 }
