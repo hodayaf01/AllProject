@@ -35,12 +35,14 @@ namespace Project.Controllers
         //[HttpGet]
         //public bool SendEmail()
         //{
-        //    //SendEmailModel model = new SendEmailModel()
-        //    //{
-        //    //    Body =  "הסיסמא שלך לאפליקציה היא: ",
-        //    //    Subject = "הרשמה לאפליקציית Medi",
-        //    //};
-        //    return _registration_BL.CreateMail();
+        //    User u = new User() { userName = "הודיה", password = "1234", email = "hodaya.farkash@gmail.com" };
+        //    bool mailSend = Models.SendMail.SendEMail(new MessageGmail()
+        //    {
+        //        sendTo = u.email,
+        //        Subject = "הרשמה לאפליקציית Medi",
+        //        Body = string.Format("היי {0} \n הסיסמא שלך לאפליקציה: {1}", u.userName, u.password)
+        //    });
+        //    return mailSend;
         //}
     }
 }

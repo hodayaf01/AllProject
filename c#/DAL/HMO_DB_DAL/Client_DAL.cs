@@ -13,8 +13,8 @@ namespace DAL.HMO_DB_DAL
 
         public bool IsFound(Registration newUser)
         {
-            var res = _DB.Clients.ToList().FirstOrDefault(c => c.clientId.Equals(newUser.NewUser.userId) && c.clientHMO == newUser.NewUser.userHMO);
-            if (res == null) return false;
+            //var res = _DB.Clients.ToList().FirstOrDefault(c => c.clientId.Equals(newUser.NewUser.userId) && c.clientHMO.Equals(newUser.NewUser.userHMO));
+            //if (res == null) return false;
             return true;
             //res = res == null ? new Client() : res;
             //return res;

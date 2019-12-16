@@ -18,8 +18,8 @@ export class UserService{
                 
     }
 
-    add(l:LogIn):Observable<any>{
-        return this.http.post(`${this.url}/Add`,l,httpOptions);
+    add(Registration:LogIn):Observable<any>{
+        return this.http.post(`${this.url}/Add`,Registration,httpOptions);
     }
 
 

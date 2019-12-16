@@ -26,10 +26,10 @@ namespace BL
             {
                 long code= _userDAL.Add(_details.NewUser);
                 //guardiansToUsers
-                for (int i = 0; i < _details.Guardian.Count; i++)
+                for (int i = 0; i < _details.Guardians.Count; i++)
                 {
-                    _guardiansDAL.Add(_details.Guardian[i]);
-                    _guardiansToUserDAL.Add(new guardiansToUser() { userId = _details.NewUser.Id, guardianId = _details.Guardian[i].Id });
+                    _guardiansDAL.Add(_details.Guardians[i]);
+                    _guardiansToUserDAL.Add(new guardiansToUser() { userId = _details.NewUser.Id, guardianId = _details.Guardians[i].Id });
                 }
 
                 //Medicines To child
@@ -44,34 +44,16 @@ namespace BL
                 //time of day?--------------
               
                 
-                //שליחת מייל 
-                //SendEmailModel model = new SendEmailModel()
-                //{
-                //    Body = "הסיסמא שלך לאפליקציה היא: ",
-                //    Subject = "הרשמה לאפליקציית Medi",
-                //};
-                CreateMail(new SendEmailModel() {
-                    Body = "הסיסמא שלך לאפליקציה היא: ",
-                    Subject = "הרשמה לאפליקציית Medi"});               
+                //שליחת מייל               
+               bool mailSend= Models.SendMail.SendEMail(new MessageGmail() {
+                    sendTo=_details.NewUser.email,
+                    Subject = "הרשמה לאפליקציית Medi",
+                    Body = string.Format("היי {0} \n הסיסמא שלך לאפליקציה: {1}",_details.NewUser.userName,_details.NewUser.password)
+                    });               
                 return code;
             }
             // else
             return 404;
         }
-        public  bool CreateMail(SendEmailModel model)
-        {
-
-            //שליחת מייל
-            MessageGmail mg = new MessageGmail();
-            mg.Body = model.Body;
-            mg.Subject = model.Subject;
-            //mg.Body = "הסיסמא שלך לאפליקציה היא: ";
-            //mg.Subject = "הרשמה לאפליקציית Medi";
-
-            //model.Email="shiralulvi1@gmail.com";
-            return SendMail.SendEMail(mg);
-        }
-
-
     }
 }
