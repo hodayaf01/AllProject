@@ -7,10 +7,10 @@ const httpOptions = { headers: new HttpHeaders({ 'Content-type': 'application/js
 
 @Injectable()
 export class TimeOfAlertForUserService {
-    url = 'http:https://localhost:44318/api/Registration';
+    url = 'https://localhost:44318/api/TimeOfAlert';
     constructor(private http: HttpClient) {
 
-    }
+    };
 
     add(t: TimeOfAlertForUser): Observable<any> {
         return this.http.post(`${this.url}/Add`, t, httpOptions);

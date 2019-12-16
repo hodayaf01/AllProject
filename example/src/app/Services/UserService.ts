@@ -12,7 +12,7 @@ const httpOptions ={headers:new HttpHeaders({'Content-type':'application/json'})
 @Injectable()
 export class UserService{
 
-    url='http:https://localhost:44318/api/Registration'
+    url='https://localhost:44318/api/Registration'
 
     constructor(private http:HttpClient) {
                 

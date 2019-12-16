@@ -6,15 +6,18 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Project.Controllers
 {
+    [EnableCors("*", "*", "*")]
     public class RegistrationController : ApiController
     {
         Registration_BL _registration_BL = new Registration_BL();
 
-        [HttpPost]
+        
         [Route("api/Registration/Add")]
+        [HttpPost]
         public long Add(Registration registration)
         {
             return _registration_BL.Add(registration);
