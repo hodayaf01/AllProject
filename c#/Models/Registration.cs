@@ -9,7 +9,7 @@ namespace Models
     public class Registration
     {
         public User NewUser { get; set; }
-        public List<Guardian> Guardian { get; set; }
+        public List<Guardian> Guardians { get; set; }
 
     }
 }
