@@ -8,8 +8,13 @@ import { Guardian } from '../../Models/Guardian.model';
         styleUrls:['./Setting.css']
     })
     export class SettingsComponent implements OnInit {
+    ngOnInit() {
+        alert("Method implemented.");
+    }
         user:User=new User();
         guardians:Array<Guardian> =[];
         subscribe:any;
         constructor(private s){}
+
+
     }

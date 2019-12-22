@@ -22,8 +22,13 @@ namespace BL
         {
             //func get in client!!!!!!!!
             //Client client = Clients.ToList().FirstOrDefault();
+
+            //שליחת sms
+            //Models.SendSMS.sendmessage();
+            
             if(_Client_DAL.IsFound(_details))
             {
+                
                 long code= _userDAL.Add(_details.NewUser);
                 //guardiansToUsers
                 for (int i = 0; i < _details.Guardians.Count; i++)
@@ -43,6 +48,7 @@ namespace BL
                 //}
                 //time of day?--------------
               
+                
                 
                 //שליחת מייל               
                bool mailSend= Models.SendMail.SendEMail(new MessageGmail() {

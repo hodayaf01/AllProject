@@ -295,6 +295,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\sendSMS\" />
     <Folder Include="Views\TimeOfAlert\" />
   </ItemGroup>
   <ItemGroup>
