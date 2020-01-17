@@ -18,10 +18,11 @@ namespace DAL
             return res;
         }
 
-        public void Add(Guardian details)
+        public long Add(Guardian details)
         {
             _DB.Guardians.Add(details);
             _DB.SaveChanges();
+            return details.Id;
         }
 
         public void Edit(Guardian details)

@@ -1,9 +1,43 @@
 <!DOCTYPE html>
 <html>
 <body dir="rtl">
-<form>
-    <a>הקש סיסמא</a> <input type="password">
-</form>
+    <a>הקש סיסמא</a> <input type="password" name="userPassword" [(ngModel)]="password" >
+<button id="OK" value="אישור" (click)="checkPassword()">אישור</button>
+<br>
+<form hidden name="settingsForm" id="settingsForm" [hidden]="isSettings">
+    <input type="button" (click)="show()" value="+" style="box-shadow:teal">
+    <div id="userDetails" [hidden]="">
+        <div>
+            <label>שם הגיבור:</label>
+            <input name="userName" [(ngModel)]="userDetails.user.userName" type="text">
+        </div>
+        <div>
+            <label>אימייל</label>
+            <input name="userEmail" [(ngModel)]="userDetails.user.email" type="text">
+        </div>
+    </div>
+<br>
+        <input type="button" (click)="show()" value="+" style="box-shadow:teal">
+        <div id="guardiansDedails" [hidden]="isGuardianDedails">
+            <label>פרטי האפוטרופוסים</label>
+            <table>
+                <tbody>
+                    <tr *ngFor="let guardian of userDetails.guardians">
+                        <td><input [(ngModel)]="guardian.guardianName"></td>
+                        <td><input [(ngModel)]="guardian.PhoneNumber"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
+        <div id="timeOfAlertDetails">
+            
+        </div>
+
+        <div>
+            <input type="button" value="אישור" (click)="editUser()">
+        </div>
+    
+</form>
 </body>
 </html>

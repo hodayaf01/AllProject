@@ -1,7 +1,7 @@
 import { User } from './User.model';
 import { Guardian } from './Guardian.model';
 
-export class LogIn{
+export class Registration{
     NewUser:User;
     Guardians:Array<Guardian>=[];
 

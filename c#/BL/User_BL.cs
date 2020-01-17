@@ -12,9 +12,9 @@ namespace BL
     {
         User_DAL _User_DAL = new User_DAL();
 
-        public User Get()
+        public User Get(string code)
         {
-            return _User_DAL.Get();
+            return _User_DAL.Get(code);
         }
 
         public void AddOrEdit(User details)

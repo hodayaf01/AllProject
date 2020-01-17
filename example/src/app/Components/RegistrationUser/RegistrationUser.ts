@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/Models/User.model';
 import { Guardian } from 'src/app/Models/Guardian.model';
-import { UserService } from 'src/app/Services/UserService';
+import { RegistrationService } from 'src/app/Services/RegistrationService';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
-import { LogIn } from 'src/app/Models/LogIn.model';
+import { Registration } from 'src/app/Models/Registration.model';
 
 @Component({
     selector: 'app-RegistrationUser',
@@ -15,13 +15,13 @@ import { LogIn } from 'src/app/Models/LogIn.model';
 export class RegistrationUserComponent implements OnInit {
     user: User = new User();
     guardian: Guardian = new Guardian();
-    login: LogIn = new LogIn();
+    registration: Registration = new Registration();
     guardians: Array<Guardian> = [];
     isLessThanThreeGuardian: boolean = false;
     isMoreThanOneGuardian: boolean = true;
     subscribe: any;
 
-    constructor(private userService: UserService) {
+    constructor(private registrationService: RegistrationService) {
 
     }
 
@@ -44,17 +44,17 @@ export class RegistrationUserComponent implements OnInit {
         this.user.email = "hodaya.farkash@gmail.com";
         this.user.password = "1234";
         this.user.userHMO = 1;
-        this.login.NewUser = this.user;
+        this.registration.NewUser = this.user;
 
         this.guardian.Id = 0;
         this.guardian.PhoneNumber = "0587828027";
         this.guardian.guardianName = "Dady";
         this.guardians.push(this.guardian);
-        this.login.Guardians = this.guardians;
+        this.registration.Guardians = this.guardians;
 
 
 
-        this.subscribe = this.userService.add(this.login).subscribe(
+        this.subscribe = this.registrationService.add(this.registration).subscribe(
             result => {
                 this.user.Id = result;
                 localStorage.setItem('USERCODE', this.user.Id.toString());

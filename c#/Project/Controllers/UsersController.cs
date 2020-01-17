@@ -19,9 +19,11 @@ namespace Project.Controllers
         {
             _user_BL.AddOrEdit(user);
         }
-        public User Get()
+        [HttpGet]
+        [Route("api/User/Get")]
+        public User Get(string code)
         {
-            return _user_BL.Get();
+            return _user_BL.Get(code);
         }
         public void Edit(User user)
         {

@@ -24,12 +24,12 @@ namespace BL
             //Client client = Clients.ToList().FirstOrDefault();
             if(_Client_DAL.IsFound(_details))
             {
-                long code= _userDAL.Add(_details.NewUser);
+                long codeUser= _userDAL.Add(_details.NewUser);
                 //guardiansToUsers
                 for (int i = 0; i < _details.Guardians.Count; i++)
                 {
-                    _guardiansDAL.Add(_details.Guardians[i]);
-                    _guardiansToUserDAL.Add(new guardiansToUser() { userId = _details.NewUser.Id, guardianId = _details.Guardians[i].Id });
+                    long codeGuardian= _guardiansDAL.Add(_details.Guardians[i]);
+                    _guardiansToUserDAL.Add(new guardiansToUser() { userId = codeUser, guardianId = codeGuardian });
                 }
 
                 //Medicines To child
@@ -50,7 +50,7 @@ namespace BL
                     Subject = "הרשמה לאפליקציית Medi",
                     Body = string.Format("היי {0} \n הסיסמא שלך לאפליקציה: {1}",_details.NewUser.userName,_details.NewUser.password)
                     });               
-                return code;
+                return codeUser;
             }
             // else
             return 404;

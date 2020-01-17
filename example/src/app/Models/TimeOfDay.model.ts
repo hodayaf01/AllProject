@@ -2,12 +2,12 @@ import { Time } from '@angular/common';
 
 export class TimeOfDay {
     timeId: number;
-    timeName: string;
+    timeCode: number;
     theTime: Time;
 
-    constructor(id?: number, name?: string, time?: Time) {
+    constructor(id?: number, code?: number, time?: Time) {
         this.timeId = id;
-        this.timeName = name;
+        this.timeCode = code;
         this.theTime = time;
     }
 }

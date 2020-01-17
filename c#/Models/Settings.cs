@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Setting
+    public class Settings
     {
-
+        public User user { get; set; }
+        public List<Guardian> Guardians { get; set; }
     }
 }
