@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core'
+import { NgModule, Component } from '@angular/core'
 import { FormsModule,ReactiveFormsModule } from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,11 +12,16 @@ import { TimeOfAlertForUserService } from './Services/TimeOfDayForUser.service';
 import { SettingsComponent } from './Components/Settings/Settings';
 import { SettingsService } from './Services/SettingsService';
 import { HomeComponent } from './Components/Home/Home';
+import { AlertComponent } from './Components/Alert/Alert';
+import { AlertService } from './Services/AlertService';
+import { HomeService } from './Services/HomeService'
 
 const appRoutes: Routes = [
   {path: 'Registration', component: RegistrationUserComponent},
   {path: 'TimeOfAlert', component: TimeOfAlertComponent},
-  {path:'Settings',component:SettingsComponent}
+  {path:'Settings',component:SettingsComponent},
+  {path:'Home',component:HomeComponent},
+  {path:'Alert',component:AlertComponent}
 ];
 
 
@@ -27,7 +32,8 @@ const appRoutes: Routes = [
     RegistrationUserComponent,
     TimeOfAlertComponent,
     SettingsComponent,
-    HomeComponent
+    HomeComponent,
+    AlertComponent
   ],
   
   imports: [
@@ -43,7 +49,9 @@ const appRoutes: Routes = [
   providers: [
     RegistrationService,
     TimeOfAlertForUserService,
-    SettingsService
+    SettingsService,
+    AlertService,
+    HomeService
   ],
   
   bootstrap: [AppComponent]
