@@ -17,13 +17,13 @@ namespace Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Medicine()
         {
-            this.MedicinesToClients = new HashSet<MedicinesToClient>();
+            this.MedicinesToChilds = new HashSet<MedicinesToChild>();
         }
     
         public long medicineId { get; set; }
         public string midicineName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MedicinesToClient> MedicinesToClients { get; set; }
+        public virtual ICollection<MedicinesToChild> MedicinesToChilds { get; set; }
     }
 }

@@ -17,13 +17,14 @@ namespace Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TimeOfDay()
         {
-            this.TimeToMedicinesForClients = new HashSet<TimeToMedicinesForClient>();
+            this.TimeToMedicinesForChilds = new HashSet<TimeToMedicinesForChild>();
         }
     
         public long timeId { get; set; }
         public int timeCode { get; set; }
+        public System.TimeSpan theTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TimeToMedicinesForClient> TimeToMedicinesForClients { get; set; }
+        public virtual ICollection<TimeToMedicinesForChild> TimeToMedicinesForChilds { get; set; }
     }
 }

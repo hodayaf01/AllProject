@@ -165,7 +165,7 @@
       <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="HMO.cs">
-      <DependentUpon>HMO_DB.tt</DependentUpon>
+      <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="HMO_DB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -183,10 +183,10 @@
       <DependentUpon>HMO_DB.edmx</DependentUpon>
     </Compile>
     <Compile Include="KingOfDosage.cs">
-      <DependentUpon>HMO_DB.tt</DependentUpon>
+      <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Medicine.cs">
-      <DependentUpon>HMO_DB.tt</DependentUpon>
+      <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="MedicinesToChild.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
@@ -215,7 +215,7 @@
     <Compile Include="SendSMS.cs" />
     <Compile Include="Setting.cs" />
     <Compile Include="TimeOfDay.cs">
-      <DependentUpon>HMO_DB.tt</DependentUpon>
+      <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="TimeToForClient.cs">
       <DependentUpon>HMO_DB.tt</DependentUpon>
