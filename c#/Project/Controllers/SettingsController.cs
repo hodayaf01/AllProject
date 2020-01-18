@@ -17,9 +17,15 @@ namespace Project.Controllers
         Settings_BL _settings_BL = new Settings_BL();
 
         [Route("api/Settings/Edit")]
-        public long Edit(Setting _details)
+        public bool Edit(Settings _details)
         {
             return  _settings_BL.Edit(_details);
+        }
+
+        [Route("api/Settings/Get")]
+        public Settings Get(int userCode)
+        {
+            return _settings_BL.Get(userCode);
         }
     }
 }

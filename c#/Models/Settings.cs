@@ -9,7 +9,7 @@ namespace Models
     public class Settings
     {
         public User User { get; set; }
-        public List<Guardian> Uuardians { get; set; }
+        public List<Guardian> Guardians { get; set; }
 
     }
 }
