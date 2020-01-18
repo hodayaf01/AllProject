@@ -6,7 +6,7 @@
 <br>
 <form hidden name="settingsForm" id="settingsForm" [hidden]="isSettings">
     <input type="button" (click)="show()" value="+" style="box-shadow:teal">
-    <div id="userDetails" [hidden]="">
+    <div id="userDetails" hidden>
         <div>
             <label>שם הגיבור:</label>
             <input name="userName" [(ngModel)]="userDetails.user.userName" type="text">
