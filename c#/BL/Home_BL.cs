@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models
+namespace BL
 {
-    public class Settings
+    public class Home_BL
     {
-        public User User { get; set; }
-        public List<Guardian> Uuardians { get; set; }
+        public long Get(int timeOfDay) {
 
+            return 1;
+        }
     }
 }

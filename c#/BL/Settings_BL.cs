@@ -10,7 +10,7 @@ namespace BL
 {
     public class Settings_BL
     {
-        public long Edit(Setting _details)
+        public bool Edit(Settings _details)
         {
             MediDBEntities DB = new MediDBEntities();
 
@@ -20,22 +20,37 @@ namespace BL
             MedicinesToChild_DAL _medicinesToChild_DAL = new MedicinesToChild_DAL();
             TimeToMedicinesForChild_DAL _timeToMedicinesForChild_DAL = new TimeToMedicinesForChild_DAL();
             TimeOfDay_DAL _timeOfDay_DAL = new TimeOfDay_DAL();
-
+            
             try
             {
                 User user = DB.Users.FirstOrDefault(u => u.userId.Equals(_details.User.userId));
-                if (_details.User.userName != null) { user.userName = _details.User.userName; }
-                if (_details.User.email != null) { user.email = _details.User.email; }
-                if (_details.User.password != null) { user.password = _details.User.password; }
+                if (user != null)
+                {
+                    if (_details.User.userName != null) { user.userName = _details.User.userName; }
+                    if (_details.User.email != null) { user.email = _details.User.email; }
+                    if (_details.User.password != null) { user.password = _details.User.password; }
+                }
+                else return false;
 
-                guardiansToUser guardiansToUser = DB.guardiansToUsers.FirstOrDefault(g => g.userId.Equals(_details.User.userId));
+                List<guardiansToUser> guardiansToUser = DB.guardiansToUsers.Where(g => g.userId.Equals(_details.User.userId)).ToList();
+                if (guardiansToUser != null)
+                {
+
+                }
+
             }
-            catch (Exception E)
+            catch (Exception e)
             {
-                return 0;
+                return false;
             }
             
-            return 1;
+            return true;
+        }
+
+        public Settings Get(int userCode)
+        {
+            Settings _details = new Settings();
+            return _details;
         }
     }
 }

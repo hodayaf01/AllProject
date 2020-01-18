@@ -11,6 +11,7 @@ import { TimeOfAlertComponent } from './Components/TimeOfAlert/TimeOfAlert';
 import { TimeOfAlertForUserService } from './Services/TimeOfDayForUser.service';
 import { SettingsComponent } from './Components/Settings/Settings';
 import { SettingsService } from './Services/SettingsService';
+import { HomeComponent } from './Components/Home/Home';
 
 const appRoutes: Routes = [
   {path: 'Registration', component: RegistrationUserComponent},
@@ -25,7 +26,8 @@ const appRoutes: Routes = [
     AppComponent, 
     RegistrationUserComponent,
     TimeOfAlertComponent,
-    SettingsComponent
+    SettingsComponent,
+    HomeComponent
   ],
   
   imports: [

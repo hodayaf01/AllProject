@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Project.Controllers
 {
-    public class HomeController : Controller
+    [EnableCors("*", "*", "*")]
+    public class HomeController : ApiController
     {
-        public ActionResult Index()
-        {
-            ViewBag.Title = "Home Page";
-                 return View();
-        }
+       [Route("api/Home/Get")]
+       public long Get(int timeOfDay)
+       {
+           return 1;
+       }
     }
 }

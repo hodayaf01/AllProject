@@ -15,7 +15,7 @@ export class SettingsService{
     };
 
     get(userCode:string):Observable<Settings>{
-        return this.http.get<Settings>(`${this.url+'/Get?'}`)
+        return this.http.get<Settings>(`${this.url}/Get?userCode=${userCode}`)
     }
 
     edit(s: Settings): Observable<any> {
