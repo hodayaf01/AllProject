@@ -10,7 +10,7 @@ namespace BL
 {
     public class Settings_BL
     {
-        public long Edit(Setting _details)
+        public long Edit(Settings _details)
         {
             MediDBEntities DB = new MediDBEntities();
 
