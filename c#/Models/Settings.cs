@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public enum TimeInDay
+    public class Settings
     {
-        Morning=1,
+
     }
-    
 }

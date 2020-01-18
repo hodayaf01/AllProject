@@ -15,7 +15,6 @@ namespace Project.Controllers
     {
         Registration_BL _registration_BL = new Registration_BL();
 
-        
         [Route("api/Registration/Add")]
         [HttpPost]
         public long Add(Registration registration)

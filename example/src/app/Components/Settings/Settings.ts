@@ -1,20 +1,70 @@
 import {Component,OnInit} from '@angular/core';
-import { User } from '../../Models/User.model';
-import { Guardian } from '../../Models/Guardian.model';
-@Component(
-    {
+import { SettingsService } from '../../Services/SettingsService';
+import { Settings } from '../../Models/Settings.model';
+@Component({
         selector:'app-Settings',
-        templateUrl:'./Setting.html',
-        styleUrls:['./Setting.css']
+        templateUrl:'./Settings.html',
+        styleUrls:['./Settings.css']
     })
     export class SettingsComponent implements OnInit {
-    ngOnInit() {
-        alert("Method implemented.");
-    }
-        user:User=new User();
-        guardians:Array<Guardian> =[];
+        userDetails:Settings;
+        password:string;
         subscribe:any;
-        constructor(private s){}
+        isSettings:boolean=true;
+        isUserDetails:boolean=true;
+        isGuardiansDedails:boolean=false;
+        isTimeOfAlertDetails:boolean=false;
 
+        constructor(private settingsService: SettingsService){
+           /* this.subscribe=this.settingsService.get(localStorage.getItem('USERCODE')).subscribe(result=>
+                {this.userDetails=result});*/
+            this.subscribe=this.settingsService.get("3").subscribe(result=>
+            {this.userDetails=result});
+           
+        }
+        checkPassword()
+        {    
+            this.isSettings=false;
+            //document.getElementById("userDetails").setAttribute("hidden",this.isUserDetails.toString());   
+            //document.getElementById("settingsForm").setAttribute("hidden","false") ;
+            document.getElementById("settingsForm").hidden=false;
+            if(this.userDetails.user.password===this.password)
+            {
+                
 
+            }
+        }
+
+        show()
+        {
+
+        }
+
+        resetDivs()
+        {
+
+            this.isUserDetails=true;
+            this.isGuardiansDedails=true
+            this.isTimeOfAlertDetails=true
+        }
+
+        editUser()
+        {
+            this.subscribe=this.settingsService.edit(this.userDetails)
+        }
+
+        ngOnInit() {
+        }
+
+        ngOnDestroy()
+        {
+        this.subscribe=null;
+        }
+       
+        addOrEdit()
+        {
+          //this.detailsUser.addOrEdit(this.user);
+         
+        }
     }
+    

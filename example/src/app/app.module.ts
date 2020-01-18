@@ -4,15 +4,18 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-import {UserService} from './Services/UserService';
+import {RegistrationService} from './Services/RegistrationService';
 import {RegistrationUserComponent} from './Components/RegistrationUser/RegistrationUser';
 import { RouterModule, Routes } from '@angular/router';
 import { TimeOfAlertComponent } from './Components/TimeOfAlert/TimeOfAlert';
 import { TimeOfAlertForUserService } from './Services/TimeOfDayForUser.service';
+import { SettingsComponent } from './Components/Settings/Settings';
+import { SettingsService } from './Services/SettingsService';
 
 const appRoutes: Routes = [
-  {path: 'registration', component: RegistrationUserComponent},
-  {path: 'timeOfAlert', component: TimeOfAlertComponent},
+  {path: 'Registration', component: RegistrationUserComponent},
+  {path: 'TimeOfAlert', component: TimeOfAlertComponent},
+  {path:'Settings',component:SettingsComponent}
 ];
 
 
@@ -21,7 +24,8 @@ const appRoutes: Routes = [
     //כל קומפוננטה חייבת להיות כאן
     AppComponent, 
     RegistrationUserComponent,
-    TimeOfAlertComponent
+    TimeOfAlertComponent,
+    SettingsComponent
   ],
   
   imports: [
@@ -35,8 +39,9 @@ const appRoutes: Routes = [
 
   //מכיל את כל הסרויסים
   providers: [
-    UserService,
-    TimeOfAlertForUserService
+    RegistrationService,
+    TimeOfAlertForUserService,
+    SettingsService
   ],
   
   bootstrap: [AppComponent]
