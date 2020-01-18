@@ -1,6 +1,6 @@
 import { Time } from "@angular/common";
 
-export class User{
+export class Alert{
     alertText:string;
     alertTime:Time
    
