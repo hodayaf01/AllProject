@@ -9,7 +9,7 @@ using System.Web.Http.Cors;
 namespace Project.Controllers
 {
     [EnableCors("*", "*", "*")]
-    public class HomeController : ApiController
+    public class HomePageController : ApiController
     {
        [Route("api/Home/Get")]
        public long Get(int timeOfDay)
