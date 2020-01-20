@@ -11,10 +11,10 @@ namespace DAL
     {
         MediDBEntities _DB = new MediDBEntities();
 
-        public guardiansToUser Get()
+        public List<guardiansToUser> GetByUser(long userId)
         {
-            var res = _DB.guardiansToUsers.ToList().FirstOrDefault();
-            res = res == null ? new guardiansToUser() : res;
+            var res = _DB.guardiansToUsers.Where(g => g.userId==userId).ToList();
+            res = res == null ? null : res;
             return res;
         }
 

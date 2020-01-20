@@ -21,7 +21,13 @@ namespace DAL
             var res = _DB.TimeToMedicinesForChilds.ToList().FirstOrDefault();
             res = res == null ? new TimeToMedicinesForChild() : res;
             return res;
-        }       
+        }
+
+        public List<TimeToMedicinesForChild> GetByMedicineToChild(long medicineToUserId) {
+            var res = _DB.TimeToMedicinesForChilds.Where(t => t.idMedicineToChild==medicineToUserId).ToList();
+            res = res == null ? null : res;
+            return res;
+        }
 
         public void Edit(TimeToMedicinesForChild details)
         {

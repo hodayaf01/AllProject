@@ -19,6 +19,13 @@ namespace DAL
             return res;
         }
 
+        public List<MedicinesToChild> GetByUser(long id)
+        {
+            var res = _DB.MedicinesToChilds.Where(m => m.childId == id).ToList();
+            res = res == null ? null : res;
+            return res;
+        }
+
         public bool Add(long userId, long timeCode)
         {
             List<MedicinesToClient> medicinesToClients = _MedicinesToClient_DAL.Get(userId);
