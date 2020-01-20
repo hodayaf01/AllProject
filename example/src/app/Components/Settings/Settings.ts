@@ -12,7 +12,7 @@ import { Settings } from '../../Models/Settings.model';
         subscribe:any;
         isSettings:boolean=true;
         isUserDetails:boolean=true;
-        isGuardiansDedails:boolean=false;
+        isGuardiansDedails:boolean=true;
         isTimeOfAlertDetails:boolean=false;
 
         constructor(private settingsService: SettingsService){
@@ -35,9 +35,21 @@ import { Settings } from '../../Models/Settings.model';
             }
         }
 
-        show()
+        showUserDetails()
         {
+            //this.isUserDetails=false;
+            //this.isGuardiansDedails=true;
+            document.getElementById("userDetails").hidden=false;
+            document.getElementById("guardiansDedails").hidden=true;
 
+        }
+
+        showGuardiansDedails()
+        {            
+            //this.isUserDetails=true;
+            //this.isGuardiansDedails=false;
+            document.getElementById("userDetails").hidden=true;
+            document.getElementById("guardiansDedails").hidden=false;
         }
 
         resetDivs()

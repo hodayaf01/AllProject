@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -11,10 +12,10 @@ namespace Project.Controllers
     [EnableCors("*", "*", "*")]
     public class HomePageController : ApiController
     {
-       [Route("api/Home/Get")]
-       public long Get(int timeOfDay)
+       //[Route("api/Home/Get")]
+       /*public List<GenerateMedicine> Get(int timeOfDay)
        {
-           return 1;
-       }
+            return ;
+       }*/
     }
 }

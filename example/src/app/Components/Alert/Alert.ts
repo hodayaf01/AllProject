@@ -15,6 +15,15 @@ import { from } from 'rxjs';
        // document.getElementById('txt').innerHTML =
  // h + ":" + m + ":" + s;
 
+    stopAlert()
+    {
+        
+    }
+
+    nagger(){
+
+    }
+
     ngOnInit() {}
 
 

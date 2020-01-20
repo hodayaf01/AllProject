@@ -162,6 +162,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alert.cs" />
     <Compile Include="ArchiveTakeMedicine.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
@@ -169,6 +170,7 @@
       <DependentUpon>HMO_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Enums.cs" />
+    <Compile Include="GenerateMedicine.cs" />
     <Compile Include="Guardian.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
