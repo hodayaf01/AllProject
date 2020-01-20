@@ -11,9 +11,9 @@ namespace DAL
     {
         MediDBEntities _DB = new MediDBEntities();
 
-        public Guardian Get()
+        public Guardian Get(long id)
         {
-            var res = _DB.Guardians.ToList().FirstOrDefault();
+            var res = _DB.Guardians.FirstOrDefault(g=>g.Id==id);
             res = res == null ? new Guardian() : res;
             return res;
         }

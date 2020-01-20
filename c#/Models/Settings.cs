@@ -10,5 +10,6 @@ namespace Models
     {
         public User User { get; set; }
         public List<Guardian> Guardians { get; set; }
+        public List<TimeOfDay> TimeOfDays { get; set; }
     }
 }

@@ -25,6 +25,13 @@ namespace DAL
             return res;
         }
 
+        public TimeOfDay GetByTimeId(long idTimeOfDay)
+        {
+            var res = _DB.TimeOfDays.FirstOrDefault(t => t.timeId == idTimeOfDay);
+            res = res == null ? null : res;
+            return res;
+        }
+
         public void Edit(TimeOfDay details)
         {
             _DB.Entry(details);

@@ -6,5 +6,5 @@ export class Alert{
    
     constructor(text:string,time:Time) {
        this.alertText=text;
-       this.alertTime=time;
+       this.alertTime=time;}
     }
