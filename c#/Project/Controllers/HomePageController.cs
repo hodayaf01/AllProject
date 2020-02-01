@@ -13,7 +13,7 @@ namespace Project.Controllers
     public class HomePageController : ApiController
     {
        //[Route("api/Home/Get")]
-       /*public List<GenerateMedicine> Get(int timeOfDay)
+       /*public List<GenerateMedicine> Get(Home _details)
        {
             return ;
        }*/

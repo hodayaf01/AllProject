@@ -195,6 +195,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HMO_DB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Home.cs" />
     <Compile Include="KingOfDosage.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
