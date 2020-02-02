@@ -39,5 +39,11 @@ namespace DAL
            // _DB.Guardians.First().DeleteRow = false;
         }
 
+        public KingOfDosage getByIdKindOfChild(long idKindOfDosage)
+        {
+            var res = _DB.KingOfDosages.FirstOrDefault(id => id.kindOfDosageId == idKindOfDosage);
+            res = res == null ? null : res;
+            return res;
+        }
     }
 }
