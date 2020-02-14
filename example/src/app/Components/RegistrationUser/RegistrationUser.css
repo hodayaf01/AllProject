@@ -1,12 +1,4 @@
-header{
-    display: flex;
-    background-color:dimgray;
-}
 
-.title{
-    font-size: 80px;
-    box-align: center;
-}
 
 label{
     font-size: 150%;
@@ -20,6 +12,6 @@ button{
 }
 input{
     font-size: 150%;
-    color:rgb(42, 65, 65);
+    color:rgb(49, 143, 143);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
