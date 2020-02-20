@@ -11,23 +11,24 @@
     </header>
     <section>
         <form name="myForm">
-            <div>
+            <label class="titleRegistration">הרשמה</label>
+            <div style="display: block; text-align: center; padding-bottom: 5px;">
                 <label>שם הגיבור</label>
                 <input name="userName" [(ngModel)]="user.Id" type="text">
             </div>
-            <div>
+            <div style="display: block; text-align: center; padding-bottom: 5px;">
                 <label>תעודת זהות</label>
                 <input name="userId" [(ngModel)]="user.userId" type="text">
             </div>
-            <div>
+            <div style="display: block; text-align: center; padding-bottom: 5px;">
                 <label>פלאפון</label>
                 <input name="userName" [(ngModel)]="user.phone" type="text">
             </div>
-            <div>
+            <div style="display: block; text-align: center; padding-bottom: 5px;">
                 <label>אימייל</label>
                 <input name="userEmail" [(ngModel)]="user.email" type="text">
             </div>
-            <div>
+            <div style="display: block; text-align: center; padding-bottom: 5px;">
                 <label>פרטי האפוטרופוסים</label>
                 <table>
                     <tbody>
@@ -39,23 +40,23 @@
                     </tbody>
                 </table>
             </div>
-            <div>
+            <div class="detailContainer">
                 <label>שם אפוטרופוס</label>
                 <input type="text" [(ngModel)]="guardian.guardianName" name="guardianName">
                 <input type="button" (click)="addGuardian()" [disabled]="isLessThanThreeGuardian" value="+" style="box-shadow:teal">
             </div>
-            <div>
+            <div class="detailContainer">
                 <label>פלאפון</label>
                 <input type="text" [(ngModel)]="guardian.PhoneNumber" name="PhoneNumber"> 
             </div>
-            <div>
+            <div class="detailContainer">
                 <input type="button" value="שלח סיסמא" (click)="sendPassword">
             </div>
-            <div>
+            <div class="detailContainer">
                 <label>הכנס סיסמא</label>
                 <input type="text" name="password">
             </div>
-            <div>
+            <div class="detailContainer">
                 <input type="button" value="אישור" (click)="addUser()">
             </div>
 

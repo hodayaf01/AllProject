@@ -1,17 +1,44 @@
 
 
 label{
-    font-size: 150%;
-    color:rgb(35, 100, 100);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-}
-button{
-    font-size: 150%;
-    color:rgb(42, 65, 65);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-}
-input{
-    font-size: 150%;
+    font-size: 20px;
     color:rgb(49, 143, 143);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
+button{
+    font-size: 20px;
+    color:rgb(49, 143, 143);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+    
+}
+input{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 20px;
+    color:rgb(49, 143, 143);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-right: 10px;
+    
+}
+
+input [type=button]{
+    background-color: #f6ad4d;
+}
+form{
+    padding-right: 7px;
+}
+.titleRegistration{
+    align-items: center;
+    font-weight: bold;
+    display: block;
+    font-size: 30px;
+    text-align: center;
+}
+
+.detailContainer{
+    display: block; 
+    text-align: center; 
+    padding-bottom: 5px;
+}
+
