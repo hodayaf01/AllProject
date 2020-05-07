@@ -14,7 +14,7 @@ namespace BL
 
         public User Get(string code)
         {
-            return _User_DAL.Get(code);
+            return _User_DAL.GetById(code);
         }
 
         public void AddOrEdit(User details)

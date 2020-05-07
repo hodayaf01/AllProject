@@ -1,25 +1,30 @@
 
 
 label{
-    font-size: 20px;
-    color:rgb(49, 143, 143);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-size: 17px;
+    color:#f6ad4d;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: inline-block;
+    width: 384px;
+    text-align: right;
 }
 button{
     font-size: 20px;
-    color:rgb(49, 143, 143);
+    color:#f6ad4d;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     
     
 }
 input{
-    border: 1px solid #ccc;
+    border: 1px solid rgb(49, 143, 143);
     border-radius: 4px;
-    font-size: 20px;
-    color:rgb(49, 143, 143);
+    font-size: 17px;
+    color:rgb(49, 112, 143);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin-right: 10px;
-    
+    display: block;
+    background-color: #f6ad4d;
+    text-align: center;
 }
 
 input [type=button]{
@@ -42,3 +47,8 @@ form{
     padding-bottom: 5px;
 }
 
+.containsLableAndInput{
+    display: block; 
+    text-align: center; 
+    padding-bottom: 5px;
+}

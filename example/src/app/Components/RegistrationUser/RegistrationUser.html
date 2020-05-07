@@ -2,33 +2,34 @@
 <html>
 <body dir="rtl">
     <header>
-        <div class="containTitle">
+        <div class="containLogo">
+            <img class="mediLogoBGimg" src="../../../assets/images/LOGOBG.png" >
+        </div>
+        <!-- <div class="containTitle">
             <div class="title">מדי</div>
-        </div>
-        <div style="width: 40%; align-self: center;">
-            <img class="mediLogoBGimg" src="../../../assets/images/mediLogoBG.png" >
-        </div>
+        </div> -->
+        <html routerLink="/TimeOfAlert" routerLinkActive="active" class="active">timeofalert</html>
     </header>
     <section>
         <form name="myForm">
             <label class="titleRegistration">הרשמה</label>
-            <div style="display: block; text-align: center; padding-bottom: 5px;">
-                <label>שם הגיבור</label>
+            <div class="containsLableAndInput">
+                <label >שם הגיבור</label>
                 <input name="userName" [(ngModel)]="user.Id" type="text">
             </div>
-            <div style="display: block; text-align: center; padding-bottom: 5px;">
+            <div class="containsLableAndInput">
                 <label>תעודת זהות</label>
                 <input name="userId" [(ngModel)]="user.userId" type="text">
             </div>
-            <div style="display: block; text-align: center; padding-bottom: 5px;">
+            <div class="containsLableAndInput">
                 <label>פלאפון</label>
                 <input name="userName" [(ngModel)]="user.phone" type="text">
             </div>
-            <div style="display: block; text-align: center; padding-bottom: 5px;">
+            <div class="containsLableAndInput">
                 <label>אימייל</label>
                 <input name="userEmail" [(ngModel)]="user.email" type="text">
             </div>
-            <div style="display: block; text-align: center; padding-bottom: 5px;">
+            <div class="containsLableAndInput">
                 <label>פרטי האפוטרופוסים</label>
                 <table>
                     <tbody>

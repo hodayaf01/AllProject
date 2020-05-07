@@ -14,7 +14,8 @@ namespace BL
 
         public guardiansToUser Get()
         {
-            return _GurdiansToUser_DAL.Get();
+            //return _GurdiansToUser_DAL.Get();
+            return new guardiansToUser();
         }
 
         public void AddOrEdit(guardiansToUser details)
