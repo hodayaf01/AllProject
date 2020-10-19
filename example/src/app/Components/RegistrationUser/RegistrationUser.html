@@ -12,46 +12,56 @@
     <section>
         <form name="myForm">
             <label class="titleRegistration">הרשמה</label>
-            <div class="containsLableAndInput">
-                <label >שם הגיבור</label>
-                <input name="userName" [(ngModel)]="user.Id" type="text">
+
+            <button class="accordion" (click)="accordionClick()">פרטי הגיבור</button>
+            <div class="containChildDetails">
+                <div class="containsLableAndInput">
+                    <label >שם הגיבור</label>
+                    <input name="userName" [(ngModel)]="user.Id" type="text">
+                </div>
+                <div class="containsLableAndInput">
+                    <label>תעודת זהות</label>
+                    <input name="userId" [(ngModel)]="user.userId" type="text">
+                </div>
+                <div class="containsLableAndInput">
+                    <label>פלאפון</label>
+                    <input name="userName" [(ngModel)]="user.phone" type="text">
+                </div>
+                <div class="containsLableAndInput">
+                    <label>אימייל</label>
+                    <input name="userEmail" [(ngModel)]="user.email" type="text">
+                </div>
             </div>
-            <div class="containsLableAndInput">
-                <label>תעודת זהות</label>
-                <input name="userId" [(ngModel)]="user.userId" type="text">
+
+            <button class="accordion">פרטי ההורה</button>
+            <div class="containChildDetails">
+                <div class="containsLableAndInput">
+                    <label>פרטי האפוטרופוסים</label>
+                    <table>
+                        <tbody>
+                            <tr *ngFor="let guardian of guardians">
+                                <td>{{guardian.guardianName}}</td>
+                                <td>{{guardian.PhoneNumber}}</td>
+                            </tr>
+                            <td (click)="changePhoneForGuardian()" [hidden]="isMoreThanOneGuardian">ערוך</td>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="detailContainer">
+                    
+                    <label>שם אפוטרופוס</label>
+                    <input type="text" [(ngModel)]="guardian.guardianName" name="guardianName">
+                    <input type="button" (click)="addGuardian()" [disabled]="isLessThanThreeGuardian" value="+" style="box-shadow:teal">
+                </div>
+                <div class="detailContainer">
+                    <label>פלאפון</label>
+                    <input type="text" [(ngModel)]="guardian.PhoneNumber" name="PhoneNumber"> 
+                </div>
+                <div class="detailContainer">
+                    <input type="button" value="שלח סיסמא" (click)="sendPassword">
+                </div>
             </div>
-            <div class="containsLableAndInput">
-                <label>פלאפון</label>
-                <input name="userName" [(ngModel)]="user.phone" type="text">
-            </div>
-            <div class="containsLableAndInput">
-                <label>אימייל</label>
-                <input name="userEmail" [(ngModel)]="user.email" type="text">
-            </div>
-            <div class="containsLableAndInput">
-                <label>פרטי האפוטרופוסים</label>
-                <table>
-                    <tbody>
-                        <tr *ngFor="let guardian of guardians">
-                            <td>{{guardian.guardianName}}</td>
-                            <td>{{guardian.PhoneNumber}}</td>
-                        </tr>
-                        <td (click)="changePhoneForGuardian()" [hidden]="isMoreThanOneGuardian">ערוך</td>
-                    </tbody>
-                </table>
-            </div>
-            <div class="detailContainer">
-                <label>שם אפוטרופוס</label>
-                <input type="text" [(ngModel)]="guardian.guardianName" name="guardianName">
-                <input type="button" (click)="addGuardian()" [disabled]="isLessThanThreeGuardian" value="+" style="box-shadow:teal">
-            </div>
-            <div class="detailContainer">
-                <label>פלאפון</label>
-                <input type="text" [(ngModel)]="guardian.PhoneNumber" name="PhoneNumber"> 
-            </div>
-            <div class="detailContainer">
-                <input type="button" value="שלח סיסמא" (click)="sendPassword">
-            </div>
+
             <div class="detailContainer">
                 <label>הכנס סיסמא</label>
                 <input type="text" name="password">

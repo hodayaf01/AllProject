@@ -7,7 +7,7 @@ label{
     display: inline-block;
     width: 384px;
     text-align: right;
-    padding-right: 10px;
+
 }
 button{
     font-size: 20px;
@@ -50,6 +50,49 @@ form{
 
 .containsLableAndInput{
     display: block; 
-    /* text-align: center;  */
+    text-align: center; 
     padding-bottom: 5px;
+}
+
+.containChildDetails{
+    overflow: hidden;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.containParentDetails{
+    border: solid 3px #f6ad4d;
+    display: none;
+    overflow: hidden;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.active .accordion{
+    width: 100%;
+}
+
+.accordion:hover{
+    cursor: pointer;
+}
+
+.accordion:after {
+    content: '\25BC'; /* Unicode character for "plus" sign (+) */
+    font-size: 15px;
+    float: right;
+    margin-left: 5px;
+    margin-top: 4px;
+  }
+  
+  .active:after {
+    content: "\25B2"; /* Unicode character for "minus" sign (-) */
+  }
+
+button{
+    font-size: 17px;
+    color: #f6ad4d;
+    background: none;
+    border: none;
 }

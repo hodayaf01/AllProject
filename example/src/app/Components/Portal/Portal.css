@@ -1,7 +1,7 @@
 .loading {
     -webkit-animation: rotation 2s infinite linear;
-    width: 100px;
-    height: 150px;
+    width: 70px;
+    height: 100px;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -24,8 +24,8 @@
 
 }
 .mediLogoBGimgPortal{
-    height: 440px;
-    width: 420px;
+    height: 420px;
+    width: 430px;
     padding-top: 25px;
 }
 
