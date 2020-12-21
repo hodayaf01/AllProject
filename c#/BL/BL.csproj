@@ -179,6 +179,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alert_BL.cs" />
     <Compile Include="Home_BL.cs" />
     <Compile Include="Settings_BL.cs" />
     <Compile Include="TimeOfAlert_BL.cs" />

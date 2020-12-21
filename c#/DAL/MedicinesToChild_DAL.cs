@@ -11,7 +11,7 @@ namespace DAL
     {
         MediDBEntities _DB = new MediDBEntities();
         DAL.HMO_DB_DAL.MedicinesToClient_DAL _MedicinesToClient_DAL = new HMO_DB_DAL.MedicinesToClient_DAL();
-        TimeToMedicinesForChild _TimeToMedicinesForChild = new TimeToMedicinesForChild();
+        //TimeToMedicinesForChild _TimeToMedicinesForChild = new TimeToMedicinesForChild();
         public MedicinesToChild Get()
         {
             var res = _DB.MedicinesToChilds.ToList().FirstOrDefault();

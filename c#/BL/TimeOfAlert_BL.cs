@@ -14,6 +14,7 @@ namespace BL
         MedicinesDAL _medicinesDAL = new MedicinesDAL();
         KingOfDosageDAL _KingOfDosageDAL = new KingOfDosageDAL();
         MedicinesToChild_DAL _MedicinesToChild_DAL = new MedicinesToChild_DAL();
+        List<long> listCodeTime = new List<long>();
         public bool Add(long userId,List<TimeOfDay> _details)
         {
             //הפעולה מקבלת את הקוד של המשתמש ורשימה של זמנים ביום         
@@ -25,8 +26,11 @@ namespace BL
             //מתבצע כל פעם כי שולחים כל פעם זמן אחר
             foreach (var item in _details)
             {
+                //?????
                 if (!(_TimeOfDay_DAL.Add(item) || _MedicinesToChild_DAL.Add(userId, item.timeId)))
-                    return false;                
+                    return false;
+                //רשימה של הקודים למשתמש
+                listCodeTime.Add(item.timeId);
             }
             return true;
         }
