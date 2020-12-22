@@ -16,8 +16,11 @@ import { AlertComponent } from './Components/Alert/Alert';
 import { AlertService } from './Services/AlertService';
 import { HomeService } from './Services/HomeService'
 import { PortalComponent } from './Components/Portal/Portal';
+import { TestComponent } from './Components/TestCompo/TestCompo';
 
 const appRoutes: Routes = [
+  {path: '', component: RegistrationUserComponent},
+
   {path: 'Registration', component: RegistrationUserComponent},
   {path: 'TimeOfAlert', component: TimeOfAlertComponent},
   {path:'Settings',component:SettingsComponent},
@@ -36,7 +39,8 @@ const appRoutes: Routes = [
     SettingsComponent,
     HomeComponent,
     AlertComponent,
-    PortalComponent
+    PortalComponent,
+    TestComponent,
   ],
   
   imports: [
