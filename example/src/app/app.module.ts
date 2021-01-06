@@ -15,13 +15,15 @@ import { HomeComponent } from './Components/Home/Home';
 import { AlertComponent } from './Components/Alert/Alert';
 import { AlertService } from './Services/AlertService';
 import { HomeService } from './Services/HomeService'
+import { PortalComponent } from './Components/Portal/Portal';
 
 const appRoutes: Routes = [
   {path: 'Registration', component: RegistrationUserComponent},
   {path: 'TimeOfAlert', component: TimeOfAlertComponent},
   {path:'Settings',component:SettingsComponent},
   {path:'Home',component:HomeComponent},
-  {path:'Alert',component:AlertComponent}
+  {path:'Alert',component:AlertComponent},
+  {path:'Portal',component:PortalComponent}
 ];
 
 
@@ -33,7 +35,8 @@ const appRoutes: Routes = [
     TimeOfAlertComponent,
     SettingsComponent,
     HomeComponent,
-    AlertComponent
+    AlertComponent,
+    PortalComponent
   ],
   
   imports: [

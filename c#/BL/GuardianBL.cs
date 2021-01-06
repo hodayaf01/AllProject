@@ -12,10 +12,10 @@ namespace BL
     {
         GuardiansDAL _guardiansDAL = new GuardiansDAL();
 
-        public Guardian Get(long id)
-        {
-            return _guardiansDAL.Get(id);
-        }
+        //public Guardian Get()
+        //{
+        //    return _guardiansDAL.Get();
+        //}
 
         public void AddOrEdit(Guardian details)
         {

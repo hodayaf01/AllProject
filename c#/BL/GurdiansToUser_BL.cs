@@ -12,10 +12,11 @@ namespace BL
     {
         GurdiansToUser_DAL _GurdiansToUser_DAL = new GurdiansToUser_DAL();
 
-        //public guardiansToUser Get()
-        //{
-        //    return _GurdiansToUser_DAL.Get();
-        //}
+        public guardiansToUser Get()
+        {
+            //return _GurdiansToUser_DAL.Get();
+            return new guardiansToUser();
+        }
 
         public void AddOrEdit(guardiansToUser details)
         {

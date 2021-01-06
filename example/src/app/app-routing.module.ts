@@ -5,6 +5,7 @@ import { TimeOfAlertComponent } from './Components/TimeOfAlert/TimeOfAlert';
 import { SettingsComponent } from './Components/Settings/Settings';
 import { HomeComponent } from './Components/Home/Home';
 import { AlertComponent } from './Components/Alert/Alert';
+import { PortalComponent } from './Components/Portal/Portal';
 
 
 export const appRoutes: Routes = [
@@ -12,7 +13,8 @@ export const appRoutes: Routes = [
   {path:'TimeOfAlert', component:TimeOfAlertComponent},
   {path:'Settings',component:SettingsComponent},
   {path: 'Home', component:HomeComponent},
-  {path:'Alert',component:AlertComponent}
+  {path:'Alert',component:AlertComponent},
+  {path:'Portal',component:PortalComponent}
 ];
 
 @NgModule({
