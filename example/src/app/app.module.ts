@@ -17,6 +17,13 @@ import { AlertService } from './Services/AlertService';
 import { HomeService } from './Services/HomeService'
 import { PortalComponent } from './Components/Portal/Portal';
 import { TestComponent } from './Components/TestCompo/TestCompo';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
+import { MessagingService } from './Services/messaging.service';
+import { AsyncPipe } from '../../node_modules/@angular/common';
+import { environment } from 'src/environments/environment';
 
 const appRoutes: Routes = [
   {path: '', component: RegistrationUserComponent},
@@ -49,7 +56,11 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireMessagingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
 
   //מכיל את כל הסרויסים
@@ -58,7 +69,9 @@ const appRoutes: Routes = [
     TimeOfAlertForUserService,
     SettingsService,
     AlertService,
-    HomeService
+    HomeService,
+    MessagingService,
+    AsyncPipe,
   ],
   
   bootstrap: [AppComponent]

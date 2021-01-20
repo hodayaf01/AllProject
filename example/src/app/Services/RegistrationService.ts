@@ -24,6 +24,4 @@ export class RegistrationService{
     get(userCode:string):Observable<User>{
         return this.http.get<User>(`${this.url+'/Get?'}`)
     }
-
-
 }

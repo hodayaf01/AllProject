@@ -5,6 +5,7 @@ import { RegistrationService } from 'src/app/Services/RegistrationService';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
 import { Registration } from 'src/app/Models/Registration.model';
+import { MessagingService } from 'src/app/Services/messaging.service';
 
 @Component({
     selector: 'app-RegistrationUser',
@@ -20,8 +21,9 @@ export class RegistrationUserComponent implements OnInit {
     isLessThanThreeGuardian: boolean = false;
     isMoreThanOneGuardian: boolean = true;
     subscribe: any;
+    message;
 
-    constructor(private registrationService: RegistrationService) {
+    constructor(private registrationService: RegistrationService, private messagingService: MessagingService) {
 
     }
 
@@ -51,8 +53,6 @@ export class RegistrationUserComponent implements OnInit {
         this.guardian.guardianName = "Dady";
         this.guardians.push(this.guardian);
         this.registration.Guardians = this.guardians;
-
-
 
         this.subscribe = this.registrationService.add(this.registration).subscribe(
             result => {
@@ -95,5 +95,8 @@ export class RegistrationUserComponent implements OnInit {
         }
     }
     ngOnInit() {
+        this.messagingService.requestPermission()
+        this.messagingService.receiveMessage()
+        this.message = this.messagingService.currentMessage
     }
 }
