@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html>
-<body dir="rtl">
-        <header>
-            <div class="containLogo">
-                <img class="mediLogoBGimg" src="../../../assets/images/LOGOBG.png" >
-            </div>
-            </header>
+<div #alertModal>
+    <header>
+        <div class="containLogo">
+            <img class="mediLogoBGimg" src="../../../assets/images/LOGOBG.png" >
+        </div>
+    </header>
     <div id="timeOfAlert">
         <img src="../../../assets/images/sun.jpg" height="42" width="42">
         <div>{{alertTime.alertText}}</div>
@@ -16,5 +14,5 @@
         <button id="okBtn" (click)="stopAlert()" >אישור</button>
         <button id="naggerBtn" (click)="nagger()">אחר כך</button>
     </div>
-</body>
-</html>
+</div>
+    

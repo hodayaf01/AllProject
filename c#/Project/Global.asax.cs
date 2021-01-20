@@ -13,6 +13,8 @@ namespace Project
     {
         protected void Application_Start()
         {
+            // call one day update timer function
+            // call every min notification alert
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
