@@ -21,8 +21,11 @@ namespace DAL
 
         public List<MedicinesToChild> GetByUser(long id)
         {
-            var res = _DB.MedicinesToChilds.Where(m => m.childId == id).ToList();
+            var res = _DB.MedicinesToChilds.Where(m => m.userId == id).ToList();
             res = res == null ? null : res;
+
+
+           // _DB.Users.FirstOrDefault(i => i.childId == "").MedicinesToChilds.SelectMany(t => t.TimeToMedicinesForChilds);
             return res;
         }
 
@@ -34,7 +37,7 @@ namespace DAL
                 MedicinesToChild medicinesToChild = new MedicinesToChild()
                 {
                     medicineId = item.medicineId,
-                    childId = userId,
+                    userId = userId,
                     kindOfDosage = item.kindOfDosage,
                     Dosage = item.Dosage
                 };

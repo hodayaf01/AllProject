@@ -14,7 +14,7 @@ namespace DAL
 
         public User GetById(string id)
         {
-            User res = _DB.Users.ToList().FirstOrDefault(u=>u.userId.Equals(id));
+            User res = _DB.Users.ToList().FirstOrDefault(u=>u.childId.Equals(id));
             res = res == null ? new User() : res;
             return res;
         }
@@ -30,7 +30,7 @@ namespace DAL
             
             User newUser = new User()
             {
-                userId = _details.userId,
+                childId = _details.childId,
                 userName = _details.userName,
                 userHMO = _details.userHMO,
                 email = _details.email,

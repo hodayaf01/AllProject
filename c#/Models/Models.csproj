@@ -166,6 +166,7 @@
     <Compile Include="ArchiveTakeMedicine.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChildMedicin.cs" />
     <Compile Include="Client.cs">
       <DependentUpon>HMO_DB.tt</DependentUpon>
     </Compile>
@@ -239,6 +240,7 @@
     <Compile Include="TimeToMedicinesForClient.cs">
       <DependentUpon>HMO_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="TimeToUser.cs" />
     <Compile Include="User.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>

@@ -293,7 +293,7 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="medicineId" Type="Int64" Nullable="false" />
-          <Property Name="childId" Type="Int64" Nullable="false" />
+          <Property Name="userId" Type="Int64" Nullable="false" />
           <Property Name="Dosage" Type="Int32" Nullable="false" />
           <Property Name="kindOfDosage" Type="Int64" Nullable="false" />
           <NavigationProperty Name="KingOfDosage" Relationship="Self.fk_KingOfDosage" FromRole="MedicinesToChild" ToRole="KingOfDosage" />
@@ -325,7 +325,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="childId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -402,7 +402,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="MedicinesToChild">
-              <PropertyRef Name="childId" />
+              <PropertyRef Name="userId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -538,7 +538,7 @@
               <MappingFragment StoreEntitySet="MedicinesToChild">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="medicineId" ColumnName="medicineId" />
-                <ScalarProperty Name="childId" ColumnName="childId" />
+                <ScalarProperty Name="userId" ColumnName="childId" />
                 <ScalarProperty Name="Dosage" ColumnName="Dosage" />
                 <ScalarProperty Name="kindOfDosage" ColumnName="kindOfDosage" />
               </MappingFragment>
@@ -566,7 +566,7 @@
             <EntityTypeMapping TypeName="MediDBModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="childId" ColumnName="userId" />
                 <ScalarProperty Name="userName" ColumnName="userName" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="password" ColumnName="password" />

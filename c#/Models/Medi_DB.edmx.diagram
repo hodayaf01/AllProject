@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="21d19dc6c20a44e0bf7b13ad57f4bd57" Name="Diagram1" ZoomLevel="108">
+      <Diagram DiagramId="21d19dc6c20a44e0bf7b13ad57f4bd57" Name="Diagram1" ZoomLevel="106">
         <EntityTypeShape EntityType="MediDBModel.ArchiveTakeMedicine" Width="1.5" PointX="0.875" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MediDBModel.Guardian" Width="1.5" PointX="3.125" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MediDBModel.guardiansToUser" Width="1.5" PointX="0.875" PointY="2.375" IsExpanded="true" />

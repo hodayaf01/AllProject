@@ -22,7 +22,7 @@ namespace Models
     
         public long Id { get; set; }
         public long medicineId { get; set; }
-        public long childId { get; set; }
+        public long userId { get; set; }
         public int Dosage { get; set; }
         public long kindOfDosage { get; set; }
     
