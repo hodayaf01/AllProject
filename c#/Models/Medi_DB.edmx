@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MediDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MediDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ArchiveTakeMedicines">
           <Key>
             <PropertyRef Name="Id" />
@@ -61,6 +61,7 @@
           <Property Name="childId" Type="bigint" Nullable="false" />
           <Property Name="Dosage" Type="int" Nullable="false" />
           <Property Name="kindOfDosage" Type="bigint" Nullable="false" />
+          <Property Name="status" Type="bit" />
         </EntityType>
         <EntityType Name="TimeOfDay">
           <Key>
@@ -88,6 +89,10 @@
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="userHMO" Type="int" Nullable="false" />
+          <Property Name="token" Type="text" />
+          <Property Name="points" Type="int" />
+          <Property Name="snoozeCounter" Type="int" />
+          <Property Name="snoozePariod" Type="int" />
         </EntityType>
         <Association Name="fk_childId">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
@@ -229,8 +234,7 @@
             <End Role="guardiansToUser" EntitySet="guardiansToUser" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MediDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -293,13 +297,14 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="medicineId" Type="Int64" Nullable="false" />
-          <Property Name="childId" Type="Int64" Nullable="false" />
+          <Property Name="userId" Type="Int64" Nullable="false" />
           <Property Name="Dosage" Type="Int32" Nullable="false" />
           <Property Name="kindOfDosage" Type="Int64" Nullable="false" />
           <NavigationProperty Name="KingOfDosage" Relationship="Self.fk_KingOfDosage" FromRole="MedicinesToChild" ToRole="KingOfDosage" />
           <NavigationProperty Name="Medicine" Relationship="Self.fk_medicineId" FromRole="MedicinesToChild" ToRole="Medicines" />
           <NavigationProperty Name="User" Relationship="Self.fk_childId" FromRole="MedicinesToChild" ToRole="Users" />
           <NavigationProperty Name="TimeToMedicinesForChilds" Relationship="Self.fk_MedicineToChild" FromRole="MedicinesToChild" ToRole="TimeToMedicinesForChild" />
+          <Property Name="status" Type="Int32" />
         </EntityType>
         <EntityType Name="TimeOfDay">
           <Key>
@@ -325,7 +330,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="childId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -333,6 +338,10 @@
           <NavigationProperty Name="guardiansToUsers" Relationship="Self.fk_userId" FromRole="Users" ToRole="guardiansToUser" />
           <NavigationProperty Name="HMO" Relationship="Self.fk_userHMO" FromRole="Users" ToRole="HMO" />
           <NavigationProperty Name="MedicinesToChilds" Relationship="Self.fk_childId" FromRole="Users" ToRole="MedicinesToChild" />
+          <Property Name="token" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="points" Type="Int32" />
+          <Property Name="snoozeCounter" Type="Int32" />
+          <Property Name="snoozePariod" Type="Int32" />
         </EntityType>
         <Association Name="fk_guardianId">
           <End Role="Guardian" Type="Self.Guardian" Multiplicity="1" />
@@ -402,7 +411,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="MedicinesToChild">
-              <PropertyRef Name="childId" />
+              <PropertyRef Name="userId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -536,9 +545,10 @@
           <EntitySetMapping Name="MedicinesToChilds">
             <EntityTypeMapping TypeName="MediDBModel.MedicinesToChild">
               <MappingFragment StoreEntitySet="MedicinesToChild">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="medicineId" ColumnName="medicineId" />
-                <ScalarProperty Name="childId" ColumnName="childId" />
+                <ScalarProperty Name="userId" ColumnName="childId" />
                 <ScalarProperty Name="Dosage" ColumnName="Dosage" />
                 <ScalarProperty Name="kindOfDosage" ColumnName="kindOfDosage" />
               </MappingFragment>
@@ -565,8 +575,12 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="MediDBModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="snoozePariod" ColumnName="snoozePariod" />
+                <ScalarProperty Name="snoozeCounter" ColumnName="snoozeCounter" />
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="token" ColumnName="token" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="childId" ColumnName="userId" />
                 <ScalarProperty Name="userName" ColumnName="userName" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="password" ColumnName="password" />

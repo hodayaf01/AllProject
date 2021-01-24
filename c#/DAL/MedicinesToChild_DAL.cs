@@ -11,7 +11,7 @@ namespace DAL
     {
         MediDBEntities _DB = new MediDBEntities();
         DAL.HMO_DB_DAL.MedicinesToClient_DAL _MedicinesToClient_DAL = new HMO_DB_DAL.MedicinesToClient_DAL();
-        TimeToMedicinesForChild _TimeToMedicinesForChild = new TimeToMedicinesForChild();
+        //TimeToMedicinesForChild _TimeToMedicinesForChild = new TimeToMedicinesForChild();
         public MedicinesToChild Get()
         {
             var res = _DB.MedicinesToChilds.ToList().FirstOrDefault();
@@ -21,8 +21,11 @@ namespace DAL
 
         public List<MedicinesToChild> GetByUser(long id)
         {
-            var res = _DB.MedicinesToChilds.Where(m => m.childId == id).ToList();
+            var res = _DB.MedicinesToChilds.Where(m => m.userId == id).ToList();
             res = res == null ? null : res;
+
+
+           // _DB.Users.FirstOrDefault(i => i.childId == "").MedicinesToChilds.SelectMany(t => t.TimeToMedicinesForChilds);
             return res;
         }
 
@@ -34,7 +37,7 @@ namespace DAL
                 MedicinesToChild medicinesToChild = new MedicinesToChild()
                 {
                     medicineId = item.medicineId,
-                    childId = userId,
+                    userId = userId,
                     kindOfDosage = item.kindOfDosage,
                     Dosage = item.Dosage
                 };

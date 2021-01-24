@@ -22,11 +22,15 @@ namespace Models
         }
     
         public long Id { get; set; }
-        public string userId { get; set; }
+        public string childId { get; set; }
         public string userName { get; set; }
         public string email { get; set; }
         public string password { get; set; }
         public int userHMO { get; set; }
+        public string token { get; set; }
+        public Nullable<int> points { get; set; }
+        public Nullable<int> snoozeCounter { get; set; }
+        public Nullable<int> snoozePariod { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<guardiansToUser> guardiansToUsers { get; set; }

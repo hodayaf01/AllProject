@@ -4,13 +4,17 @@ using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BL
 {
     public class Registration_BL
     {
+        string phoneNumber;
+        string nameChild;
         Client_DAL _Client_DAL = new Client_DAL();
         User_DAL _userDAL = new User_DAL();
         GuardiansDAL _guardiansDAL = new GuardiansDAL();
@@ -20,6 +24,10 @@ namespace BL
         //SMSCOMMS SMSEngine;
         public long Add(Registration _details)
         {
+            //ניסיון לשליחת הההודעה
+            //phoneNumber = _details.Guardians[0].PhoneNumber;
+            //nameChild = _details.NewUser.userName;
+
             //func get in client!!!!!!!!
             //Client client = Clients.ToList().FirstOrDefault();
             if(_Client_DAL.IsFound(_details))
@@ -49,11 +57,37 @@ namespace BL
                     sendTo=_details.NewUser.email,
                     Subject = "הרשמה לאפליקציית Medi",
                     Body = string.Format("היי {0} \n הסיסמא שלך לאפליקציה: {1}",_details.NewUser.userName,_details.NewUser.password)
-                    });               
-                return codeUser;
+                    });
+
+                //SendUsingAPIAsync(phoneNumber,nameChild); //This Method Sends Using API and its ASYNC (You have to wait until the process ends)
+                //Thread.Sleep(5000); //Sleep for 5 SECOND Until API FINISH His Work
+                //return codeUser;
             }
             // else
             return 404;
         }
+        //static async Task SendUsingAPIAsync(string phone,string name)
+        //{
+        //    HttpClient client = new HttpClient();
+        //    //Define the Required Variables
+        //    string key = "YnPDiagST";
+        //    string user = "0587828027";
+        //    string pass = "65576266";
+        //    string sender = "Medi";
+        //    //string recipient = "0538320860";
+        //    //string recipient = _registrationTest.Guardians[0].PhoneNumber;
+        //    string recipient = phone;
+        //    string msg = "Your Child- " + name +" has not yet taken his medication";
+        //    var values = new Dictionary<string, string>
+        //    {
+        //        { "key", key }, { "user", user },{ "pass", pass },
+        //        { "sender", sender }, { "recipient", recipient },
+        //        { "msg", msg }
+        //    };
+        //    var content = new FormUrlEncodedContent(values); //Encode the Data
+        //    var response = await client.PostAsync("https://www.sms4free.co.il/ApiSMS/SendSMS", content);
+        //    var responseString = await response.Content.ReadAsStringAsync();
+        //    Console.WriteLine(responseString); //Gives You How many Recipients the message was sent to
+        //}
     }
 }

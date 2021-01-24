@@ -43,13 +43,14 @@ export class RegistrationUserComponent implements OnInit {
         this.user.userId = "207420274";
         this.user.userName = "הודיה";
         this.user.phone = "0587828027";
-        this.user.email = "hodaya.farkash@gmail.com";
+        //this.user.email = "hodaya.farkash@gmail.com";
+        this.user.email = "shiralulvi1@gmail.com";
         this.user.password = "1234";
         this.user.userHMO = 1;
         this.registration.NewUser = this.user;
 
         this.guardian.Id = 0;
-        this.guardian.PhoneNumber = "0587828027";
+        this.guardian.PhoneNumber = "0538320860";
         this.guardian.guardianName = "Dady";
         this.guardians.push(this.guardian);
         this.registration.Guardians = this.guardians;

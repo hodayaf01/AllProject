@@ -16,7 +16,7 @@ namespace BL
         TimeOfDay_DAL _timeOfDay_DAL = new TimeOfDay_DAL();
         KingOfDosageDAL _kingOfDosageDAL = new KingOfDosageDAL();
 
-        public List<GenerateMedicine> Get(Home _details) {
+        public List<GenerateMedicine> Get(CodeTimeToUser _details) {
 
             List<GenerateMedicine> generateMedicinesList = new List<GenerateMedicine>();
             List< MedicinesToChild > medicinesToChild = _medicinesToChild_DAL.GetByUser(_details.UserID);
