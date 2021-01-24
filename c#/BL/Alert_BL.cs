@@ -1,8 +1,11 @@
 ﻿using DAL;
 using Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,36 +15,39 @@ namespace BL
     {
         static System.Timers.Timer t;
         public static List<ChildMedicin>[,] timeOfChildrenMat = new List<ChildMedicin>[24, 60];
+        public static List<string>[,] _userToken = new List<string>  [24, 60];
         static Alert_BL()
         {
+            Beginning();            
+        }
+
+        public static void CreatMatForChildMedicin()
+        { 
             for (int i = 0; i < 24; i++)
             {
                 for (int j = 0; j < 60; j++)
                 {
                     timeOfChildrenMat[i, j] = new List<ChildMedicin>();
+
+                    _userToken[i, j] = new List<string>();
                 }
             }
-
-            Beginning();
-            
         }
-
         
 
         public static void Beginning()
         {
+            CreatMatForChildMedicin();
+
             //play this fucn every day- fill mat details
             SetTimes();
+
             t = new System.Timers.Timer();
             t.AutoReset = false;
             t.Elapsed += new System.Timers.ElapsedEventHandler(t_Elapsed);
             t.Interval = GetInterval();
             t.Start();
             // Console.ReadLine();
-        }
-        public static void Stop()
-        {
-            t.Stop();
         }
 
         static double GetInterval()
@@ -74,14 +80,61 @@ namespace BL
                     //find or where??
                     List<ChildMedicin> childMedicins = listChildMedicinsNow.FindAll(m => m.userId.Equals(childrenAlert.userId)).ToList();
                     listChildMedicinsNow.RemoveAll(m => m.userId.Equals(childrenAlert.userId));
-                    Console.WriteLine(childMedicins);
+
+                    //-------------------------------
+                    //send alert to send by firabase
+                    WebRequest tRequest = WebRequest.Create("https://fcm.googleapis.com/fcm/send");
+                    tRequest.Method = "post";
+                    //serverKey - Key from Firebase cloud messaging server  
+                    tRequest.Headers.Add(string.Format("Authorization: key={0}", "key=AAAAat--WUo:APA91bHssfs8jZ9WQvhNjr-zp5KcoefJu6HgbA4cud2TIGcH_o6omHgn6TC_wE_JXnqakpbKfSfuAd_B5uVTtGWItGoSRsn7J5RCTxO6rzJdARoXup0vbhxjW60vgacvi5DL-t6k2hwg"));
+                    ////Sender Id - From firebase project setting  
+                    //tRequest.Headers.Add(string.Format("Sender: id={0}", "XXXXX.."));
+                    tRequest.ContentType = "application/json";
+                    var payload = new
+                    {
+                        to = "eL1D6oH3L8U:APA91bF5oV8g-4JisK84aw6XmatgJ_5ArOidF6hCXjASj0mI6xlCjgvfZK4zb1wXktdHDAh5HdjP-RhUoldXBZua2059-e4IJEoOx2DPSjDtVZaKnfWOVxNHk_rAWo9j7DAeHlR4QQHZ",
+                        //priority = "high",
+                        content_available = true,
+                        notification = new
+                        {
+                            body = "גיע הזמן לקחת תרופה",
+                            title = "שלום לך!",
+                            badge = 1
+                        },
+                        data = new
+                        {
+                            key1 = "value1",
+                            key2 = "value2"
+                        }
+
+                    };
+
+                    string postbody = JsonConvert.SerializeObject(payload).ToString();
+                    Byte[] byteArray = Encoding.UTF8.GetBytes(postbody);
+                    tRequest.ContentLength = byteArray.Length;
+                    using (Stream dataStream = tRequest.GetRequestStream())
+                    {
+                        dataStream.Write(byteArray, 0, byteArray.Length);
+                        using (WebResponse tResponse = tRequest.GetResponse())
+                        {
+                            using (Stream dataStreamResponse = tResponse.GetResponseStream())
+                            {
+                                if (dataStreamResponse != null) using (StreamReader tReader = new StreamReader(dataStreamResponse))
+                                    {
+                                        String sResponseFromServer = tReader.ReadToEnd();
+                                        //result.Response = sResponseFromServer;
+                                    }
+                            }
+                        }
+                    }
                 }
             }
             else 
             {
                 t.Stop();
                 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-               // Alert_BL = new Alert_BL();
+                // Alert_BL = new Alert_BL();
+                Beginning();
             }
         }
 
@@ -104,9 +157,17 @@ namespace BL
                     userName = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.userName,
                     Dosage = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.Dosage,
                     kindOfDosageName = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.KingOfDosage.kindOfDosageName,
-                    userId=t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.Id
+                    userId=t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.Id,
+                  medicineToChildId=t.TimeToMedicinesForChilds.FirstOrDefault().idMedicineToChild,
+                  medicineName=t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.Medicine.midicineName
                 }).ToList();
             }
+
+
+
+            //--------------------------------------------------------------
+            //--------------------------------------------------------------
+            //fill userToken matrix in detailes
         }
     }
 }

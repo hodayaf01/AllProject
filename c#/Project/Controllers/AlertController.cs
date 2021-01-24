@@ -13,7 +13,7 @@ namespace Project.Controllers
     {
         Alert_BL _alert_BL = new Alert_BL();
 
-        [Route("api/Alert/Add")]
+        [Route("api/Alert")]
         //[HttpPost]
         //public long Add(Registration registration)
         //{
@@ -27,5 +27,12 @@ namespace Project.Controllers
         {
             //_registration_BL.Edit(registration);
         }
+
+//public List<MedicinesToChild> Get()
+        //public List<MedicinesToChild> Get(long userId)
+        
+        //{
+
+        //}
     }
 }

@@ -21,7 +21,7 @@ namespace BL
         {   
             try
             {
-                User user = _userDAL.GetById(_details.User.userId);
+                User user = _userDAL.GetById(_details.User.childId);
                 if (user != null)
                 {
                     if (_details.User.userName != null) { user.userName = _details.User.userName; }
@@ -112,7 +112,7 @@ namespace BL
 
             _details.TimeOfDays = new List<TimeOfDay>();
             MedicinesToChild medicinesToChild = _medicinesToChild_DAL.GetByUser(userCode).First();
-            List<TimeToMedicinesForChild> timeToMedicinesForChildList = _timeToMedicinesForChild_DAL.GetByMedicineToChild(medicinesToChild.childId);
+            List<TimeToMedicinesForChild> timeToMedicinesForChildList = _timeToMedicinesForChild_DAL.GetByMedicineToChild(medicinesToChild.userId);
             var timeToMedicinesForChildrenListgroup = timeToMedicinesForChildList.GroupBy(t => t.idTimeOfDay).Select(t => t.ToList()).ToList();
             for (int i = 0; i < timeToMedicinesForChildrenListgroup.Count; i++)//loop 4 times
             {

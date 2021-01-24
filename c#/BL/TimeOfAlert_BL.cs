@@ -10,12 +10,13 @@ namespace BL
 {
     public class TimeOfAlert_BL
     {
+        User_DAL _user_DAL = new User_DAL();
         TimeOfDay_DAL _TimeOfDay_DAL = new TimeOfDay_DAL();
         MedicinesDAL _medicinesDAL = new MedicinesDAL();
         KingOfDosageDAL _KingOfDosageDAL = new KingOfDosageDAL();
         MedicinesToChild_DAL _MedicinesToChild_DAL = new MedicinesToChild_DAL();
         List<long> listCodeTime = new List<long>();
-        public bool Add(long userId,List<TimeOfDay> _details)
+        public bool Add(Snooze _snoozeDetails,List<TimeOfDay> _details)
         {
             //הפעולה מקבלת את הקוד של המשתמש ורשימה של זמנים ביום         
 

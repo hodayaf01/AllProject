@@ -25,6 +25,7 @@ namespace Models
         public long userId { get; set; }
         public int Dosage { get; set; }
         public long kindOfDosage { get; set; }
+        public Nullable<int> status { get; set; }
     
         public virtual KingOfDosage KingOfDosage { get; set; }
         public virtual Medicine Medicine { get; set; }
