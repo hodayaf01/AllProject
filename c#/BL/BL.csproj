@@ -180,22 +180,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alert_BL.cs" />
-    <Compile Include="Home_BL.cs" />
+    <Compile Include="MedicinesList_BL.cs" />
+    <Compile Include="Report_BL.cs" />
     <Compile Include="Settings_BL.cs" />
+    <Compile Include="SMSCOMMS.cs" />
     <Compile Include="TimeOfAlert_BL.cs" />
     <Compile Include="GuardianBL.cs" />
     <Compile Include="GurdiansToUser_BL.cs" />
     <Compile Include="HMO_BL.cs" />
-    <Compile Include="KingOfDosageBL.cs" />
     <Compile Include="Registration_BL.cs" />
-    <Compile Include="MedicinesBL.cs" />
-    <Compile Include="MedicinesToChild_BL.cs" />
+    <Compile Include="MedicinesToUserBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimeOfDay_BL.cs" />
-    <Compile Include="Timer.cs" />
     <Compile Include="TimeToMedicinesForChild_BL.cs" />
-    <Compile Include="TimeToUser_BL.cs" />
-    <Compile Include="User_BL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

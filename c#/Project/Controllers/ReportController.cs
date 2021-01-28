@@ -9,6 +9,7 @@ namespace Project.Controllers
 {
     public class ReportController : Controller
     {
+
         [Route("api/Report/Get")]
         public ArchiveTakeMedicineDetails Get(int userCode)
         {

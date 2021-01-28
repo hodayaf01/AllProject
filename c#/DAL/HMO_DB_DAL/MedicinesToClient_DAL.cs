@@ -13,7 +13,9 @@ namespace DAL.HMO_DB_DAL
 
         public List<MedicinesToClient> Get(long userId)
         {
-            List<MedicinesToClient> res = _DB.MedicinesToClients.ToList().FindAll(m=>m.clientId==userId).ToList();           
+            //int codeClient=_
+            //List<MedicinesToClient> res = _DB.MedicinesToClients.ToList().FindAll(m=>m.clientId.CompareTo(userId)).ToList();           
+            List<MedicinesToClient> res = _DB.MedicinesToClients.ToList().FindAll(m=>m.clientId==(userId)).ToList();           
             return res;
         }
     }

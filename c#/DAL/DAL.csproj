@@ -220,6 +220,7 @@
     <Compile Include="MedicinesToChild_DAL.cs" />
     <Compile Include="HMO_DB_DAL\Client_DAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report_DAL.cs" />
     <Compile Include="TimeOfDay_DAL.cs" />
     <Compile Include="TimeToMedicinesForChild_DAL.cs" />
     <Compile Include="TimeTOUser_DAL.cs" />

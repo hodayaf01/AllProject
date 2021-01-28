@@ -28,7 +28,7 @@ namespace BL
             foreach (var item in _details)
             {
                 //?????
-                if (!(_TimeOfDay_DAL.Add(item) || _MedicinesToChild_DAL.Add(userId, item.timeId)))
+                if (!(_TimeOfDay_DAL.Add(item) || _MedicinesToChild_DAL.Add(_snoozeDetails.userId, item.timeId)))
                     return false;
                 //רשימה של הקודים למשתמש
                 listCodeTime.Add(item.timeId);

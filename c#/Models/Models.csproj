@@ -170,6 +170,7 @@
     <Compile Include="Client.cs">
       <DependentUpon>HMO_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DetailsAlert.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="GenerateMedicine.cs" />
     <Compile Include="Guardian.cs">

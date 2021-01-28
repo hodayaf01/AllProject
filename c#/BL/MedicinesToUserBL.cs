@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public class MedicinesBL
+    public class MedicinesToUserBL
     {
         public MedicinesDAL _medicinesDAL = new MedicinesDAL();
 
-        public Medicine Get()
+        public List<GenerateMedicine> Get(CodeTimeToUser t)
         {
-            return _medicinesDAL.Get();
+            List<GenerateMedicine> temp = new List<GenerateMedicine>();
+            return temp;
+            //return _medicinesDAL.Get();
         }
 
         public void AddOrEdit(Medicine details)
@@ -32,6 +34,8 @@ namespace BL
         public void Delete()
         {
             _medicinesDAL.Delete();
-        }       
+        }
+
+        c
     }
 }

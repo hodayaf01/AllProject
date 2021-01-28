@@ -12,12 +12,12 @@ namespace DAL
         MediDBEntities _DB = new MediDBEntities();
         HMO_DBEntities _HMO_DB = new HMO_DBEntities();
 
-        public User GetById(string id)
-        {
-            User res = _DB.Users.ToList().FirstOrDefault(u=>u.childId.Equals(id));
-            res = res == null ? new User() : res;
-            return res;
-        }
+        //public User GetById(string id)
+        //{
+        //    User res = _DB.Users.ToList().FirstOrDefault(u=>u.childId.Equals(id));
+        //    res = res == null ? new User() : res;
+        //    return res;
+        //}
         public User GetByIdentity(long userId)
         {
             User res = _DB.Users.FirstOrDefault(u => u.Id == userId);

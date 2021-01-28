@@ -19,10 +19,11 @@ namespace Models
     public static class SendMail
     {
         private static string senderName = "Medi";
-        private static string senderEmailId = "shiralulvi1@gmail.com";
+        private static string senderEmailId = "Shiralulvi1@gmail.com";
         private static string password = "0548523727";
         private static MailAddress fromAddress = new MailAddress(senderEmailId, senderName);
-
+        
+        //מקבלת פרטי הודעת מייל
         public static bool SendEMail(MessageGmail message)
         {
             var success = false;
@@ -40,6 +41,7 @@ namespace Models
             return success;
         }
 
+        //יצירת הודעת מייל
         private static MailMessage createMessage(MessageGmail message)
         {
             MailMessage msg = new MailMessage()
@@ -57,9 +59,10 @@ namespace Models
 
             return msg;
         }
-
+            //התממשקות לsmtp
         private static SmtpClient createClient()
         {
+            
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             client.EnableSsl = true;
             client.Credentials = new NetworkCredential(fromAddress.Address, password);

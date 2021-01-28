@@ -30,6 +30,22 @@ namespace DAL
             _DB.Entry(details);
             _DB.SaveChanges();
         }
+
+        public List<Guardian> GetGuardiansByUserId(long userId)
+        {
+            var guardiansToUsers = _DB.guardiansToUsers.Where(m => m.userId == userId).ToList();
+            List<Guardian> guardiansDetails = new List<Guardian>();
+            foreach (var guardi in guardiansToUsers)
+            {
+                guardiansDetails.Add(new Guardian
+                {
+                    PhoneNumber = guardi.Guardian.PhoneNumber,
+                    guardianName = guardi.Guardian.guardianName,
+                    Id = guardi.guardianId
+                }) ;
+            }
+            return guardiansDetails;
+        }
         //public void Delete()
         //{
         //    _DB.Guardians.First().DeleteRow = false;

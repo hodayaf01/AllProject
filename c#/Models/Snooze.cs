@@ -10,6 +10,6 @@ namespace Models
     {
         public long userId { get; set; }
         public int snoozeCounter { get; set; }
-        public int snoozePariod { get; set; }
+        public int snoozePeriod { get; set; }
     }
 }
