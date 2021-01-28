@@ -1,3 +1,4 @@
+
 export class Snoozer{
 
     userId:number;
