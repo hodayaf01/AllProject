@@ -215,6 +215,7 @@
     <Compile Include="HMO_DB_DAL\MedicinesToClient_DAL.cs" />
     <Compile Include="HMO_DB_DAL\Medicines_DAL.cs" />
     <Compile Include="HMO_DB_DAL\TimeOfDay_DAL.cs" />
+    <Compile Include="HMO_DB_DAL\TimeToMedicinesForClient_DAL.cs" />
     <Compile Include="KingOfDosageDAL.cs" />
     <Compile Include="MedicinesDAL.cs" />
     <Compile Include="MedicinesToChild_DAL.cs" />

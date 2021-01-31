@@ -21,18 +21,22 @@ namespace BL
 
             List<GenerateMedicine> _generateMedicinesList = new List<GenerateMedicine>();
             List< MedicinesToChild > _medicinesToChild = _medicinesToChild_DAL.GetByUser(_details.UserID);
-            List< MedicinesToChild > _medicinesToChild = _medicinesToChild_DAL.GetByUserInSomeTime(_details);
+            //List< MedicinesToChild > _medicinesToChild = _medicinesToChild_DAL.GetByUserInSomeTime(_details);
 
-            foreach (var _medicines in _medicinesToChild)
-            {
-                _medicines _generateMedicinesList.Add ( new GenerateMedicine
-                {
-                    MedicineName = _medicines.Medicine.midicineName,
-                    DosageName =_medicines.KingOfDosage.kindOfDosageName,
-                    Dosage=_medicines.Dosage
-                });
-            }
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //foreach (var _medicines in _medicinesToChild)
+            //{
+            //    _medicines _generateMedicinesList.Add ( new GenerateMedicine
+            //    {
+            //        MedicineName = _medicines.Medicine.midicineName,
+            //        DosageName =_medicines.KingOfDosage.kindOfDosageName,
+            //        Dosage=_medicines.Dosage
+            //    });
+            //}
             return _generateMedicinesList;
+
+
+
             //for (int i = 0; i < medicinesToChild.Count; i++)
             //{
             //   List<TimeToMedicinesForChild> timeToMedicinesForChild= _timeToMedicinesForChild_DAL.GetByMedicineToChild(medicinesToChild[i].Id);

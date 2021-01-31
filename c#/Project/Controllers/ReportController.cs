@@ -10,10 +10,10 @@ namespace Project.Controllers
     public class ReportController : Controller
     {
 
-        [Route("api/Report/Get")]
-        public ArchiveTakeMedicineDetails Get(int userCode)
-        {
-            return .Get(userCode);
-        }
+        //[Route("api/Report/Get")]
+        //public ArchiveTakeMedicineDetails Get(int userCode)
+        //{
+        //    return .Get(userCode);
+        //}
     }
 }

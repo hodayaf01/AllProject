@@ -16,9 +16,8 @@ namespace Models
     {
         public int Id { get; set; }
         public long idMedicineToClient { get; set; }
-        public long idTimeOfDay { get; set; }
+        public int timeCode { get; set; }
     
         public virtual MedicinesToClient MedicinesToClient { get; set; }
-        public virtual TimeOfDay TimeOfDay { get; set; }
     }
 }

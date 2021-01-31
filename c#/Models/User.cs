@@ -30,7 +30,7 @@ namespace Models
         public string token { get; set; }
         public Nullable<int> points { get; set; }
         public Nullable<int> snoozeCounter { get; set; }
-        public Nullable<int> snoozePariod { get; set; }
+        public Nullable<int> snoozePeriod { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<guardiansToUser> guardiansToUsers { get; set; }

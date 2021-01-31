@@ -39,7 +39,7 @@ export class RegistrationUserComponent implements OnInit {
 
     addUser() {
 
-        this.user.Id = 0;
+        this.user.childId = 0;
         this.user.userId = "207420274";
         this.user.userName = "הודיה";
         this.user.phone = "0587828027";
@@ -48,6 +48,7 @@ export class RegistrationUserComponent implements OnInit {
         this.user.password = "1234";
         this.user.userHMO = 1;
         this.registration.NewUser = this.user;
+        this.user.token=this.messagingService.tokenUser
 
         this.guardian.Id = 0;
         this.guardian.PhoneNumber = "0538320860";
@@ -57,12 +58,12 @@ export class RegistrationUserComponent implements OnInit {
 
         this.subscribe = this.registrationService.add(this.registration).subscribe(
             result => {
-                this.user.Id = result;
-                localStorage.setItem('USERCODE', this.user.Id.toString());
+                this.user.childId = result;
+                localStorage.setItem('USERCODE', this.user.childId.toString());
                 // sessionStorage.setItem('KEY', 'VALUE');
                 // var value = sessionStorage.getItem('KEY');
                 // sessionStorage.clear('KEY');
-                console.log('added'+ this.user.Id);
+                console.log('added'+ this.user.childId);
             }
         );
         
@@ -98,6 +99,6 @@ export class RegistrationUserComponent implements OnInit {
     ngOnInit() {
         this.messagingService.requestPermission()
         this.messagingService.receiveMessage()
-        this.message = this.messagingService.currentMessage
+        this.message = this.messagingService.currentMessage;
     }
 }

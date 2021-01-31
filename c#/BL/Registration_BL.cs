@@ -12,19 +12,15 @@ using System.Threading.Tasks;
 namespace BL
 {
     public class Registration_BL
-    {
-        string phoneNumber;
-        string nameChild;
+    {        
         Client_DAL _Client_DAL = new Client_DAL();
         User_DAL _userDAL = new User_DAL();
         GuardiansDAL _guardiansDAL = new GuardiansDAL();
         GurdiansToUser_DAL _guardiansToUserDAL = new GurdiansToUser_DAL();
-        MedicinesToChild_DAL _medicinesToChild_DAL = new MedicinesToChild_DAL();
-        MedicinesToClient_DAL _medicinesToClient_DAL = new DAL.HMO_DB_DAL.MedicinesToClient_DAL();
-        public long Add(Registration _details)
+
+        public string Add(Registration _details)
         {           
-            //func get in client!!!!!!!!
-            //Client client = Clients.ToList().FirstOrDefault();
+            //בדיקה שהמשתמש נמצא במאגר החולים
             if(_Client_DAL.IsFound(_details))
             {
                 long codeUser= _userDAL.Add(_details.NewUser);
@@ -34,19 +30,6 @@ namespace BL
                     long codeGuardian= _guardiansDAL.Add(_details.Guardians[i]);
                     _guardiansToUserDAL.Add(new guardiansToUser() { userId = codeUser, guardianId = codeGuardian });
                 }
-
-                //Medicines To child
-                //List<MedicinesToClient> medicinesList = _medicinesToClient_DAL.Get(_details.NewUser.childId);
-                //for (int i = 0; i < medicinesList.Count; i++)
-                //{
-                //    _medicinesToChild_DAL.Add(new MedicinesToChild()
-                //    {
-                //       // medicineId = medicinesList[i].medicineId,
-                //        userId = medicinesList[i].clientId,
-                //        Dosage = medicinesList[i].Dosage,
-                //        kindOfDosage = medicinesList[i].kindOfDosage
-                //    });
-                //}
 
 
                 //שליחת מייל               
@@ -58,8 +41,9 @@ namespace BL
 
 
             }
-            // else
-            return 404;
+            return _details.NewUser.password;
+            // else"
+            return "404";
         }
        
     }

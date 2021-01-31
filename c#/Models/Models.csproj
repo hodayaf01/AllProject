@@ -233,9 +233,6 @@
     <Compile Include="TimeOfDay.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="TimeToForClient.cs">
-      <DependentUpon>HMO_DB.tt</DependentUpon>
-    </Compile>
     <Compile Include="TimeToMedicinesForChild.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>

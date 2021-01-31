@@ -36,6 +36,9 @@ namespace BL
             _medicinesDAL.Delete();
         }
 
-        c
+        public static void Update(CodeTimeToUser details)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

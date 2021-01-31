@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs'
 export class MessagingService {
   //@ViewChild (alertModal) alertModal:ElementRef;
 
+  tokenUser:string
   currentMessage = new BehaviorSubject(null);
   constructor(private angularFireMessaging: AngularFireMessaging) {
   //   this.angularFireMessaging.messaging.subscribe(
@@ -17,6 +18,7 @@ export class MessagingService {
   requestPermission() {
     this.angularFireMessaging.requestToken.subscribe(
   (token) => {
+    this.tokenUser=token;
     console.log(token);
   },
   (err) => {

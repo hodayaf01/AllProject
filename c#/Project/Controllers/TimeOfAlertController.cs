@@ -4,25 +4,38 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Cors;
+//using System.Web.Mvc;
 
 namespace Project.Controllers
 {
-    public class TimeOfAlertController : Controller
+    [EnableCors("*", "*", "*")]
+    public class TimeOfAlertController : ApiController
     {
+        
         // GET: TimeOfAlert
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
 
         TimeOfAlert_BL _timeOfAlert_BL = new TimeOfAlert_BL();
 
-        [HttpPost]
+        
         [Route("api/TimeOfAlert/Add")]
-        public bool Add(Snooze _snoozeDetails, List<TimeOfDay> _details)
-        { 
-            return _timeOfAlert_BL.Add(_snoozeDetails,_details);
+        [HttpPost]
+        public bool Add(Snooze snoozeDetails, List<TimeOfDay> listTimeOfDay, string token)
+        {
+            return _timeOfAlert_BL.Add(snoozeDetails, listTimeOfDay, token);
         }
+        //[HttpGet]
+        //public bool Add()
+        //{
+        //    //return _timeOfAlert_BL.Add(snoozeDetails, listTimeOfDay, token);
+        //    return true;
+        //}
     }
 }

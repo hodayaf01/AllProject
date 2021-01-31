@@ -8,15 +8,12 @@ import {RegistrationService} from './Services/RegistrationService';
 import {RegistrationUserComponent} from './Components/RegistrationUser/RegistrationUser';
 import { RouterModule, Routes } from '@angular/router';
 import { TimeOfAlertComponent } from './Components/TimeOfAlert/TimeOfAlert';
-import { TimeOfAlertForUserService } from './Services/TimeOfDayForUser.service';
+import { TimeOfAlertForUserService } from './Services/TimeOfAlert.service';
 import { SettingsComponent } from './Components/Settings/Settings';
 import { SettingsService } from './Services/SettingsService';
 import { HomeComponent } from './Components/Home/Home';
 import { AlertComponent } from './Components/Alert/Alert';
-import { AlertService } from './Services/AlertService';
-import { HomeService } from './Services/HomeService'
 import { PortalComponent } from './Components/Portal/Portal';
-import { TestComponent } from './Components/TestCompo/TestCompo';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -46,8 +43,7 @@ const appRoutes: Routes = [
     SettingsComponent,
     HomeComponent,
     AlertComponent,
-    PortalComponent,
-    TestComponent,
+    PortalComponent
   ],
   
   imports: [
@@ -68,8 +64,6 @@ const appRoutes: Routes = [
     RegistrationService,
     TimeOfAlertForUserService,
     SettingsService,
-    AlertService,
-    HomeService,
     MessagingService,
     AsyncPipe,
   ],

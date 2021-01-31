@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import { Observable } from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { MedicineToUserByTime } from '../Models/MdicineToUserByTime.model';
 
 const httpOptions ={headers:new HttpHeaders({'Content-type':'application/json'})}
 
@@ -13,14 +14,13 @@ export class MedicinesListService{
                 
     }
 
-    //add(MedicinesList:MedicinesList):Observable<any>{
-    //   return this.http.post(`${this.url}/Add`,MedicinesList,httpOptions);
-    //}
 
-    //get(userCode:string):Observable<User>{
-    //    return this.http.get<User>(`${this.url+'/Get?'}`)
-   // }
-
+    get(userCode:string):Observable<MedicineToUserByTime>{
+       return this.http.get<MedicineToUserByTime>(`${this.url+'/Get?'}`)
+   }
+   update(userCode:string):Observable<MedicineToUserByTime>{
+    return this.http.get<MedicineToUserByTime>(`${this.url+'/Update?'}`)
+}
 
 }
 

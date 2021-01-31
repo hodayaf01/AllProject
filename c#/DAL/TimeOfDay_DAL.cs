@@ -10,16 +10,28 @@ namespace DAL
     public class TimeOfDay_DAL
     {
         MediDBEntities _DB = new MediDBEntities();
-        //public long Add(TimeOfDay details)
-        public bool Add(TimeOfDay details)
+        ////public long Add(TimeOfDay details)
+        //public bool Add(TimeOfDay details)
+        //{
+        //    _DB.TimeOfDays.Add(details);
+        //    if (_DB.SaveChanges() == 0)
+        //        return false;
+        //    //return 0;
+        //    // return details.timeId;
+        //    return true;
+        //}
+
+        public bool AddListTimeOfAlert(List<TimeOfDay> _details)
         {
-            _DB.TimeOfDays.Add(details);
+            foreach (var time in _details)
+            {
+                _DB.TimeOfDays.Add(time);
+            }
             if (_DB.SaveChanges() == 0)
                 return false;
-            //return 0;
-            // return details.timeId;
             return true;
         }
+        //public Array<long> add
 
         public TimeOfDay Get()
         {

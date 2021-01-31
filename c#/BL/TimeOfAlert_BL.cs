@@ -12,28 +12,21 @@ namespace BL
     {
         User_DAL _user_DAL = new User_DAL();
         TimeOfDay_DAL _TimeOfDay_DAL = new TimeOfDay_DAL();
-        MedicinesDAL _medicinesDAL = new MedicinesDAL();
-        KingOfDosageDAL _KingOfDosageDAL = new KingOfDosageDAL();
         MedicinesToChild_DAL _MedicinesToChild_DAL = new MedicinesToChild_DAL();
         List<long> listCodeTime = new List<long>();
-        public bool Add(Snooze _snoozeDetails,List<TimeOfDay> _details)
+        public bool Add(Snooze _snoozeDetails,List<TimeOfDay> _listTimeOfDay,string token)
         {
-            //הפעולה מקבלת את הקוד של המשתמש ורשימה של זמנים ביום         
-
-            //צריך להיות במקום אחר, כי אנחנו רוצות שהוא התבצע פעם אחת- הוספת כל התרופות והמינונים        
-            _medicinesDAL.Add();
-            _KingOfDosageDAL.Add();
-            //bool insertTime = false;//בדיקה שכל הזמנים עודכנו במסד נתונים
-            //מתבצע כל פעם כי שולחים כל פעם זמן אחר
-            foreach (var item in _details)
-            {
-                //?????
-                if (!(_TimeOfDay_DAL.Add(item) || _MedicinesToChild_DAL.Add(_snoozeDetails.userId, item.timeId)))
-                    return false;
-                //רשימה של הקודים למשתמש
-                listCodeTime.Add(item.timeId);
+            if (_user_DAL.AddSnooze(_snoozeDetails))
+            { 
+                if(_TimeOfDay_DAL.AddListTimeOfAlert(_listTimeOfDay))
+                {
+                    if (_MedicinesToChild_DAL.AddListMedicinesToUser(_snoozeDetails.userId, _listTimeOfDay, token))
+                    {
+                        return true;
+                    } return false;
+                }return false;
             }
-            return true;
+            return false;
         }
     }
 }

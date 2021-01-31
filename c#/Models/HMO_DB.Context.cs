@@ -30,8 +30,6 @@ namespace Models
         public virtual DbSet<KingOfDosage> KingOfDosages { get; set; }
         public virtual DbSet<Medicine> Medicines { get; set; }
         public virtual DbSet<MedicinesToClient> MedicinesToClients { get; set; }
-        public virtual DbSet<TimeOfDay> TimeOfDays { get; set; }
-        public virtual DbSet<TimeToForClient> TimeToForClients { get; set; }
         public virtual DbSet<TimeToMedicinesForClient> TimeToMedicinesForClients { get; set; }
     }
 }

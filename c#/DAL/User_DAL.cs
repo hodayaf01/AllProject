@@ -12,17 +12,27 @@ namespace DAL
         MediDBEntities _DB = new MediDBEntities();
         HMO_DBEntities _HMO_DB = new HMO_DBEntities();
 
-        //public User GetById(string id)
-        //{
-        //    User res = _DB.Users.ToList().FirstOrDefault(u=>u.childId.Equals(id));
-        //    res = res == null ? new User() : res;
-        //    return res;
-        //}
+        public User GetById(string id)
+        {
+            User res = _DB.Users.ToList().FirstOrDefault(u => u.childId.Equals(id));
+            res = res == null ? new User() : res;
+            return res;
+        }
         public User GetByIdentity(long userId)
         {
             User res = _DB.Users.FirstOrDefault(u => u.Id == userId);
             res = res == null ? null : res;
             return res;
+        }
+
+        public bool AddSnooze(Snooze snoozeDetails)
+        {
+            User res = _DB.Users.FirstOrDefault(u => u.Id ==snoozeDetails.userId);
+            if (res == null) return false;
+            res.snoozeCounter = snoozeDetails.snoozeCounter;
+            res.snoozePeriod = snoozeDetails.snoozePeriod;
+            _DB.SaveChanges();
+            return true;
         }
 
         public long Add(User _details)
@@ -34,7 +44,9 @@ namespace DAL
                 userName = _details.userName,
                 userHMO = _details.userHMO,
                 email = _details.email,
-                password = _details.password
+                password = _details.password,
+                points=0,
+                token=_details.token,                
             };
             _DB.Users.Add(newUser);
             _DB.SaveChanges();
@@ -53,6 +65,12 @@ namespace DAL
         //    }
         //}
 
+        public string GetChildIdByToken(string userToken)
+        {
+            User res = _DB.Users.FirstOrDefault(u => u.token.Equals(userToken));
+            if (res == null) return "404";
+            return res.childId;
+        }
         public void Edit(User details)
         {
             _DB.Entry(details);
