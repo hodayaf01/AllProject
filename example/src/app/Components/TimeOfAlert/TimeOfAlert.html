@@ -12,29 +12,47 @@
             <div class="containLogo">
                 <img class="mediLogoBGimg" src="../../../assets/images/LOGOBG.png" >
             </div>
-            </header>
-    <section>
-        <h1>לפי זמני היום מתי תעדיף לקבל את ההתראה?</h1>
-        <div>
-            <img src="../../../assets/images/sun.jpg" height="42" width="42">
-            <input type="time" placeholder="HH:mm" min="05:00:00" max="10:00:00">
-        </div>
-        <div>
-            <img src="../../../assets/images/day.jpg" height="42" width="42">
-            <input type="time" placeholder="HH:mm" min="05:00:00" max="10:00:00">
-        </div>
-        <div>
-            <img src="../../../assets/images/moon.png" height="42" width="42">
-            <input type="time" placeholder="HH:mm" min="05:00:00" max="10:00:00">
-        </div>
-        <div>
-            <img src="../../../assets/images/moon.png" height="42" width="42">
-            <input type="time" placeholder="HH:mm" min="05:00:00" max="10:00:00">
-        </div>
-        <br>
-        <input type="button" value="אישור" (click)="setTimeInDay()">
+        </header>
+        <section>
+            <label class="timeOfAlertTitle">הגדרות התראה</label>
+            <div>
+                <label class="timeOfAlertSubTitle">לפי זמני היום מתי תעדיף לקבל את ההתראה?</label>
+                <div  class="containTime">
+                    <div style="margin-bottom: 10px;">
+                        <img src="../../../assets/images/morning.png" class="timeImg">
+                        <input type="time"  min="05:00:00" max="10:00:00">
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <img src="../../../assets/images/noon.png" class="timeImg">
+                        <input type="time" placeholder="HH:mm" min="05:00:00" max="10:00:00">
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <img src="../../../assets/images/evening.png" class="timeImg">
+                        <input type="time" placeholder="HH:mm" min="05:00:00" max="10:00:00">
+                    </div>
+                    <div>
+                        <img src="../../../assets/images/evening.png" class="timeImg">
+                        <input type="time" placeholder="HH:mm" min="05:00:00" max="10:00:00">
+                    </div>
+                </div>
+            </div>
 
-    </section>
+            <div>
+                <label class="timeOfAlertSubTitle">הגדרות נודניק</label>
+                <input class="formInput" placeholder="מספר חזרות">
+                <select class="formInput" name="HMO" id="HmoCode">
+                    <option value="0">השהייה בין כל חזרה</option>
+                    <option value="1">5 דקות</option>
+                    <option value="2">10 דקות</option>
+                    <option value="3">15 דקות</option>
+
+                </select>
+            </div>
+
+            <br>
+            <input class="formInput submitButton" type="button" value="אישור" (click)="setTimeInDay()">
+
+        </section>
     <footer></footer>
 </body>
 

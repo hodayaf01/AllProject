@@ -6,67 +6,42 @@
             <img class="mediLogoBGimg" src="../../../assets/images/LOGOBG.png" >
         </div>
     </header>
+
     <section>
-        
         <form name="myForm">
             <label class="titleRegistration">הרשמה</label>
 
-            <button class="accordion" (click)="accordionClick()">פרטי הגיבור</button>
-            <div class="containChildDetails">
-                <div class="containsLableAndInput">
-                    <label >שם הגיבור</label> <input name="userName" [(ngModel)]="user.Id" type="text">
-                </div>
-                <div class="containsLableAndInput">
-                    <label>תעודת זהות</label> <input name="userId" [(ngModel)]="user.userId" type="text">
-                </div>
-                <div class="containsLableAndInput">
-                    <label>פלאפון</label> <input name="userName" [(ngModel)]="user.phone" type="text">
-                </div>
-                <div class="containsLableAndInput">
-                    <label>אימייל</label> <input name="userEmail" [(ngModel)]="user.email" type="text">
-                </div>
+            <label style="margin-right: 60px;">פרטי הגיבור</label>
+            <div >
+                <input class="formInput" placeholder="שם הגיבור" name="userName" [(ngModel)]="user.userName" type="text">
+                <input class="formInput" placeholder="תעודת זהות" name="userId" [(ngModel)]="user.childId" type="text">
+                <input class="formInput" placeholder="אימייל" name="userEmail" [(ngModel)]="user.email" type="text">
+                <select class="formInput" name="HMO" id="HmoCode" [(ngModel)]="user.userHMO">
+                    <option value="0">קופת חולים</option>
+                    <option value="1">כללית</option>
+                    <option value="2">מאוחדת</option>
+                    <option value="3">מכבי</option>
+                    <option value="4">לאומית</option>
+                </select>
             </div>
 
-            <button class="accordion">פרטי ההורה</button>
-            <div class="containChildDetails">
-                <div class="containsLableAndInput">
-                    <label>פרטי האפוטרופוסים</label>
-                    <table>
-                        <tbody>
-                            <tr *ngFor="let guardian of guardians">
-                                <td>{{guardian.guardianName}}</td>
-                                <td>{{guardian.PhoneNumber}}</td>
-                            </tr>
-                            <td (click)="changePhoneForGuardian()" [hidden]="isMoreThanOneGuardian">ערוך</td>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="detailContainer">
-                    
-                    <label>שם אפוטרופוס</label>
-                    <input type="text" [(ngModel)]="guardian.guardianName" name="guardianName">
-                    <input type="button" (click)="addGuardian()" [disabled]="isLessThanThreeGuardian" value="+" style="box-shadow:teal">
-                </div>
-                <div class="detailContainer">
-                    <label>פלאפון</label>
-                    <input type="text" [(ngModel)]="guardian.PhoneNumber" name="PhoneNumber"> 
-                </div>
-                <div class="detailContainer">
-                    <input type="button" value="שלח סיסמא" (click)="sendPassword">
-                </div>
+            <label  style="margin-right: 60px; width: 100px;">פרטי ההורה</label> 
+            <div class="tooltip">?
+                <span class="tooltiptext">להוספת אפוטרופוס, יש להקיש על סימן ה + . ניתן להוסיף על שני אפוטרופוסים</span>
+              </div>
+            <div>
+                <input class="formInput" placeholder="שם" type="text" [(ngModel)]="guardian.guardianName" name="guardianName">
+                <input class="formInput" placeholder="פלאפון" type="text" [(ngModel)]="guardian.PhoneNumber" name="PhoneNumber">
+                <!-- <input class="formInput submitButton smallInput" type="button" value="שלח סיסמא" (click)="sendPassword"> -->
+                <!-- <input class="formInput smallInput" placeholder="הכנס סיסמא" type="text" name="password" > -->
+                <input type="button" class="formInput smallInput" (click)="addGuardian()" [disabled]="isLessThanThreeGuardian" value="+" style="box-shadow:teal">
             </div>
-
-            <div class="detailContainer">
-                <label>הכנס סיסמא</label>
-                <input type="text" name="password">
-            </div>
-            <div class="detailContainer">
-                <input type="button" value="אישור" (click)="addUser()">
-            </div>
+            <input class="formInput submitButton" type="button" value="אישור" (click)="addUser()">
         </form>
     </section>
+
     <footer>
-        <a href="tel:+972-053-832-0860" >Call me</a>
+        <!-- <a href="tel:+972-053-832-0860" >Call me</a> -->
     </footer>
 
 </body>
