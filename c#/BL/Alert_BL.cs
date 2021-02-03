@@ -152,10 +152,11 @@ namespace BL
                 Beginning();
             }
         }
-       
+
         public static void FillUserDetailsMat()
         {
             List<TimeOfDay> allTimes = _timeOfDay_DAL.GetAll();
+
             var allHours = allTimes.GroupBy(t => new { t.theTime.Hours, t.theTime.Minutes });
             //fill userDetailsAlert matrix in detailes
             foreach (var hour in allHours)
@@ -189,8 +190,8 @@ namespace BL
             //}
         }
 
-        //צריך לבדוק שתקין
-        //פונקציה לשליחת הודעה דרך אסאמס4יו
+      //  צריך לבדוק שתקין
+        //פונקצי לשליחת הודעה דרך אסאמס4יו
         static async Task SendUsingAPIAsync(string guardianPhone, string childName)
         {
             Console.WriteLine("send massage to guardian");

@@ -1,6 +1,6 @@
 label{
     font-size: 17px;
-    color:#f6ad4d;
+    color:#369191;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: inline-block;
     width: 384px;
@@ -8,22 +8,60 @@ label{
 
 }
 button{
-    font-size: 20px;
-    color:#f6ad4d;
+    font-size: 17px;
+    color: #f6ad4d;
+    background: none;
+    border: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    
+}
+.formInput{
+    font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: block;
+    text-align: right;
+    color: #369191;
+    background-color: white;
+    border: 1px solid #f6ad4e;
+    border-radius: 20px;
+    width: 250px;
+    height: 35px;
+    margin: 5px auto 5px auto;
+    outline:none; 
+}
+.formInput::placeholder{
+    color: #369191;
+    padding-right: 10px;
+}
+.smallInput{
+    width: 100px !important;
+    display: inline !important;
+    margin-right: 120px;
+    text-align: center;
     
 }
-input{
-    border: 1px solid #f6ad4d;
-    border-radius: 4px;
-    font-size: 17px;
-    color:rgb(49, 112, 143);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-right: 10px;
-    display: block;
-    background-color: #f6ad4d;
+.tooltip .tooltiptext{
+    visibility: hidden;
+    width: 180px;
+    background-color: #f6ad4e;
+    color: #369191;
     text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.tooltip{
+    text-align: center; 
+    width: 20px; 
+    height: 20px; 
+    background-color: #f6ad4e; 
+    border-radius: 50px;
+    position: relative;
+    display: inline-block;
+}
+.tooltip:hover .tooltiptext {
+    visibility: visible;
 }
 
 input [type=button]{
@@ -39,58 +77,8 @@ form{
     font-size: 30px;
     text-align: center;
 }
-
-.detailContainer{
-    display: block; 
-    text-align: center; 
-    padding-bottom: 5px;
-}
-
-.containsLableAndInput{
-    display: block; 
-    text-align: center; 
-    padding-bottom: 5px;
-}
-
-.containChildDetails{
-    overflow: hidden;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
-}
-
-.containParentDetails{
-    border: solid 3px #f6ad4d;
-    display: none;
-    overflow: hidden;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
-}
-
-.active .accordion{
-    width: 100%;
-}
-
-.accordion:hover{
-    cursor: pointer;
-}
-
-.accordion:after {
-    content: '\25BC'; /* Unicode character for "plus" sign (+) */
-    font-size: 15px;
-    float: right;
-    margin-left: 5px;
-    margin-top: 4px;
-  }
-  
-  .active:after {
-    content: "\25B2"; /* Unicode character for "minus" sign (-) */
-  }
-
-button{
-    font-size: 17px;
-    color: #f6ad4d;
-    background: none;
-    border: none;
+.submitButton{
+    background-color: #f6ad4e !important;
+    text-align: center !important;
+    font-size: 20px;
 }

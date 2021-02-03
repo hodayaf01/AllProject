@@ -18,7 +18,7 @@ namespace Models
         public long idMedicineToChild { get; set; }
         public long idTimeOfDay { get; set; }
     
-        public virtual MedicinesToChild MedicinesToChild { get; set; }
         public virtual TimeOfDay TimeOfDay { get; set; }
+        public virtual MedicinesToChild MedicinesToChild { get; set; }
     }
 }

@@ -31,9 +31,9 @@ namespace Models
         public virtual DbSet<HMO> HMOes { get; set; }
         public virtual DbSet<KingOfDosage> KingOfDosages { get; set; }
         public virtual DbSet<Medicine> Medicines { get; set; }
-        public virtual DbSet<MedicinesToChild> MedicinesToChilds { get; set; }
         public virtual DbSet<TimeOfDay> TimeOfDays { get; set; }
         public virtual DbSet<TimeToMedicinesForChild> TimeToMedicinesForChilds { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<MedicinesToChild> MedicinesToChilds { get; set; }
     }
 }
