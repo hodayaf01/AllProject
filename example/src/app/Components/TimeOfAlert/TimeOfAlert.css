@@ -1,0 +1,81 @@
+.timeOfAlertTitle{
+    align-items: center;
+    font-weight: bold;
+    display: block;
+    font-size: 30px;
+    text-align: center;
+} 
+.timeOfAlertSubTitle{
+    font-weight: bold;
+    display: block;
+    font-size: 19px;
+    text-align: right;
+    margin-top: 20px;
+}
+label{
+    font-size: 17px;
+    color:#369191;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: inline-block;
+    width: 384px;
+    text-align: right;
+}
+.containTime{
+    margin: 20px auto 20px auto;
+    width: fit-content;
+}
+.timeImg{
+    margin-left: 10px;
+    height:42px;
+    width: 42px;
+}
+.formInput{
+    font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: block;
+    text-align: right;
+    color: #369191;
+    background-color: white;
+    border: 1px solid #f6ad4e;
+    border-radius: 20px;
+    width: 250px;
+    height: 35px;
+    margin: 5px auto 5px auto;
+    outline:none; 
+}
+.submitButton{
+    background-color: #f6ad4e !important;
+    text-align: center !important;
+    font-size: 20px;
+}
+input[type=time] {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: right;
+    color: #369191;
+    background-color: white;
+    border: 1px solid #f6ad4e;
+    border-radius: 20px;
+    width: 200px;
+    height: 42px;
+    align-items: flex-end;
+    font-size: 17px;
+    letter-spacing: 7px;
+
+}
+input[type=time]::-webkit-datetime-edit-text {
+    padding: 50px 4px;
+  }
+input[type="time"]::-webkit-calendar-picker-indicator {
+    background: none;
+}
+input[type=time]::-webkit-clear-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance:none;
+    appearance: none;
+    margin: -10px; 
+  }
+  input[type="time"]::-webkit-datetime-edit-ampm-field {
+    display: none;
+  }
