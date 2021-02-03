@@ -15,4 +15,5 @@ export class TimeOfAlertForUserService {
     add(t: TimeOfAlertForUser): Observable<any> {
         return this.http.post(`${this.url}/Add`, t, httpOptions);
     }
+
 }

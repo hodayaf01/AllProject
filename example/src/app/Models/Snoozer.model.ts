@@ -11,8 +11,4 @@ export class Snoozer{
         this.snoozeCounter=snoozeCounter;
         this.snoozePeriod=snoozePeriod;
     }
-
-    addUser(){
-        
-    }
 }

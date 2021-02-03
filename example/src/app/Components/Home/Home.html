@@ -8,13 +8,41 @@
 </head> -->
 
 <body dir="rtl">
-        <header>
-            <div class="containLogo">
-                <img class="mediLogoBGimg" src="../../../assets/images/LOGOBG.png" >
-            </div>
-            </header>
+    <header>
+        <div class="containLogo">
+            <img class="mediLogoBGimg" src="../../../assets/images/LOGOBG.png" >
+        </div>
+    </header>
     <section>
-        <h1>מה התוכניות שלנו היום?</h1>
+        <label class="titleHome">מה התוכניות שלנו להיום?</label>
+        <div class="timeInDay" >
+            <div  *ngFor = "let morning of medicineToUserByTimeResp1">
+                <div class="timeInDayItem">{{morning.medicineName}}</div>
+                <div class="timeInDayItem">{{morning.dosage}}</div>
+                <div class="timeInDayItem">{{morning.dosageName}}</div>
+            </div>
+        </div>
+        <div class="timeInDay" >
+            <div  *ngFor = "let morning of medicineToUserByTimeResp1">
+                <div class="timeInDayItem">{{morning.medicineName}}</div>
+                <div class="timeInDayItem">{{morning.dosage}}</div>
+                <div class="timeInDayItem">{{morning.dosageName}}</div>
+            </div>
+        </div>
+        <div class="timeInDay" >
+            <div  *ngFor = "let morning of medicineToUserByTimeResp1">
+                <div class="timeInDayItem">{{morning.medicineName}}</div>
+                <div class="timeInDayItem">{{morning.dosage}}</div>
+                <div class="timeInDayItem">{{morning.dosageName}}</div>
+            </div>
+        </div>
+        <div class="timeInDay" >
+            <div  *ngFor = "let morning of medicineToUserByTimeResp1">
+                <div class="timeInDayItem">{{morning.medicineName}}</div>
+                <div class="timeInDayItem">{{morning.dosage}}</div>
+                <div class="timeInDayItem">{{morning.dosageName}}</div>
+            </div>
+        </div>
         
     </section>
     <footer></footer>

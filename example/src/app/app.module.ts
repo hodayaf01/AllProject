@@ -21,6 +21,7 @@ import { AngularFireModule } from '@angular/fire';
 import { MessagingService } from './Services/messaging.service';
 import { AsyncPipe } from '../../node_modules/@angular/common';
 import { environment } from 'src/environments/environment';
+import { MedicinesListService } from './Services/MedicinesListService';
 
 const appRoutes: Routes = [
   {path: '', component: RegistrationUserComponent},
@@ -66,6 +67,7 @@ const appRoutes: Routes = [
     SettingsService,
     MessagingService,
     AsyncPipe,
+    MedicinesListService,
   ],
   
   bootstrap: [AppComponent]

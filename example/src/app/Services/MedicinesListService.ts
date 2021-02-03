@@ -15,10 +15,10 @@ export class MedicinesListService{
     }
 
 
-    get(userCode:string):Observable<MedicineToUserByTime>{
-       return this.http.get<MedicineToUserByTime>(`${this.url+'/Get?'}`)
+    get(medicineToUserByTime:MedicineToUserByTime):Observable<any>{
+       return this.http.post(`${this.url+'/Get?'}`, medicineToUserByTime, httpOptions);
    }
-   update(userCode:string):Observable<MedicineToUserByTime>{
+   update(userCode:MedicineToUserByTime):Observable<MedicineToUserByTime>{
     return this.http.get<MedicineToUserByTime>(`${this.url+'/Update?'}`)
 }
 

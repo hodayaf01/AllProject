@@ -19,40 +19,47 @@
                 <label class="timeOfAlertSubTitle">לפי זמני היום מתי תעדיף לקבל את ההתראה?</label>
                 <div  class="containTime">
                     <div style="margin-bottom: 10px;">
-                        <img src="../../../assets/images/morning.png" class="timeImg">
-                        <input type="time"  min="05:00:00" max="10:00:00">
+                        <img src="../../../assets/images/morning.png" class="timeImg" >
+                        <input type="time"  [(ngModel)]="morningTime">
                     </div>
                     <div style="margin-bottom: 10px;">
                         <img src="../../../assets/images/noon.png" class="timeImg">
-                        <input type="time" placeholder="HH:mm" min="05:00:00" max="10:00:00">
+                        <input type="time" [(ngModel)]="noonTome">
                     </div>
                     <div style="margin-bottom: 10px;">
                         <img src="../../../assets/images/evening.png" class="timeImg">
-                        <input type="time" placeholder="HH:mm" min="05:00:00" max="10:00:00">
+                        <input type="time" [(ngModel)]="evening">
                     </div>
                     <div>
                         <img src="../../../assets/images/evening.png" class="timeImg">
-                        <input type="time" placeholder="HH:mm" min="05:00:00" max="10:00:00">
+                        <input type="time" [(ngModel)]="night">
                     </div>
                 </div>
             </div>
 
             <div>
                 <label class="timeOfAlertSubTitle">הגדרות נודניק</label>
-                <input class="formInput" placeholder="מספר חזרות">
-                <select class="formInput" name="HMO" id="HmoCode">
-                    <option value="0">השהייה בין כל חזרה</option>
-                    <option value="1">5 דקות</option>
-                    <option value="2">10 דקות</option>
-                    <option value="3">15 דקות</option>
+                <select class="formInput" name="snoozeCounter" id="snoozeCounter" [(ngModel)]="snooze.snoozeCounter">
+                    <option value="0">מספר חזרות</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
 
+                <select class="formInput" name="snoozePeriod" id="snoozePeriod" [(ngModel)]="snooze.snoozePeriod">
+                    <option value="0">השהייה בין כל חזרה</option>
+                    <option value="5">5 דקות</option>
+                    <option value="10">10 דקות</option>
+                    <option value="15">15 דקות</option>
                 </select>
             </div>
 
             <br>
             <input class="formInput submitButton" type="button" value="אישור" (click)="setTimeInDay()">
-
         </section>
+
     <footer></footer>
 </body>
 

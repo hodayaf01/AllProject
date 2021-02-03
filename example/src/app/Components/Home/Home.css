@@ -1,0 +1,32 @@
+label{
+    font-size: 17px;
+    color:#369191;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: inline-block;
+    width: 384px;
+    text-align: right;
+
+}
+.titleHome{
+    align-items: center;
+    font-weight: bold;
+    display: block;
+    font-size: 30px;
+    text-align: center;
+}
+.timeInDay{
+    width: 75%;
+    height: fit-content;
+    background-color: white;
+    border-radius: 15px;
+    margin: 15px auto 15px auto;
+}
+
+.timeInDayItem{
+    display: inline-block;
+    font-size: 17px;
+    color:#369191;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: 75px;
+    text-align: center;
+}
