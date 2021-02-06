@@ -22,16 +22,19 @@ namespace DAL
             return res;
         }
 
-        public bool AddListMedicinesToUser(long userId, List<TimeOfDay> listTimeOfDays,string token)
+        //public bool AddListMedicinesToUser(long userId, List<TimeOfDay> listTimeOfDays)
+        public bool AddListMedicinesToUser(TimeOfAlertForUser timeOfAlertForUser)
         {
-            List<MedicinesToClient> medicinesToClients = _MedicinesToClient_DAL.Get(token);
+            //List<MedicinesToClient> medicinesToClients = _MedicinesToClient_DAL.Get(token);
+            List<MedicinesToClient> medicinesToClients = _MedicinesToClient_DAL.Get(timeOfAlertForUser.snooze.userId);
+
             foreach (var item in medicinesToClients)
             {
                 //_DB.Medicines.Add(new Medicine() { medicineId = item.medicineId, midicineName = item.midicineName });
                 MedicinesToChild medicinesToChild = new MedicinesToChild()
                 {
-                    medicineId = item.medicineId,
-                    userId = userId,
+                    medicineId = item.medicinesId,
+                    userId = timeOfAlertForUser.snooze.userId,
                     kindOfDosage = item.kindOfDosage,
                     Dosage = item.Dosage,
                 };
@@ -47,7 +50,7 @@ namespace DAL
                     {
                         idMedicineToChild = medicinesToChild.Id,
                         //idTimeOfDay = listTimeOfDays.Find(t => t.timeCode == item.TimeToMedicinesForClients.Where(tC => tC.TimeOfDay.timeId)).timeId
-                        idTimeOfDay = listTimeOfDays.Find(t => t.timeCode == timeList.timeCode).timeId
+                        idTimeOfDay = timeOfAlertForUser.timeOfDay.Find(t => t.timeCode == timeList.timeCode).timeId
                     });
                 }
                 // int codeTimeToClient = item.TimeToMedicinesForClients.FirstOrDefault(t=>t.TimeOfDay.timeCode)
@@ -70,14 +73,18 @@ namespace DAL
 
         public List<MedicinesToChild> GetByUserInSomeTime(CodeTimeToUser details)
         {
-            var res = _DB.MedicinesToChilds.Where(m => m.userId == details.UserID).ToList();
-          
+            var res = _DB.MedicinesToChilds.Where(m => m.userId == details.UserID && m.TimeToMedicinesForChilds.All(t=>t.TimeOfDay.timeCode==details.TimeOfDay)==true).ToList();
+
+            //foreach (var item in res)
+            //{
+            //    _DB.TimeToMedicinesForChilds.Where(m=>m.idMedicineToChild==item.Id).ToList()
+            //}
             //!!!!!!!!!!!!!!!!
             // res.FindAll(m=>m.TimeToMedicinesForChilds)
            // res = res == null ? null : res;
 
 
-            // _DB.Users.FirstOrDefault(i => i.childId == "").MedicinesToChilds.SelectMany(t => t.TimeToMedicinesForChilds);
+           // _DB.Users.FirstOrDefault(i => i.childId == "").MedicinesToChilds.SelectMany(t => t.TimeToMedicinesForChilds);
             return res;
         }
 

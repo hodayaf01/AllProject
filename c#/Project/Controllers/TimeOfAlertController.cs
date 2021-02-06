@@ -27,9 +27,10 @@ namespace Project.Controllers
         
         [Route("api/TimeOfAlert/Add")]
         [HttpPost]
-        public bool Add(Snooze snoozeDetails, List<TimeOfDay> listTimeOfDay, string token)
+        //public bool Add(Snooze snoozeDetails, List<TimeOfDay> listTimeOfDay)
+        public bool Add(TimeOfAlertForUser timeOfAlertForUser)
         {
-            return _timeOfAlert_BL.Add(snoozeDetails, listTimeOfDay, token);
+            return _timeOfAlert_BL.Add(timeOfAlertForUser);
         }
         //[HttpGet]
         //public bool Add()

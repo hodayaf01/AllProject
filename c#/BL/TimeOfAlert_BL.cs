@@ -14,13 +14,13 @@ namespace BL
         TimeOfDay_DAL _TimeOfDay_DAL = new TimeOfDay_DAL();
         MedicinesToChild_DAL _MedicinesToChild_DAL = new MedicinesToChild_DAL();
         List<long> listCodeTime = new List<long>();
-        public bool Add(Snooze _snoozeDetails,List<TimeOfDay> _listTimeOfDay,string token)
+        public bool Add(TimeOfAlertForUser timeOfAlertForUser)
         {
-            if (_user_DAL.AddSnooze(_snoozeDetails))
+            if (_user_DAL.AddSnooze(timeOfAlertForUser.snooze))
             { 
-                if(_TimeOfDay_DAL.AddListTimeOfAlert(_listTimeOfDay))
+                if(_TimeOfDay_DAL.AddListTimeOfAlert(timeOfAlertForUser.timeOfDay))
                 {
-                    if (_MedicinesToChild_DAL.AddListMedicinesToUser(_snoozeDetails.userId, _listTimeOfDay, token))
+                    if (_MedicinesToChild_DAL.AddListMedicinesToUser(timeOfAlertForUser))
                     {
                         return true;
                     } return false;

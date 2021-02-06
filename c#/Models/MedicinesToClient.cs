@@ -21,7 +21,7 @@ namespace Models
         }
     
         public long Id { get; set; }
-        public long medicineId { get; set; }
+        public long medicinesId { get; set; }
         public long clientId { get; set; }
         public int Dosage { get; set; }
         public long kindOfDosage { get; set; }
