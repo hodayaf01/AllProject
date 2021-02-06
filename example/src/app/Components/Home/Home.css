@@ -30,3 +30,13 @@ label{
     margin-left: 75px;
     text-align: center;
 }
+
+.settings{
+    width: 50x;
+    height: 40px;
+}
+.containStettings{
+    background: none; 
+    border: none; 
+    margin: 20px 57px 66px 10px;
+}

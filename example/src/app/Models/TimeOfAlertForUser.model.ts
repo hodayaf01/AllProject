@@ -2,11 +2,11 @@ import { Snoozer } from './Snoozer.model';
 import { TimeOfDay } from './TimeOfDay.model';
 
 export class TimeOfAlertForUser{
-    snoose:Snoozer;
+    snooze:Snoozer;
     timeOfDay:Array<TimeOfDay>=[];
 
     constructor(sno?:Snoozer, time?:Array<TimeOfDay>){
-        this.snoose=sno;
+        this.snooze=sno;
         this.timeOfDay=time;
 
     }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MedicineToUserByTime } from 'src/app/Models/MdicineToUserByTime.model';
 import { MedicineToUserByTimeResp } from 'src/app/Models/MedicineToUserByTimeResp.model';
 import { MedicinesListService } from 'src/app/Services/MedicinesListService';
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit{
     date:Date = new Date();
     
 
-    constructor(private medicineListService: MedicinesListService){
+    constructor(private medicineListService: MedicinesListService, private router: Router, ){
         this.date.setHours(12);
         this.date.toUTCString();
     }
@@ -76,7 +77,11 @@ export class HomeComponent implements OnInit{
     //         }
     //     );
 
-    
 
+
+    }
+
+    navigateToSettings(){
+        this.router.navigate(['/TimeOfAlert']);
     }
 }
