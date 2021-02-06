@@ -35,22 +35,34 @@ namespace DAL
             return true;
         }
 
+        internal string GetChildIdByUserId(long userId)
+        {
+            User res = _DB.Users.FirstOrDefault(u => u.Id==userId);
+            if (res == null) return "404";
+            return res.childId;
+        }
+
         public long Add(User _details)
         {
-            
-            User newUser = new User()
-            {
-                childId = _details.childId,
-                userName = _details.userName,
-                userHMO = _details.userHMO,
-                email = _details.email,
-                password = _details.password,
-                points=0,
-                token=_details.token,                
-            };
-            _DB.Users.Add(newUser);
+
+            //User newUser = new User()
+            //{
+            //    childId = _details.childId,
+            //    userName = _details.userName,
+            //    userHMO = _details.userHMO,
+            //    email = _details.email,
+            //    password = _details.password,
+            //    points=0,
+            //    token=_details.token,                
+            //};
+            //_DB.Users.Add(newUser);
+            //_DB.SaveChanges();
+            //return newUser.Id;
+
+            _details.points = 0;
+            _DB.Users.Add(_details);
             _DB.SaveChanges();
-            return newUser.Id;
+            return _details.Id;
         }
 
         //public void Add(User _details)//this fuc dont get User

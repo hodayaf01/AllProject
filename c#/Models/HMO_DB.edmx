@@ -40,7 +40,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="medicineId" Type="bigint" Nullable="false" />
+          <Property Name="medicinesId" Type="bigint" Nullable="false" />
           <Property Name="clientId" Type="bigint" Nullable="false" />
           <Property Name="Dosage" Type="int" Nullable="false" />
           <Property Name="kindOfDosage" Type="bigint" Nullable="false" />
@@ -97,7 +97,7 @@
               <PropertyRef Name="medicineId" />
             </Principal>
             <Dependent Role="MedicinesToClient">
-              <PropertyRef Name="medicineId" />
+              <PropertyRef Name="medicinesId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -154,7 +154,7 @@
           <Property Name="clientName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="clientHMO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="HMO" Relationship="Self.fk_clientHMO" FromRole="Clients" ToRole="HMO" />
-          <NavigationProperty Name="MedicinesToClients" Relationship="Self.fk_clientId" FromRole="Clients" ToRole="MedicinesToClient" />
+          <NavigationProperty Name="MedicinesToClients" Relationship="HMO_DBModel.fk_clientId" FromRole="Client" ToRole="MedicinesToClient" />
         </EntityType>
         <EntityType Name="HMO">
           <Key>
@@ -170,7 +170,7 @@
           </Key>
           <Property Name="kindOfDosageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="kindOfDosageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="MedicinesToClients" Relationship="Self.fk_KingOfDosage" FromRole="KingOfDosage" ToRole="MedicinesToClient" />
+          <NavigationProperty Name="MedicinesToClients" Relationship="HMO_DBModel.fk_KingOfDosage" FromRole="KingOfDosage" ToRole="MedicinesToClient" />
         </EntityType>
         <EntityType Name="Medicine">
           <Key>
@@ -178,21 +178,7 @@
           </Key>
           <Property Name="medicineId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="midicineName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="MedicinesToClients" Relationship="Self.fk_medicineId" FromRole="Medicines" ToRole="MedicinesToClient" />
-        </EntityType>
-        <EntityType Name="MedicinesToClient">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="medicineId" Type="Int64" Nullable="false" />
-          <Property Name="clientId" Type="Int64" Nullable="false" />
-          <Property Name="Dosage" Type="Int32" Nullable="false" />
-          <Property Name="kindOfDosage" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.fk_clientId" FromRole="MedicinesToClient" ToRole="Clients" />
-          <NavigationProperty Name="KingOfDosage" Relationship="Self.fk_KingOfDosage" FromRole="MedicinesToClient" ToRole="KingOfDosage" />
-          <NavigationProperty Name="Medicine" Relationship="Self.fk_medicineId" FromRole="MedicinesToClient" ToRole="Medicines" />
-          <NavigationProperty Name="TimeToMedicinesForClients" Relationship="HMO_DBModel.fk_MedicineToChild" FromRole="MedicinesToClient" ToRole="TimeToMedicinesForClient" />
+          <NavigationProperty Name="MedicinesToClients" Relationship="HMO_DBModel.fk_medicineId" FromRole="Medicine" ToRole="MedicinesToClient" />
         </EntityType>
         <Association Name="fk_clientHMO">
           <End Role="HMO" Type="Self.HMO" Multiplicity="1" />
@@ -206,11 +192,62 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="HMO_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="HMOes" EntityType="Self.HMO" />
+          <EntitySet Name="KingOfDosages" EntityType="Self.KingOfDosage" />
+          <EntitySet Name="Medicines" EntityType="Self.Medicine" />
+          <AssociationSet Name="fk_clientHMO" Association="Self.fk_clientHMO">
+            <End Role="HMO" EntitySet="HMOes" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <EntitySet Name="TimeToMedicinesForClients" EntityType="HMO_DBModel.TimeToMedicinesForClient" />
+          <EntitySet Name="MedicinesToClients" EntityType="HMO_DBModel.MedicinesToClient" />
+          <AssociationSet Name="fk_clientId" Association="HMO_DBModel.fk_clientId">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="MedicinesToClient" EntitySet="MedicinesToClients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KingOfDosage" Association="HMO_DBModel.fk_KingOfDosage">
+            <End Role="KingOfDosage" EntitySet="KingOfDosages" />
+            <End Role="MedicinesToClient" EntitySet="MedicinesToClients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_medicineId" Association="HMO_DBModel.fk_medicineId">
+            <End Role="Medicine" EntitySet="Medicines" />
+            <End Role="MedicinesToClient" EntitySet="MedicinesToClients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_MedicineToChild" Association="HMO_DBModel.fk_MedicineToChild">
+            <End Role="MedicinesToClient" EntitySet="MedicinesToClients" />
+            <End Role="TimeToMedicinesForClient" EntitySet="TimeToMedicinesForClients" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="TimeToMedicinesForClient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idMedicineToClient" Type="Int64" Nullable="false" />
+          <Property Name="timeCode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MedicinesToClient" Relationship="HMO_DBModel.fk_MedicineToChild" FromRole="TimeToMedicinesForClient" ToRole="MedicinesToClient" />
+        </EntityType>
+        <EntityType Name="MedicinesToClient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="medicinesId" Type="Int64" Nullable="false" />
+          <Property Name="clientId" Type="Int64" Nullable="false" />
+          <Property Name="Dosage" Type="Int32" Nullable="false" />
+          <Property Name="kindOfDosage" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="HMO_DBModel.fk_clientId" FromRole="MedicinesToClient" ToRole="Client" />
+          <NavigationProperty Name="KingOfDosage" Relationship="HMO_DBModel.fk_KingOfDosage" FromRole="MedicinesToClient" ToRole="KingOfDosage" />
+          <NavigationProperty Name="Medicine" Relationship="HMO_DBModel.fk_medicineId" FromRole="MedicinesToClient" ToRole="Medicine" />
+          <NavigationProperty Name="TimeToMedicinesForClients" Relationship="HMO_DBModel.fk_MedicineToChild" FromRole="MedicinesToClient" ToRole="TimeToMedicinesForClient" />
+        </EntityType>
         <Association Name="fk_clientId">
-          <End Role="Clients" Type="Self.Client" Multiplicity="1" />
-          <End Role="MedicinesToClient" Type="Self.MedicinesToClient" Multiplicity="*" />
+          <End Type="HMO_DBModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="HMO_DBModel.MedicinesToClient" Role="MedicinesToClient" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Clients">
+            <Principal Role="Client">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="MedicinesToClient">
@@ -219,8 +256,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_KingOfDosage">
-          <End Role="KingOfDosage" Type="Self.KingOfDosage" Multiplicity="1" />
-          <End Role="MedicinesToClient" Type="Self.MedicinesToClient" Multiplicity="*" />
+          <End Type="HMO_DBModel.KingOfDosage" Role="KingOfDosage" Multiplicity="1" />
+          <End Type="HMO_DBModel.MedicinesToClient" Role="MedicinesToClient" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="KingOfDosage">
               <PropertyRef Name="kindOfDosageId" />
@@ -231,54 +268,17 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_medicineId">
-          <End Role="Medicines" Type="Self.Medicine" Multiplicity="1" />
-          <End Role="MedicinesToClient" Type="Self.MedicinesToClient" Multiplicity="*" />
+          <End Type="HMO_DBModel.Medicine" Role="Medicine" Multiplicity="1" />
+          <End Type="HMO_DBModel.MedicinesToClient" Role="MedicinesToClient" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Medicines">
+            <Principal Role="Medicine">
               <PropertyRef Name="medicineId" />
             </Principal>
             <Dependent Role="MedicinesToClient">
-              <PropertyRef Name="medicineId" />
+              <PropertyRef Name="medicinesId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="HMO_DBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Clients" EntityType="Self.Client" />
-          <EntitySet Name="HMOes" EntityType="Self.HMO" />
-          <EntitySet Name="KingOfDosages" EntityType="Self.KingOfDosage" />
-          <EntitySet Name="Medicines" EntityType="Self.Medicine" />
-          <EntitySet Name="MedicinesToClients" EntityType="Self.MedicinesToClient" />
-          <AssociationSet Name="fk_clientHMO" Association="Self.fk_clientHMO">
-            <End Role="HMO" EntitySet="HMOes" />
-            <End Role="Clients" EntitySet="Clients" />
-          </AssociationSet>
-          <AssociationSet Name="fk_clientId" Association="Self.fk_clientId">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="MedicinesToClient" EntitySet="MedicinesToClients" />
-          </AssociationSet>
-          <AssociationSet Name="fk_KingOfDosage" Association="Self.fk_KingOfDosage">
-            <End Role="KingOfDosage" EntitySet="KingOfDosages" />
-            <End Role="MedicinesToClient" EntitySet="MedicinesToClients" />
-          </AssociationSet>
-          <AssociationSet Name="fk_medicineId" Association="Self.fk_medicineId">
-            <End Role="Medicines" EntitySet="Medicines" />
-            <End Role="MedicinesToClient" EntitySet="MedicinesToClients" />
-          </AssociationSet>
-          <EntitySet Name="TimeToMedicinesForClients" EntityType="HMO_DBModel.TimeToMedicinesForClient" />
-          <AssociationSet Name="fk_MedicineToChild" Association="HMO_DBModel.fk_MedicineToChild">
-            <End Role="MedicinesToClient" EntitySet="MedicinesToClients" />
-            <End Role="TimeToMedicinesForClient" EntitySet="TimeToMedicinesForClients" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="TimeToMedicinesForClient">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idMedicineToClient" Type="Int64" Nullable="false" />
-          <Property Name="timeCode" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="MedicinesToClient" Relationship="HMO_DBModel.fk_MedicineToChild" FromRole="TimeToMedicinesForClient" ToRole="MedicinesToClient" />
-        </EntityType>
         <Association Name="fk_MedicineToChild">
           <End Type="HMO_DBModel.MedicinesToClient" Role="MedicinesToClient" Multiplicity="1" />
           <End Type="HMO_DBModel.TimeToMedicinesForClient" Role="TimeToMedicinesForClient" Multiplicity="*" />
@@ -291,7 +291,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -331,22 +331,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MedicinesToClients">
-            <EntityTypeMapping TypeName="HMO_DBModel.MedicinesToClient">
-              <MappingFragment StoreEntitySet="MedicinesToClient">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="medicineId" ColumnName="medicineId" />
-                <ScalarProperty Name="clientId" ColumnName="clientId" />
-                <ScalarProperty Name="Dosage" ColumnName="Dosage" />
-                <ScalarProperty Name="kindOfDosage" ColumnName="kindOfDosage" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TimeToMedicinesForClients">
             <EntityTypeMapping TypeName="HMO_DBModel.TimeToMedicinesForClient">
               <MappingFragment StoreEntitySet="TimeToMedicinesForClient">
                 <ScalarProperty Name="timeCode" ColumnName="timeCode" />
                 <ScalarProperty Name="idMedicineToClient" ColumnName="idMedicineToClient" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedicinesToClients">
+            <EntityTypeMapping TypeName="HMO_DBModel.MedicinesToClient">
+              <MappingFragment StoreEntitySet="MedicinesToClient">
+                <ScalarProperty Name="kindOfDosage" ColumnName="kindOfDosage" />
+                <ScalarProperty Name="Dosage" ColumnName="Dosage" />
+                <ScalarProperty Name="clientId" ColumnName="clientId" />
+                <ScalarProperty Name="medicinesId" ColumnName="medicinesId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

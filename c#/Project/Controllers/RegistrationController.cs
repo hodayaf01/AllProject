@@ -18,7 +18,7 @@ namespace Project.Controllers
         [Route("api/Registration/Add")]
         [HttpPost]
         //רישום משתמש חדש, ואחזור 
-        public string Add(Registration registration)
+        public long Add(Registration registration)
         {
             return _registration_BL.Add(registration);
         }

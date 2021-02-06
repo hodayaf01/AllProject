@@ -18,13 +18,13 @@ namespace BL
         GuardiansDAL _guardiansDAL = new GuardiansDAL();
         GurdiansToUser_DAL _guardiansToUserDAL = new GurdiansToUser_DAL();
 
-        public string Add(Registration _details)
+        public long Add(Registration _details)
         {           
             //בדיקה שהמשתמש נמצא במאגר החולים
-            if(_Client_DAL.IsFound(_details))
-            {
+            //if(_Client_DAL.IsFound(_details))
+           // {
                 long codeUser= _userDAL.Add(_details.NewUser);
-                //guardiansToUsers
+                
                 for (int i = 0; i < _details.Guardians.Count; i++)
                 {
                     long codeGuardian= _guardiansDAL.Add(_details.Guardians[i]);
@@ -40,10 +40,10 @@ namespace BL
                     });
 
 
-            }
-            return _details.NewUser.password;
+           // }
+            return _details.NewUser.Id;
             // else"
-            return "404";
+            return 404;
         }
        
     }
