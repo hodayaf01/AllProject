@@ -1,4 +1,4 @@
 export class MedicineToUserByTime{
-    user:number;
-    timeCode:number
+    UserID:number;
+    TimeOfDay:number
 }
