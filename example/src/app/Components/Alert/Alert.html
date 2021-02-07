@@ -1,18 +1,24 @@
-<div #alertModal>
-    <header>
-        <div class="containLogo">
-            <img class="mediLogoBGimg" src="../../../assets/images/LOGOBG.png" >
-        </div>
-    </header>
-    <div id="timeOfAlert">
-        <img src="../../../assets/images/sun.jpg" height="42" width="42">
-        <div>{{alertTime.alertText}}</div>
-        <div>{{alertTime.timeAlert.hours}}</div>
-        <div>{{alertTime.timeAlert.minutes}}</div>
-    </div>
-    <div>
-        <button id="okBtn" (click)="stopAlert()" >אישור</button>
-        <button id="naggerBtn" (click)="nagger()">אחר כך</button>
-    </div>
-</div>
+
+
+<!DOCTYPE html>
+<html>
+
+<body dir="rtl">
+        <header>
+            <div class="containLogo">
+                <img class="mediLogoBGimg" src="../../../assets/images/LOGOBG.png" >
+            </div>
+        </header>
+        <section>
+            <div class="containTimeOfDatImg">
+                <img class="timeImg" src="../../../assets/images/sunVX.png" alt="">
+            </div>
+            <button class="Vmark">&#10003;</button>
+            <button class="Xmark">&#10007;</button>
+        </section>
+
+    <footer></footer>
+</body>
+
+</html>
     
