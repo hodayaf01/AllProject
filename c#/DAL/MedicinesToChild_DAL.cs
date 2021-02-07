@@ -73,7 +73,20 @@ namespace DAL
 
         public List<MedicinesToChild> GetByUserInSomeTime(CodeTimeToUser details)
         {
-            var res = _DB.MedicinesToChilds.Where(m => m.userId == details.UserID && m.TimeToMedicinesForChilds.All(t=>t.TimeOfDay.timeCode==details.TimeOfDay)==true).ToList();
+            //List<MedicinesToChild> res = _DB.MedicinesToChilds.Where(m => m.userId == details.UserID && m.TimeToMedicinesForChilds.All(t=>t.TimeOfDay.timeCode==details.TimeOfDay)).ToList();
+            List<MedicinesToChild> res = _DB.MedicinesToChilds.Where(m => m.userId == details.UserID).ToList();
+
+            List<MedicinesToChild> res2 = new List<MedicinesToChild>();
+            foreach (var item in res)
+            {
+                foreach (var time in item.TimeToMedicinesForChilds)
+
+            //    foreach (var time in _DB.TimeToMedicinesForChilds.Where(t=>t.idMedicineToChild==item.Id))
+                {
+                    if (time.TimeOfDay.timeCode == details.TimeOfDay)
+                        res2.Add(item);
+                }        
+            }
 
             //foreach (var item in res)
             //{
@@ -85,7 +98,7 @@ namespace DAL
 
 
            // _DB.Users.FirstOrDefault(i => i.childId == "").MedicinesToChilds.SelectMany(t => t.TimeToMedicinesForChilds);
-            return res;
+            return res2;
         }
 
        
