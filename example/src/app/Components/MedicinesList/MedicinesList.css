@@ -1,0 +1,67 @@
+label{
+    font-size: 17px;
+    color:#369191;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: inline-block;
+    width: 384px;
+    text-align: right;
+
+}
+.title{
+    align-items: center;
+    font-weight: bold;
+    display: block;
+    font-size: 30px;
+    text-align: center;
+}
+.timeInDay{
+    width: 75%;
+    height: fit-content;
+    background-color: white;
+    border-radius: 15px;
+    margin: 15px auto 15px auto;
+}
+
+.timeInDayItem{
+    display: inline-block;
+    font-size: 17px;
+    color:#369191;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: 75px;
+    text-align: center;
+}
+button{
+    font-size: 17px;
+    color: #f6ad4d;
+    background: none;
+    border: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.formInput{
+    font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: block;
+    text-align: right;
+    color: #369191;
+    background-color: white;
+    border: 1px solid #f6ad4e;
+    border-radius: 20px;
+    width: 250px;
+    height: 35px;
+    margin: 5px auto 5px auto;
+    outline:none; 
+}
+.formInput::placeholder{
+    color: #369191;
+    padding-right: 10px;
+}
+
+input [type=button]{
+    background-color: #f6ad4d;
+}
+
+.submitButton{
+    background-color: #f6ad4e !important;
+    text-align: center !important;
+    font-size: 20px;
+}

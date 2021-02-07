@@ -95,18 +95,16 @@ namespace BL
             Settings _details = new Settings();
 
             //find user
-            //find guardian 
+            //find guardians
             //find time to user
-            User user = _userDAL.GetByIdentity(userCode);
-            _details.User = new User();
-            _details.User = user;
+            _details.User = _userDAL.GetByIdentity(userCode);
 
             List<guardiansToUser> guardiansToUser = _gurdiansToUser_DAL.GetByUser(userCode);
             _details.Guardians = new List<Guardian>();
             for (int i = 0; i < guardiansToUser.Count; i++)
             {
                 Guardian guardian = _guardiansDAL.Get(guardiansToUser[i].guardianId);
-                _details.Guardians[i]=new Guardian();
+                //_details.Guardians[i]=new Guardian();
                 _details.Guardians[i] = guardian;
             }
 

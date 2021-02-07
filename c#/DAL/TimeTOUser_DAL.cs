@@ -11,15 +11,16 @@ namespace DAL
     {
         MediDBEntities _DB = new MediDBEntities();
 
-        //public List<TimeSpan> Get(long userId)
-        //{
+        public List<TimeOfDay> Get(long userId)
+        {
 
-        //        //var medicinesToChilds = _DB.MedicinesToChilds.Where(m => m.userId == userId).ToList();
-        //   // var timeOfDay= medicinesToChilds.Where(m=>m.)
-        //         var medicinesToChilds = _DB.MedicinesToChilds.Where(m => m.userId == userId).ToList();
-        //    var  = medicinesToChilds.Where(m => m.)
-        //        //res = res == null ? null : res;
-        //        //return res;
-        //}
+            //var medicinesToChilds = _DB.MedicinesToChilds.Where(m => m.userId == userId).ToList();
+            // var timeOfDay= medicinesToChilds.Where(m=>m.)
+            // var medicinesToChilds = _DB.TimeToMedicinesForChilds. MedicinesToChilds.Where(m => m.userId == userId).ToList().;
+            // var = medicinesToChilds.Where(m => m.)
+            //res = res == null ? null : res;
+            //return res;
+            return new List<TimeOfDay>();
+        }
     }
 }

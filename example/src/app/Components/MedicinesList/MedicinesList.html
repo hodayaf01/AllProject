@@ -9,12 +9,20 @@
 
 <body dir="rtl">
         <header>
-            <div class="containLogo">
+            <div class="containLogo" style="margin-right: 140px;">
                 <img class="mediLogoBGimg" src="../../../assets/images/LOGOBG.png" >
             </div>
-            </header>
+        </header>
     <section>
-        <h1>תרופות לילד - רשימה</h1>
+        <label class="title"></label>
+        <div class="timeInDay" >
+            <div  *ngFor = "let time of medicineToUserByTimeResp">
+                <div class="timeInDayItem">{{time.medicineName}}</div>
+                <div class="timeInDayItem">{{time.dosage}}</div>
+                <div class="timeInDayItem">{{time.dosageName}}</div>
+            </div>
+        </div>
+        <input class="formInput submitButton" type="button" placeholder="אישור" (click)="updateTokenMedicines()" >
     </section>
     <footer></footer>
 </body>
