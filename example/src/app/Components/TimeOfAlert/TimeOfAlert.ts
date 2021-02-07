@@ -24,9 +24,14 @@ export class TimeOfAlertComponent implements OnInit {
     
     subscribe: any;
 
-    constructor(
-        private router: Router, 
-        private timeOfAlertForUserService: TimeOfAlertForUserService) { }
+    date:Date = new Date();
+
+    constructor(private router: Router, 
+                private timeOfAlertForUserService: TimeOfAlertForUserService) {
+            this.date.setHours(12);
+            this.date.toUTCString();
+        }
+    
     ngOnInit() {
         this.snooze.snoozeCounter=0;
         this.snooze.snoozePeriod=0;
@@ -34,19 +39,51 @@ export class TimeOfAlertComponent implements OnInit {
 
     setTimeInDay() {
         
-        this.snooze.userId= parseInt(localStorage.getItem('USERCODE'));
-
+        // this.snooze.userId= parseInt(localStorage.getItem('USERCODE'));
+        this.snooze.userId=40004;
         //this.timeOfDay.timeCode=1; this.timeOfDay.theTime.setHours(+this.morningTime.split(':')[0]); this.timeOfDay.theTime.setMinutes(+this.morningTime.split(':')[1]);
-        this.timeOfDay.timeCode=1; this.timeOfDay.theTime.setHours(8); this.timeOfDay.theTime.setMinutes(0);
-        console.log(this.timeOfDay);
-        this.timeOfAlertForUser.timeOfDay.push(this.timeOfDay);
-        this.timeOfDay.timeCode=2; this.timeOfDay.theTime.setHours(13); this.timeOfDay.theTime.setMinutes(0);
-        this.timeOfAlertForUser.timeOfDay.push(this.timeOfDay);
-        this.timeOfDay.timeCode=3; this.timeOfDay.theTime.setHours(18); this.timeOfDay.theTime.setMinutes(0);
-        this.timeOfAlertForUser.timeOfDay.push(this.timeOfDay);
-        this.timeOfDay.timeCode=4; this.timeOfDay.theTime.setHours(20); this.timeOfDay.theTime.setMinutes(0);
-        this.timeOfAlertForUser.timeOfDay.push(this.timeOfDay);
 
+        this.timeOfDay = new TimeOfDay();
+        this.timeOfDay.timeCode=1; 
+        this.timeOfDay.theTime= new Date();
+        this.timeOfDay.theTime.setHours(8); 
+        this.timeOfDay.theTime.setMinutes(0); 
+        //this.timeOfDay.theTime.toUTCString();
+        this.timeOfAlertForUser.timeOfDay = new Array<TimeOfDay>();
+        this.timeOfAlertForUser.timeOfDay[0]= new TimeOfDay();
+        this.timeOfAlertForUser.timeOfDay[0]= this.timeOfDay;
+
+
+        this.timeOfDay = new TimeOfDay();
+        this.timeOfDay.timeCode=2; 
+        this.timeOfDay.theTime= new Date();
+        this.timeOfDay.theTime.setHours(13); 
+        this.timeOfDay.theTime.setMinutes(0); 
+        //this.timeOfDay.theTime.toUTCString();
+        //this.timeOfAlertForUser.timeOfDay.push(this.timeOfDay);
+        this.timeOfAlertForUser.timeOfDay[1]= new TimeOfDay();
+        this.timeOfAlertForUser.timeOfDay[1]= this.timeOfDay;
+
+        this.timeOfDay = new TimeOfDay();
+        this.timeOfDay.timeCode=3; 
+        this.timeOfDay.theTime= new Date();
+        this.timeOfDay.theTime.setHours(18); 
+        this.timeOfDay.theTime.setMinutes(0); 
+        //this.timeOfDay.theTime.toUTCString();
+        this.timeOfAlertForUser.timeOfDay[2]= new TimeOfDay();
+        this.timeOfAlertForUser.timeOfDay[2]= this.timeOfDay;
+
+        this.timeOfDay = new TimeOfDay();
+        this.timeOfDay.timeCode=4; 
+        this.timeOfDay.theTime= new Date();
+        this.timeOfDay.theTime.setHours(20); 
+        this.timeOfDay.theTime.setMinutes(0); 
+        //this.timeOfDay.theTime.toUTCString();
+        this.timeOfAlertForUser.timeOfDay[3]= new TimeOfDay();
+        this.timeOfAlertForUser.timeOfDay[3]= this.timeOfDay;
+
+        this.timeOfAlertForUser.snooze = new Snoozer();
+        this.timeOfAlertForUser.snooze=this.snooze;
         
         this.subscribe= this.timeOfAlertForUserService.add(this.timeOfAlertForUser).subscribe(
             result => {
