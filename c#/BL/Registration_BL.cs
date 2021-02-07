@@ -18,7 +18,7 @@ namespace BL
         GuardiansDAL _guardiansDAL = new GuardiansDAL();
         GurdiansToUser_DAL _guardiansToUserDAL = new GurdiansToUser_DAL();
 
-        public long Add(Registration _details)
+        public PasswordToUser Add(Registration _details)
         {           
             //בדיקה שהמשתמש נמצא במאגר החולים
             //if(_Client_DAL.IsFound(_details))
@@ -41,9 +41,9 @@ namespace BL
 
 
            // }
-            return _details.NewUser.Id;
+            return new PasswordToUser (){ UserId = _details.NewUser.Id, Password = _details.NewUser.password };
             // else"
-            return 404;
+            //return 404;
         }
        
     }
