@@ -106,7 +106,7 @@ namespace BL
                             body = "גיע הזמן לקחת תרופה",
                             title = "שלום לך!",
                             badge = 1,
-                            click_action = "http://localhost:4200/Alert",
+                            click_action = "http://localhost:4200/Alert?id='12345'",
                             icon = "C:/Users/User/Desktop/AllProject/example/src/assets/images/LOGO.PNG"
                         },
                         data = new

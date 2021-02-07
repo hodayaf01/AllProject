@@ -21,7 +21,7 @@ namespace DAL
         public User GetByIdentity(long userId)
         {
             User res = _DB.Users.FirstOrDefault(u => u.Id == userId);
-            res = res == null ? null : res;
+            res = res == null ? new User() : res;
             return res;
         }
 

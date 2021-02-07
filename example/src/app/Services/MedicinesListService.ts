@@ -18,8 +18,8 @@ export class MedicinesListService{
     get(medicineToUserByTime:MedicineToUserByTime):Observable<any>{
        return this.http.post(`${this.url+'/Get?'}`, medicineToUserByTime, httpOptions);
    }
-   update(userCode:MedicineToUserByTime):Observable<MedicineToUserByTime>{
-    return this.http.get<MedicineToUserByTime>(`${this.url+'/Update?'}`)
+   update(medicineToUserByTime:MedicineToUserByTime):Observable<any>{
+    return this.http.post(`${this.url+'/Update?'}`, medicineToUserByTime, httpOptions);
 }
 
 }

@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit{
     //call 4 times to medicine to chiled to user.
     ngOnInit(): void {
         //this.medicineListToUserByTime.user= parseInt(localStorage.getItem('USERCODE'));
-        this.medicineListToUserByTime.UserID = 1234;
+        this.medicineListToUserByTime.UserID = 30010;
         this.medicineListToUserByTime.TimeOfDay = 1;
 
         this.subscribe = this.medicineListService.get(this.medicineListToUserByTime).subscribe(

@@ -38,7 +38,7 @@ namespace BL
 
         public static void Update(CodeTimeToUser details)
         {
-            throw new NotImplementedException();
+           
         }
     }
 }
