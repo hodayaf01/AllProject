@@ -11,7 +11,8 @@ namespace BL
     public class MedicinesList_BL
     {
         MedicinesToChild_DAL _medicinesToChild_DAL = new MedicinesToChild_DAL();
-       
+        public MedicinesDAL _medicinesDAL = new MedicinesDAL();
+        ArchiveDAL _archiveDAL = new ArchiveDAL();
 
         //שליפת רשימת התרופות לפי קוד ילד וקוד זמן ביום
         public List<GenerateMedicine> Get(CodeTimeToUser _details) {
@@ -53,9 +54,23 @@ namespace BL
             //}
         }
         //עדכון סטטוס התרופות לאחר שהמשתמש אישר שלקח אותם
-        public static void Update(CodeTimeToUser details)
+        public void Update(CodeTimeToUser _details)
         {
-            
+
+            List<MedicinesToChild> _medicinesToChild = _medicinesToChild_DAL.GetByUserInSomeTime(_details);
+
+            foreach (var _medicines in _medicinesToChild)
+            {
+                _archiveDAL.Add(
+                    new ArchiveTakeMedicine
+                    {
+                        userId = _medicines.userId,
+                        medicineToChild = _medicines.Id,
+                        date = DateTime.Now,
+                        time = DateTime.Now,
+                    }
+                );
+            }
         }
     }
 }
