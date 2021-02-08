@@ -207,6 +207,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alert_DAL.cs" />
+    <Compile Include="ArchiveDAL.cs" />
     <Compile Include="GuardiansDAL.cs" />
     <Compile Include="GurdiansToUser_DAL.cs" />
     <Compile Include="HMO_DAL.cs" />

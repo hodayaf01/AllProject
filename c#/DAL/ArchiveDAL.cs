@@ -10,10 +10,9 @@ namespace DAL
     public class ArchiveDAL
     {
         MediDBEntities _DB = new MediDBEntities();
-
-        public void Add(ArchiveTakeMedicine details)
+        public void Add(ArchiveTakeMedicine archiveTakeMedicine)
         {
-            _DB.ArchiveTakeMedicines.Add(details);
+            _DB.ArchiveTakeMedicines.Add(archiveTakeMedicine);
             _DB.SaveChanges();
         }
     }
