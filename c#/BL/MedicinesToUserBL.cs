@@ -23,7 +23,7 @@ namespace BL
         {
             if (details.medicineId == 0)
             {
-                _medicinesDAL.Add();
+                //_medicinesDAL.Add();
             }
             else
             {
@@ -36,9 +36,5 @@ namespace BL
             _medicinesDAL.Delete();
         }
 
-        public static void Update(CodeTimeToUser details)
-        {
-           
-        }
     }
 }

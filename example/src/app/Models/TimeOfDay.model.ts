@@ -3,11 +3,11 @@ import { Time } from '@angular/common';
 export class TimeOfDay {
     timeId: number;
     timeCode: number;
-    theTime: Date = new Date();
+    theTime: string;
 
-    constructor(id?: number, code?: number, time?: Date) {
+    constructor(id?: number, code?: number) {
         this.timeId = id;
         this.timeCode = code;
-        this.theTime = time;
+       // this.theTime = {hours:0,minutes:0};
     }
 }

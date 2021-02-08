@@ -13,15 +13,15 @@ namespace DAL
         MediDBEntities _DB = new MediDBEntities();
         //HMO_DBEntities _HMO_DB = new HMO_DBEntities();
         Medicines_DAL _MedicinesInHMO_DAL = new HMO_DB_DAL.Medicines_DAL();
-        public void Add()
-        {
-            List<Medicine> medicines = _MedicinesInHMO_DAL.Get();
-            foreach (var item in medicines)
-            {
-                _DB.Medicines.Add(new Medicine() { medicineId= item.medicineId, midicineName=item.midicineName});
-            }           
-            _DB.SaveChanges();
-        }
+        //public void Add()
+        //{
+        //    List<Medicine> medicines = _MedicinesInHMO_DAL.Get();
+        //    foreach (var item in medicines)
+        //    {
+        //        _DB.Medicines.Add(new Medicine() { medicineId= item.medicineId, midicineName=item.midicineName});
+        //    }           
+        //    _DB.SaveChanges();
+        //}
 
         public Medicine Get()
         {

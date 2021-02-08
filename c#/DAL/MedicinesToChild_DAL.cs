@@ -1,5 +1,6 @@
 ﻿using DAL.HMO_DB_DAL;
 using Models;
+using Models.HMO_db;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace DAL
         public bool AddListMedicinesToUser(TimeOfAlertForUser timeOfAlertForUser)
         {
             //List<MedicinesToClient> medicinesToClients = _MedicinesToClient_DAL.Get(token);
-            List<MedicinesToClient> medicinesToClients = _MedicinesToClient_DAL.Get(timeOfAlertForUser.snooze.userId);
+            List<Models.HMO_db.MedicinesToClient> medicinesToClients = _MedicinesToClient_DAL.Get(timeOfAlertForUser.snooze.userId);
 
             foreach (var item in medicinesToClients)
             {

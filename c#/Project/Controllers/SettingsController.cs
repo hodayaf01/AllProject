@@ -23,9 +23,9 @@ namespace Project.Controllers
         }
 
         [Route("api/Settings/Get")]
-        public Settings Get(int userCode)
+        public Settings Get(PasswordToUser password)
         {
-            return _settings_BL.Get(userCode);
+            return _settings_BL.Get(password);
         }
     }
 }

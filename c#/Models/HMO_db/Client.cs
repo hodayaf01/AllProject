@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Models
+namespace Models.HMO_db
 {
     using System;
     using System.Collections.Generic;

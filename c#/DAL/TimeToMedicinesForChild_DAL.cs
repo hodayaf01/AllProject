@@ -23,8 +23,8 @@ namespace DAL
             return res;
         }
 
-        public List<TimeToMedicinesForChild> GetByMedicineToChild(long medicineToUserId) {
-            var res = _DB.TimeToMedicinesForChilds.Where(t => t.idMedicineToChild==medicineToUserId).ToList();
+        public List<TimeToMedicinesForChild> GetByMedicineToChild(long userId) {
+            var res = _DB.TimeToMedicinesForChilds.Where(t => t.MedicinesToChild.userId ==userId).ToList();
             res = res == null ? null : res;
             return res;
         }

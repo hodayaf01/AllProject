@@ -10,11 +10,11 @@ namespace DAL
     public class HMO_DAL
     {
         MediDBEntities _DB = new MediDBEntities();
-        DAL.HMO_DB_DAL.HMO_DAL _HMO_DAL=new DAL.HMO_DB_DAL.HMO_DAL();
-        public HMO Get()
+        HMO_DAL _HMO_DAL=new HMO_DAL();
+        public List<HMO> Get()
         {
-            var res = _DB.HMOes.ToList().FirstOrDefault();
-            res = res == null ? new HMO() : res;
+            var  res=  _DB.HMOes.ToList();
+            res = res == null ? new List<HMO>() : res;
             return res;
         }
 

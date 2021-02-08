@@ -7,29 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Models
+namespace Models.HMO_db
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class MedicinesToClient
+    public partial class Medicine
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MedicinesToClient()
+        public Medicine()
         {
-            this.TimeToMedicinesForClients = new HashSet<TimeToMedicinesForClient>();
+            this.MedicinesToClients = new HashSet<MedicinesToClient>();
         }
     
-        public long Id { get; set; }
-        public long medicinesId { get; set; }
-        public long clientId { get; set; }
-        public int Dosage { get; set; }
-        public long kindOfDosage { get; set; }
+        public long medicineId { get; set; }
+        public string midicineName { get; set; }
     
-        public virtual Client Client { get; set; }
-        public virtual KingOfDosage KingOfDosage { get; set; }
-        public virtual Medicine Medicine { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TimeToMedicinesForClient> TimeToMedicinesForClients { get; set; }
+        public virtual ICollection<MedicinesToClient> MedicinesToClients { get; set; }
     }
 }

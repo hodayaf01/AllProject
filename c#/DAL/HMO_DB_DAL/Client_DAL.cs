@@ -1,4 +1,5 @@
 ﻿using Models;
+using Models.HMO_db;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace DAL.HMO_DB_DAL
 {
     public class Client_DAL
     {
-        HMO_DBEntities _DB = new HMO_DBEntities();
+        Models.HMO_db.HMO_DBEntities _DB = new HMO_DBEntities();
 
 
         public bool IsFound(Registration newUser)

@@ -11,7 +11,7 @@ namespace DAL
     public class KingOfDosageDAL
     {
         MediDBEntities _DB = new MediDBEntities();
-        DAL.HMO_DB_DAL.KingOfDosageDAL _KingOfDosageInHMO_DAL = new DAL.HMO_DB_DAL.KingOfDosageDAL();
+        KingOfDosageDAL _KingOfDosageInHMO_DAL = new KingOfDosageDAL();
         public KingOfDosage Get()
         {
             var res = _DB.KingOfDosages.ToList().FirstOrDefault();
@@ -19,15 +19,15 @@ namespace DAL
             return res;
         }
 
-        public void Add()
-        {
-            List<KingOfDosage> KingOfDosage = _KingOfDosageInHMO_DAL.Get();
-            foreach (var item in KingOfDosage)
-            {
-                _DB.KingOfDosages.Add(new KingOfDosage() { kindOfDosageId = item.kindOfDosageId, kindOfDosageName = item.kindOfDosageName });
-            }
-            _DB.SaveChanges();
-        }
+        //public void Add()
+        //{
+        //    List<KingOfDosage> KingOfDosage = _KingOfDosageInHMO_DAL.Get();
+        //    foreach (var item in KingOfDosage)
+        //    {
+        //        _DB.KingOfDosages.Add(new KingOfDosage() { kindOfDosageId = item.kindOfDosageId, kindOfDosageName = item.kindOfDosageName });
+        //    }
+        //    _DB.SaveChanges();
+        //}
 
         public void Edit(KingOfDosage details)
         {

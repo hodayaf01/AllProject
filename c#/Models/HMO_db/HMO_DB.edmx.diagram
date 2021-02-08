@@ -4,18 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b468b35c7cd946a6833ed5329f7c081c" Name="Diagram1">
+      <Diagram DiagramId="f8021c2bce6c42b9941cbae1e0b8a6c4" Name="Diagram1">
         <EntityTypeShape EntityType="HMO_DBModel.Client" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="HMO_DBModel.HMO" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="HMO_DBModel.KingOfDosage" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="HMO_DBModel.Medicine" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMO_DBModel.Medicine" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMO_DBModel.MedicinesToClient" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMO_DBModel.TimeToMedicinesForClient" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
         <AssociationConnector Association="HMO_DBModel.fk_clientHMO" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="HMO_DBModel.TimeToMedicinesForClient" Width="1.5" PointX="7.5" PointY="1.5" />
-        <EntityTypeShape EntityType="HMO_DBModel.MedicinesToClient" Width="1.5" PointX="5.125" PointY="1.125" />
-        <AssociationConnector Association="HMO_DBModel.fk_clientId" />
-        <AssociationConnector Association="HMO_DBModel.fk_KingOfDosage" />
-        <AssociationConnector Association="HMO_DBModel.fk_medicineId" />
-        <AssociationConnector Association="HMO_DBModel.fk_MedicineToChild" />
+        <AssociationConnector Association="HMO_DBModel.fk_clientId" ManuallyRouted="false" />
+        <AssociationConnector Association="HMO_DBModel.fk_KingOfDosage" ManuallyRouted="false" />
+        <AssociationConnector Association="HMO_DBModel.fk_medicineId" ManuallyRouted="false" />
+        <AssociationConnector Association="HMO_DBModel.FK__TimeToMed__idMed__01142BA1" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

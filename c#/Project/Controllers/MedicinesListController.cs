@@ -28,7 +28,7 @@ namespace Project.Controllers
         //עדכון כל התרופות שנלקחו
         public void Update(CodeTimeToUser _details)
         {
-            MedicinesToUserBL.Update(_details);
+           _medicinesListBL.Update(_details);
         }
     }
 }

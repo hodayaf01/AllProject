@@ -1,6 +1,7 @@
 import {Component,OnInit} from '@angular/core';
 import { Alert } from '../../Models/Alert.model';
 import { from } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 @Component({
         selector:'app-Alert',
         templateUrl:'./Alert.html',
@@ -10,7 +11,7 @@ import { from } from 'rxjs';
         subscribe:any;
         alertTime:Alert;
 
-        constructor(){}
+        constructor(private route:ActivatedRoute){}
        // document.getElementById('txt').innerHTML =
  // h + ":" + m + ":" + s;
 
@@ -23,7 +24,14 @@ import { from } from 'rxjs';
 
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+this.route.params.subscribe(
+    p=>{
+       console.log( p.id+" "+p.time)
+
+    }
+)
+    }
 
 
     ngOnDestroy()

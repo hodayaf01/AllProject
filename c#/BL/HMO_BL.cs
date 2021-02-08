@@ -12,7 +12,7 @@ namespace BL
     {
         HMO_DAL _HMO_DAL = new HMO_DAL();
 
-        public HMO Get()
+        public List< HMO> Get()
         {
             return _HMO_DAL.Get();
         }

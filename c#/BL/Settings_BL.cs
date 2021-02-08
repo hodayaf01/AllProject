@@ -52,7 +52,7 @@ namespace BL
                             guardianToAdd.PhoneNumber = _details.Guardians[i].PhoneNumber;
                             guardianToAdd.guardianName = _details.Guardians[i].guardianName;
                             long guardianID = _guardiansDAL.Add(guardianToAdd);
-                            _gurdiansToUser_DAL.Add(new Models.guardiansToUser { guardianId = guardianID, userId = user.Id });
+                            _gurdiansToUser_DAL.Add(new guardiansToUser { guardianId = guardianID, userId = user.Id });
 
                         }
                     }
@@ -90,36 +90,48 @@ namespace BL
             return true;
         }
 
-        public Settings Get(long userCode)
+        public Settings Get(PasswordToUser password)
         {
-            Settings _details = new Settings();
-
-            //find user
-            //find guardians
-            //find time to user
-            _details.User = _userDAL.GetByIdentity(userCode);
-
-            List<guardiansToUser> guardiansToUser = _gurdiansToUser_DAL.GetByUser(userCode);
-            _details.Guardians = new List<Guardian>();
-            for (int i = 0; i < guardiansToUser.Count; i++)
+            if (_userDAL.CheckPassword(password)) 
             {
-                Guardian guardian = _guardiansDAL.Get(guardiansToUser[i].guardianId);
-                //_details.Guardians[i]=new Guardian();
-                _details.Guardians[i] = guardian;
-            }
+                Settings _details = new Settings();
 
-            _details.TimeOfDays = new List<TimeOfDay>();
-            MedicinesToChild medicinesToChild = _medicinesToChild_DAL.GetByUser(userCode).First();
-            List<TimeToMedicinesForChild> timeToMedicinesForChildList = _timeToMedicinesForChild_DAL.GetByMedicineToChild(medicinesToChild.userId);
-            var timeToMedicinesForChildrenListgroup = timeToMedicinesForChildList.GroupBy(t => t.idTimeOfDay).Select(t => t.ToList()).ToList();
-            for (int i = 0; i < timeToMedicinesForChildrenListgroup.Count; i++)//loop 4 times
-            {
-                long idTimeOfDay = timeToMedicinesForChildrenListgroup[i].ToList()[0].idTimeOfDay;
-                TimeOfDay timeOfDay = _timeOfDay_DAL.GetByTimeId(idTimeOfDay);
-                _details.TimeOfDays.Add(timeOfDay);
-            }
+                //find user, guardians and time to user
+                _details.User = _userDAL.GetByIdentity(password.UserId);
 
-            return _details;
+                List<guardiansToUser> guardiansToUser = _gurdiansToUser_DAL.GetByUser(password.UserId);
+                _details.Guardians = new List<Guardian>();
+                for (int i = 0; i < guardiansToUser.Count; i++)
+                {
+                    Guardian guardian = _guardiansDAL.Get(guardiansToUser[i].guardianId);
+                    _details.Guardians[i] = guardian;
+                }
+
+                _details.TimeOfDays = new List<TimeOfDay>();
+                List<TimeToMedicinesForChild> timeToMedicinesForChildList = _timeToMedicinesForChild_DAL.GetByMedicineToChild(password.UserId);
+                timeToMedicinesForChildList.GroupBy(t => t.idTimeOfDay).ToList();
+                foreach (var time in timeToMedicinesForChildList)
+                {
+                    _details.TimeOfDays.Add(new TimeOfDay {
+                        timeId=time.idTimeOfDay,
+                    timeCode=time.TimeOfDay.timeCode,
+                    theTime=time.TimeOfDay.theTime
+                    });
+                }
+
+                //--------------------------------
+                //var timeToMedicinesForChildrenListgroup = timeToMedicinesForChildList.GroupBy(t => t.idTimeOfDay).Select(t => t.ToList()).ToList();
+                //List<TimeToMedicinesForChild> timeToMedicinesForChildrenListgroup = timeToMedicinesForChildList.GroupBy(t => t.idTimeOfDay).ToList();
+                //for (int i = 0; i < timeToMedicinesForChildrenListgroup.Count; i++)//loop 4 times
+                //{
+                //    long idTimeOfDay = timeToMedicinesForChildrenListgroup[i].idTimeOfDay;
+                //    TimeOfDay timeOfDay = _timeOfDay_DAL.GetByTimeId(idTimeOfDay);
+                //    _details.TimeOfDays.Add(timeOfDay);
+                //}
+
+                return _details;
+            }
+            return null;
         }
     }
 }

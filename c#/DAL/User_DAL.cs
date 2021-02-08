@@ -1,4 +1,5 @@
 ﻿using Models;
+using Models.HMO_db;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,6 +90,9 @@ namespace DAL
             _DB.SaveChanges();
         }
 
-
+        public bool CheckPassword(PasswordToUser password)
+        {
+            return _DB.Users.First(u => u.Id == password.UserId).password == password.Password;
+        }
     }
 }

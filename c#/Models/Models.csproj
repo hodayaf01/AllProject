@@ -167,12 +167,10 @@
     </Compile>
     <Compile Include="ArchiveTakeMedicineDetails.cs" />
     <Compile Include="ChildMedicin.cs" />
-    <Compile Include="Client.cs">
-      <DependentUpon>HMO_DB.tt</DependentUpon>
-    </Compile>
     <Compile Include="DetailsAlert.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="GenerateMedicine.cs" />
+    <Compile Include="CodeTimeToUser.cs" />
     <Compile Include="Guardian.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
@@ -182,22 +180,39 @@
     <Compile Include="HMO.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="HMO_DB.Context.cs">
+    <Compile Include="HMO_db\Client.cs">
+      <DependentUpon>HMO_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HMO_db\HMO.cs">
+      <DependentUpon>HMO_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HMO_db\HMO_DB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HMO_DB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="HMO_DB.cs">
+    <Compile Include="HMO_db\HMO_DB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HMO_DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="HMO_DB.Designer.cs">
+    <Compile Include="HMO_db\HMO_DB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HMO_DB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="CodeTimeToUser.cs" />
+    <Compile Include="HMO_db\KingOfDosage.cs">
+      <DependentUpon>HMO_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HMO_db\Medicine.cs">
+      <DependentUpon>HMO_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HMO_db\MedicinesToClient.cs">
+      <DependentUpon>HMO_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HMO_db\TimeToMedicinesForClient.cs">
+      <DependentUpon>HMO_DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="KingOfDosage.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
@@ -206,9 +221,6 @@
     </Compile>
     <Compile Include="MedicinesToChild.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MedicinesToClient.cs">
-      <DependentUpon>HMO_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Medi_DB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -238,9 +250,6 @@
     <Compile Include="TimeToMedicinesForChild.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="TimeToMedicinesForClient.cs">
-      <DependentUpon>HMO_DB.tt</DependentUpon>
-    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
@@ -251,11 +260,11 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Medi_DB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <EntityDeploy Include="HMO_DB.edmx">
+    <EntityDeploy Include="HMO_db\HMO_DB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>HMO_DB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="HMO_DB.edmx.diagram">
+    <None Include="HMO_db\HMO_DB.edmx.diagram">
       <DependentUpon>HMO_DB.edmx</DependentUpon>
     </None>
     <None Include="Medi_DB.edmx.diagram">
@@ -267,12 +276,12 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="HMO_DB.Context.tt">
+    <Content Include="HMO_db\HMO_DB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>HMO_DB.edmx</DependentUpon>
       <LastGenOutput>HMO_DB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="HMO_DB.tt">
+    <Content Include="HMO_db\HMO_DB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>HMO_DB.edmx</DependentUpon>
       <LastGenOutput>HMO_DB.cs</LastGenOutput>
@@ -288,5 +297,6 @@
       <LastGenOutput>Medi_DB.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

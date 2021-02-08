@@ -1,4 +1,5 @@
 ﻿using Models;
+using Models.HMO_db;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,10 @@ namespace DAL.HMO_DB_DAL
     {
         HMO_DBEntities _DB = new HMO_DBEntities();
 
-        public List<Medicine> Get()
+        public List<Models.HMO_db.Medicine> Get()
         {
             var res = _DB.Medicines.ToList();
-            //res = res == null ? new Medicine() : res;
+            res = res == null ? new List<Models.HMO_db.Medicine> () : res;
             return res;
         }
     }

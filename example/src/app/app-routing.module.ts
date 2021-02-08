@@ -13,7 +13,7 @@ export const appRoutes: Routes = [
   {path:'TimeOfAlert', component:TimeOfAlertComponent},
   {path:'Settings',component:SettingsComponent},
   {path: 'Home', component:HomeComponent},
-  {path:'Alert',component:AlertComponent},
+  {path:'Alert/:id/:time',component:AlertComponent},
   {path:'Portal',component:PortalComponent}
 ];
 
