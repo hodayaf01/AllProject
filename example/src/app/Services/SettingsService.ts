@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { InjectableCompiler } from '@angular/compiler/src/injectable_compiler';
 import { ImplicitReceiver } from '@angular/compiler';
 import { Settings } from '../Models/Settings.model';
+import { SettingsReq } from '../Models/settingsReq.model';
 
 const httpOptions = { headers: new HttpHeaders({ 'Content-type': 'application/json' }) }
 
@@ -14,8 +15,8 @@ export class SettingsService{
 
     };
 
-    get(userCode:string):Observable<Settings>{
-        return this.http.get<Settings>(`${this.url}/Get?userCode=${20004}`)
+    get(settingsReq:SettingsReq):Observable<any>{
+        return this.http.post<Settings>(`${this.url}/Get`, settingsReq, httpOptions);
     }
 
     edit(s: Settings): Observable<any> {

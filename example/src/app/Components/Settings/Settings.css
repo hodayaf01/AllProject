@@ -1,0 +1,63 @@
+label{
+    font-size: 17px;
+    color:#369191;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: inline-block;
+    width: 384px;
+    text-align: right;
+
+}
+
+.formInput{
+    font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: block;
+    text-align: right;
+    color: #369191;
+    background-color: white;
+    border: 1px solid #f6ad4e;
+    border-radius: 20px;
+    width: 250px;
+    height: 35px;
+    margin: 5px auto 5px auto;
+    outline:none; 
+}
+.formInput::placeholder{
+    color: #369191;
+    padding-right: 10px;
+}
+.smallInput{
+    width: 100px !important;
+    display: inline !important;
+    margin-right: 120px;
+    text-align: center;
+    
+}
+.tooltip .tooltiptext{
+    visibility: hidden;
+    width: 180px;
+    background-color: #f6ad4e;
+    color: #369191;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.tooltip{
+    text-align: center; 
+    width: 20px; 
+    height: 20px; 
+    background-color: #f6ad4e; 
+    border-radius: 50px;
+    position: relative;
+    display: inline-block;
+}
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+input [type=button]{
+    background-color: #f6ad4d;
+}

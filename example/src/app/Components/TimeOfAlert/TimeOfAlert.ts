@@ -45,9 +45,7 @@ export class TimeOfAlertComponent implements OnInit {
 
         this.timeOfDay = new TimeOfDay();
         this.timeOfDay.timeCode=1; 
-        // this.timeOfDay.theTime.hours=8; 
-        // this.timeOfDay.theTime.minutes=0; 
-        //this.timeOfDay.theTime.toUTCString();
+        this.timeOfDay.theTime="08:00:00";
         this.timeOfAlertForUser.timeOfDay = new Array<TimeOfDay>();
         this.timeOfAlertForUser.timeOfDay[0]= new TimeOfDay();
         this.timeOfAlertForUser.timeOfDay[0]= this.timeOfDay;
@@ -55,27 +53,19 @@ export class TimeOfAlertComponent implements OnInit {
 
         this.timeOfDay = new TimeOfDay();
         this.timeOfDay.timeCode=2; 
-        // this.timeOfDay.theTime.hours=13; 
-        // this.timeOfDay.theTime.minutes=0; 
-        //this.timeOfDay.theTime.toUTCString();
-        //this.timeOfAlertForUser.timeOfDay.push(this.timeOfDay);
+        this.timeOfDay.theTime="13:00:00";
         this.timeOfAlertForUser.timeOfDay[1]= new TimeOfDay();
         this.timeOfAlertForUser.timeOfDay[1]= this.timeOfDay;
 
         this.timeOfDay = new TimeOfDay();
         this.timeOfDay.timeCode=3; 
-        // this.timeOfDay.theTime.hours=18; 
-        // this.timeOfDay.theTime.minutes=0; 
-        //this.timeOfDay.theTime.toUTCString();
+        this.timeOfDay.theTime="18:00:00";
         this.timeOfAlertForUser.timeOfDay[2]= new TimeOfDay();
         this.timeOfAlertForUser.timeOfDay[2]= this.timeOfDay;
 
         this.timeOfDay = new TimeOfDay();
         this.timeOfDay.timeCode=4; 
-        this.timeOfDay.theTime="20:00:00"
-        // this.timeOfDay.theTime.hours=20; 
-        // this.timeOfDay.theTime.minutes=0; 
-        //this.timeOfDay.theTime.toUTCString();
+        this.timeOfDay.theTime="20:00:00";
         this.timeOfAlertForUser.timeOfDay[3]= new TimeOfDay();
         this.timeOfAlertForUser.timeOfDay[3]= this.timeOfDay;
 

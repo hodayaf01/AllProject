@@ -1,6 +1,7 @@
 import {Component,OnInit} from '@angular/core';
 import { SettingsService } from '../../Services/SettingsService';
 import { Settings } from '../../Models/Settings.model';
+import { SettingsReq } from 'src/app/Models/settingsReq.model';
 @Component({
         selector:'app-Settings',
         templateUrl:'./Settings.html',
@@ -9,30 +10,34 @@ import { Settings } from '../../Models/Settings.model';
     export class SettingsComponent implements OnInit {
         userDetails:Settings;
         password:string;
+        settingReq:SettingsReq;
+        loggedIn:boolean = false;
         subscribe:any;
-        isSettings:boolean=true;
+
         isUserDetails:boolean=true;
         isGuardiansDedails:boolean=true;
         isTimeOfAlertDetails:boolean=false;
 
         constructor(private settingsService: SettingsService){
-           /* this.subscribe=this.settingsService.get(localStorage.getItem('USERCODE')).subscribe(result=>
-                {this.userDetails=result});*/
-            this.subscribe=this.settingsService.get("3").subscribe(result=>
-            {this.userDetails=result});
-           
+          
         }
-        checkPassword()
-        {    
-            this.isSettings=false;
-            //document.getElementById("userDetails").setAttribute("hidden",this.isUserDetails.toString());   
-            //document.getElementById("settingsForm").setAttribute("hidden","false") ;
-            document.getElementById("settingsForm").hidden=false;
-            if(this.userDetails.user.password===this.password)
-            {
-                
 
-            }
+        checkPasswordAndretriveSettings(){
+            this.settingReq.UserId=+(localStorage.getItem('USERCODE'));
+            this.settingReq.Password = this.password;
+            this.subscribe = this.settingsService.get(this.settingReq).subscribe(
+                result => {
+                    console.log(result);
+                    if(result==null){
+                        alert("password is incorrect");
+                    }
+                    else{
+                        this.loggedIn=true;
+                        this.userDetails=result;
+                    }
+                    
+                }
+            )
         }
 
         showUserDetails()
@@ -66,6 +71,7 @@ import { Settings } from '../../Models/Settings.model';
         }
 
         ngOnInit() {
+            
         }
 
         ngOnDestroy()
