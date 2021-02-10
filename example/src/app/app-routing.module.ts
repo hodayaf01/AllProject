@@ -6,6 +6,7 @@ import { SettingsComponent } from './Components/Settings/Settings';
 import { HomeComponent } from './Components/Home/Home';
 import { AlertComponent } from './Components/Alert/Alert';
 import { PortalComponent } from './Components/Portal/Portal';
+import { MedicinesListComponent } from './Components/MedicinesList/MedicinesList';
 
 
 export const appRoutes: Routes = [
@@ -14,7 +15,8 @@ export const appRoutes: Routes = [
   {path:'Settings',component:SettingsComponent},
   {path: 'Home', component:HomeComponent},
   {path:'Alert/:id/:time',component:AlertComponent},
-  {path:'Portal',component:PortalComponent}
+  {path:'Portal',component:PortalComponent},
+  {path:'MedicinesList',component:MedicinesListComponent}
 ];
 
 @NgModule({

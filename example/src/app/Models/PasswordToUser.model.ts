@@ -1,6 +1,6 @@
 
 
-export class SettingsReq{
+export class PasswordToUser{
     UserId: number;
     Password: string;
     
