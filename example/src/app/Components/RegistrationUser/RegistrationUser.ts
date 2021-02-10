@@ -42,9 +42,11 @@ export class RegistrationUserComponent implements OnInit {
 
     addUser() {
         //validations: 
+
         if(this.user.userHMO==0)
             alert("אנא בחר בית חולים");
         else{
+            this.addGuardian();
             this.setPassword();
             this.user.token=this.messagingService.token;
             this.registration.NewUser=this.user;
@@ -63,11 +65,8 @@ export class RegistrationUserComponent implements OnInit {
                 // sessionStorage.setItem('KEY', 'VALUE');
                 // var value = sessionStorage.getItem('KEY');
                 // sessionStorage.clear('KEY');
-                console.log('added'+ this.user.childId);
                 this.router.navigate(['/TimeOfAlert']);
-                }
-                
-               
+                }                   
             }
         );
         
@@ -75,7 +74,7 @@ export class RegistrationUserComponent implements OnInit {
 
     addGuardian() {
         this.guardian.Id += 1;
-        this.guardians.push(this.guardian);
+        this.guardians.push(new Guardian(this.guardian.Id, this.guardian.guardianName, this.guardian.PhoneNumber));
 
         if (this.guardians.length == 1) {
             this.isMoreThanOneGuardian = false;

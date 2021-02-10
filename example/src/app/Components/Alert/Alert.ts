@@ -1,7 +1,10 @@
 import {Component,OnInit} from '@angular/core';
 import { Alert } from '../../Models/Alert.model';
 import { from } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from 'src/app/Services/Alert.service';
+import { TimeOfAlertForUser } from 'src/app/Models/TimeOfAlertForUser.model';
+import { MedicineToUserByTime } from 'src/app/Models/MdicineToUserByTime.model';
 @Component({
         selector:'app-Alert',
         templateUrl:'./Alert.html',
@@ -10,32 +13,32 @@ import { ActivatedRoute } from '@angular/router';
     export class AlertComponent implements OnInit{
         subscribe:any;
         alertTime:Alert;
+        timeForUser: MedicineToUserByTime = new MedicineToUserByTime();
+        timeCode:number;
 
-        constructor(private route:ActivatedRoute){}
-       // document.getElementById('txt').innerHTML =
- // h + ":" + m + ":" + s;
+        constructor(private route:ActivatedRoute,
+            private router: Router,
+            private alertService:AlertService){
 
-    stopAlert()
-    {
-        
-    }
+        }
 
-    nagger(){
+        cancleAlertAndNvigateToList(){
+           this.timeForUser.UserID=+(localStorage.getItem('USERCODE'));
 
-    }
+           this.timeForUser.TimeOfDay=this.timeCode;
+            this.subscribe = this.alertService.cancleAlertAndNavigate(this.timeForUser).subscribe(
+                result => {
+                    this.router.navigate(['/MedicinesList']);
+                }
+            );
+        }
 
     ngOnInit() {
-this.route.params.subscribe(
-    p=>{
-       console.log( p.id+" "+p.time)
-
+        this.route.params.subscribe(
+            p=>{
+                this.timeCode=p.time;
+             p.time;
+            })
     }
-)
-    }
 
-
-    ngOnDestroy()
-    {
-        this.subscribe=null;
-    }
 }

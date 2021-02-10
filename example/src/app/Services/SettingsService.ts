@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { InjectableCompiler } from '@angular/compiler/src/injectable_compiler';
 import { ImplicitReceiver } from '@angular/compiler';
 import { Settings } from '../Models/Settings.model';
-import { SettingsReq } from '../Models/settingsReq.model';
+import { PasswordToUser } from '../Models/PasswordToUser.model';
 
 const httpOptions = { headers: new HttpHeaders({ 'Content-type': 'application/json' }) }
 
@@ -15,8 +15,8 @@ export class SettingsService{
 
     };
 
-    get(settingsReq:SettingsReq):Observable<any>{
-        return this.http.post(`${this.url}/Get?`, settingsReq, httpOptions);
+    getSettings(PasswordToUser:PasswordToUser):Observable<any>{
+        return this.http.post(`${this.url}/Get`, PasswordToUser, httpOptions);
     }
 
     edit(s: Settings): Observable<any> {

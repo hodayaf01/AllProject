@@ -24,6 +24,7 @@ import { AsyncPipe } from '../../node_modules/@angular/common';
 import { environment } from 'src/environments/environment';
 import { MedicinesListService } from './Services/MedicinesListService';
 import { from } from 'rxjs';
+import { AlertService } from './Services/Alert.service';
 
 const appRoutes: Routes = [
   {path: '', component: RegistrationUserComponent},
@@ -72,6 +73,7 @@ const appRoutes: Routes = [
     MessagingService,
     AsyncPipe,
     MedicinesListService,
+    AlertService
   ],
   
   bootstrap: [AppComponent]
