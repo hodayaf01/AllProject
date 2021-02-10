@@ -21,13 +21,20 @@ namespace DAL.HMO_DB_DAL
         //    return res;
         //}
 
-        public List<MedicinesToClient> Get(long userId)
-        {//שולף את הת.ז של הילד לפי התוקן וכך שולף את כל התרופות מקליינט
+        public List<MedicinesToClient> GetByUserId(long userId)
+        {//שולף את הת.ז של הילד לפי קוד וכך שולף את כל התרופות מקליינט
             //string childId = _User_DAL.GetChildIdByToken(userId);
             string childId = _User_DAL.GetChildIdByUserId(userId);
             List<MedicinesToClient> res = _DB.MedicinesToClients.ToList().FindAll(m => m.Client.clientId.Equals(childId)).ToList();
             return res;
         }
+
+
+        //public List<MedicinesToClient> Get()
+        //{
+        //    List<MedicinesToClient> res = _DB.MedicinesToClients.ToList();
+        //    return res;
+        //}
 
     }
 }

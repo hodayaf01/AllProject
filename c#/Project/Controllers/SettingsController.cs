@@ -10,22 +10,26 @@ using Models;
 
 namespace Project.Controllers
 {
-    [EnableCors("*","*","*")]
+    [EnableCors("*", "*", "*")]
     public class SettingsController : ApiController
     {
         
         Settings_BL _settings_BL = new Settings_BL();
 
         [Route("api/Settings/Edit")]
+        [HttpPost]
         public bool Edit(Settings _details)
         {
             return  _settings_BL.Edit(_details);
         }
 
         [Route("api/Settings/Get")]
+        [HttpPost]
         public Settings Get(PasswordToUser password)
         {
+            //return new Settings();
             return _settings_BL.Get(password);
+            //return null;
         }
     }
 }

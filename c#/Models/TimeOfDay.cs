@@ -23,6 +23,7 @@ namespace Models
         public long timeId { get; set; }
         public int timeCode { get; set; }
         public System.TimeSpan theTime { get; set; }
+        public Nullable<long> userId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TimeToMedicinesForChild> TimeToMedicinesForChilds { get; set; }

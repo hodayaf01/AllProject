@@ -6,33 +6,19 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Project.Controllers
 {
+    [EnableCors("*", "*", "*")]
     public class AlertController : ApiController
     {
         Alert_BL _alert_BL = new Alert_BL();
-
-        //[Route("api/Alert")]
-        //[HttpPost]
-        //public long Add(Registration registration)
-        //{
-        //    return _registration_BL.Add(registration);
-        //}
-        //public Registration Get()
-        //{
-        //    return _registration_BL.Get();
-        //}
-        //public void Edit(Alert alert)
-        //{
-        //    //_registration_BL.Edit(registration);
-        //}
-
-//public List<MedicinesToChild> Get()
-        //public List<MedicinesToChild> Get(long userId)
-        
-        //{
-
-        //}
+        [Route("api/Alert/V")]
+        [HttpPost]
+        public void AlertV(CodeTimeToUser codeTimeToUser)
+        {
+            _alert_BL.RemoveSnooze(codeTimeToUser);
+        }
     }
 }

@@ -16,14 +16,36 @@ namespace BL
     public class Alert_BL
     {
         static System.Timers.Timer t;
+
+        public void RemoveSnooze(CodeTimeToUser codeTimeToUser)
+        {
+            DateTime now = DateTime.Now;
+            //למחוק מהמטריצה את הנודניק
+            for (int i = now.Hour; i < 15; i++)
+            {
+                for (int j = now.Minute; j < 15; j++)
+                {
+                    
+                    DetailsAlert snoozeToRemove= _userDetailsOfAlert[i, j].FirstOrDefault(a=>a.snooze.userId==codeTimeToUser.UserID&&a.CodeTime==codeTimeToUser.TimeOfDay);
+                    if(snoozeToRemove !=null)
+                    {
+                        _userDetailsOfAlert[i, j].Remove(snoozeToRemove); //??
+                        break;
+                    }
+                }
+            }
+            
+        }
+
         //public static List<ChildMedicin>[,] timeOfChildrenMat = new List<ChildMedicin>  [24, 60];
         //public static List<string>[,] _userToken = new List<string>  [24, 60];
         public static List<DetailsAlert>[,] _userDetailsOfAlert = new List<DetailsAlert>[24, 60];
         public static TimeOfDay_DAL _timeOfDay_DAL = new TimeOfDay_DAL();
         public static GuardiansDAL _GuardiansDAL = new GuardiansDAL();
+        public static MedicinesToChild_DAL _MedicinesToChild_DAL = new MedicinesToChild_DAL();
         SMSCOMMS SMSEngine;
 
-
+        
         //Creating a class while running the project
         static Alert_BL()
         {
@@ -35,7 +57,8 @@ namespace BL
          Called every day at midnight.*/
         public static void Beginning()
         {
-            CreatMatForChildMedicin();
+           // if (_MedicinesToChild_DAL.UpdateMedicinceToUsers())
+                CreatMatForChildMedicines(); 
 
             //play this fucn every day- fill mat details
             FillUserDetailsMat();
@@ -49,7 +72,7 @@ namespace BL
 
         /*Create a matrix that describes all the hours and minutes of the day. It contains the users' token,
         by the time they need to take medication*/
-        public static void CreatMatForChildMedicin()
+        public static void CreatMatForChildMedicines()
         {
             for (int i = 0; i < 24; i++)
             {
@@ -91,22 +114,24 @@ namespace BL
                     WebRequest tRequest = WebRequest.Create("https://fcm.googleapis.com/fcm/send");
                     tRequest.Method = "post";
                     //serverKey - Key from Firebase cloud messaging server  
-                    tRequest.Headers.Add(string.Format("Authorization: key={0}", "key=AAAAat--WUo:APA91bHssfs8jZ9WQvhNjr-zp5KcoefJu6HgbA4cud2TIGcH_o6omHgn6TC_wE_JXnqakpbKfSfuAd_B5uVTtGWItGoSRsn7J5RCTxO6rzJdARoXup0vbhxjW60vgacvi5DL-t6k2hwg"));
+                    //tRequest.Headers.Add(string.Format("Authorization: key={0}", "key=AAAAat--WUo:APA91bHssfs8jZ9WQvhNjr-zp5KcoefJu6HgbA4cud2TIGcH_o6omHgn6TC_wE_JXnqakpbKfSfuAd_B5uVTtGWItGoSRsn7J5RCTxO6rzJdARoXup0vbhxjW60vgacvi5DL-t6k2hwg"));
+                    tRequest.Headers.Add(HttpRequestHeader.Authorization, "key=AAAAat--WUo:APA91bHssfs8jZ9WQvhNjr-zp5KcoefJu6HgbA4cud2TIGcH_o6omHgn6TC_wE_JXnqakpbKfSfuAd_B5uVTtGWItGoSRsn7J5RCTxO6rzJdARoXup0vbhxjW60vgacvi5DL-t6k2hwg");
                     ////Sender Id - From firebase project setting  
                     //tRequest.Headers.Add(string.Format("Sender: id={0}", "XXXXX.."));
                     tRequest.ContentType = "application/json";
                     var payload = new
                     {
                         //to = "eL1D6oH3L8U:APA91bF5oV8g-4JisK84aw6XmatgJ_5ArOidF6hCXjASj0mI6xlCjgvfZK4zb1wXktdHDAh5HdjP-RhUoldXBZua2059-e4IJEoOx2DPSjDtVZaKnfWOVxNHk_rAWo9j7DAeHlR4QQHZ",
-                        to = childrenAlert.UserToken,
+                        to= "eihgr9lcIow:APA91bFjK4PjT-5zDS088pMGjT7E0XFsi5kRPkDw1l4DjHKbOv-XAQaCbbmU_uc5BTq-GB5GxPsMPSwLqrQB8uX70G_ti9Ru4kKij4_9FOcTUNTD3itlPpqxqeD7Lllu5TPCz8JkNOWU",
+                        //to = childrenAlert.UserToken,
                         //priority = "high",
                         content_available = true,
                         notification = new
                         {
-                            body = "גיע הזמן לקחת תרופה",
+                            body = "הגיע הזמן לקחת תרופה",
                             title = "שלום לך!",
                             badge = 1,
-                            click_action = "http://localhost:4200/Alert/12345",
+                            click_action = "http://localhost:4200/Alert/40010/"+childrenAlert.CodeTime,//לשלוח קוד ילד
                             icon = "C:/Users/User/Desktop/AllProject/example/src/assets/images/LOGO.PNG"
                         },
                         data = new
@@ -137,17 +162,12 @@ namespace BL
                     }
 
                     childrenAlert.AlertCount++;
+                    PlaySnooze(childrenAlert.snooze.userId, DateTime.Now);
                 }
             }
             else
             {
-                //                "notification":{
-                //                    "title":"IssA",
-                //"body":"Lafi",
-                //"icon": "Icon URL",
-                //"click_action": "Your URL here"
-                //}
-
+              
                 t.Stop();
                 Beginning();
             }
@@ -162,18 +182,22 @@ namespace BL
             foreach (var hour in allHours)
             {
                 //_userToken[hour.Key.Hours, hour.Key.Minutes] = hour.ToList().Select(t => t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.token).ToList();
-                _userDetailsOfAlert[hour.Key.Hours, hour.Key.Minutes] = hour.ToList().Select(t => new DetailsAlert
+                if (hour.ToList().Find(t => t.TimeToMedicinesForChilds.Count > 0) != null)
                 {
-                    UserToken = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.token,
-                    AlertCount = 0,
-                    UserName = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.userName,
-                    snooze = new Snooze
+                    _userDetailsOfAlert[hour.Key.Hours, hour.Key.Minutes] = hour.ToList().Select(t => new DetailsAlert
                     {
-                        userId = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.userId,
-                        snoozePeriod = (int)t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.snoozePeriod,
-                        snoozeCounter = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.snoozeCounter.Value,
-                    }
-                }).ToList();
+                        UserToken = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.token,
+                        AlertCount = 0,
+                        UserName = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.userName,
+                        snooze = new Snooze
+                        {
+                            userId = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.userId,
+                            snoozePeriod = (int)t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.snoozePeriod,
+                            snoozeCounter = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.snoozeCounter.Value,
+                        },
+                        CodeTime = t.timeCode
+                    }).ToList();
+                }
             }
 
             //foreach (var hour in allHours)
@@ -219,12 +243,18 @@ namespace BL
 
         //הפעלת נודניק על ידי הילד. 
         //שליחה של זמן ההתראה ע"י הפיירבייס
-        public static void PlaySnooze(CodeTimeToUser _codeTimeToUser, TimeSpan time)
+
+
+
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //public static void PlaySnooze(CodeTimeToUser _codeTimeToUser, long timeId)
+        public static void PlaySnooze(long  userId, DateTime time)
+           //מקבל קוד ילד וזמן שההתראה התבצעה
         {
-            int hour = time.Hours, minute = time.Minutes;
+            int hour = time.Hour, minute = time.Minute;
             if ((hour >= 0 && hour <= 23) && (minute >= 0 && minute <= 59))
             {
-                DetailsAlert smoozeUserDidNotTakeMedicines = _userDetailsOfAlert[hour, minute].Find(u => u.snooze.userId == _codeTimeToUser.UserID);
+                DetailsAlert smoozeUserDidNotTakeMedicines = _userDetailsOfAlert[hour, minute].Find(u => u.snooze.userId == userId);
                 if (smoozeUserDidNotTakeMedicines.snooze.snoozeCounter < smoozeUserDidNotTakeMedicines.AlertCount)
                 {
                     if (minute + smoozeUserDidNotTakeMedicines.snooze.snoozePeriod < 60)

@@ -23,7 +23,9 @@ import { SettingsReq } from 'src/app/Models/settingsReq.model';
         }
 
         checkPasswordAndretriveSettings(){
-            this.settingReq.UserId=+(localStorage.getItem('USERCODE'));
+            this.settingReq=new SettingsReq();
+            this.settingReq.UserId=30010;
+            // this.settingReq.UserId=+(localStorage.getItem('USERCODE'));
             this.settingReq.Password = this.password;
             this.subscribe = this.settingsService.get(this.settingReq).subscribe(
                 result => {

@@ -21,7 +21,7 @@ namespace Project
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            //Alert_BL _alert_BL = new Alert_BL();
+            Alert_BL _alert_BL = new Alert_BL();
         }
     }
 }

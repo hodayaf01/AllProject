@@ -12,6 +12,7 @@ namespace Models
         public Snooze snooze { get; set; }
         public int AlertCount { get; set; }
         public string UserName { get; set; }
-       // public bool sendSMS { get; set; }
+        public int CodeTime { get; set; }
+        // public bool sendSMS { get; set; }
     }
 }

@@ -16,7 +16,7 @@ export class SettingsService{
     };
 
     get(settingsReq:SettingsReq):Observable<any>{
-        return this.http.post<Settings>(`${this.url}/Get`, settingsReq, httpOptions);
+        return this.http.post(`${this.url}/Get?`, settingsReq, httpOptions);
     }
 
     edit(s: Settings): Observable<any> {

@@ -53,6 +53,12 @@ namespace DAL
             return res;
         }
 
+        public List<TimeOfDay> GetListByUserId(long userId)
+        {
+            List<TimeOfDay> timeOfDays = _DB.TimeOfDays.Where(t => t.userId == userId).ToList();
+            timeOfDays = timeOfDays == null ? null : timeOfDays;
+            return timeOfDays;
+        }
         public void Edit(TimeOfDay details)
         {
             _DB.Entry(details);

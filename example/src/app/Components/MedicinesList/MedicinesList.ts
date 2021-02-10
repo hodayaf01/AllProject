@@ -21,7 +21,7 @@ export class MedicinesListComponent implements OnInit{
         
     }
     ngOnInit() {
-        this.medicineListToUserByTime.UserID = 30010;
+        this.medicineListToUserByTime.UserID = 30010;//localstorage
         this.medicineListToUserByTime.TimeOfDay = 1;
 
         this.subscribe = this.medicineListService.get(this.medicineListToUserByTime).subscribe(

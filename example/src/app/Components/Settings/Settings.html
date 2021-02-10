@@ -33,7 +33,7 @@
                     <div class="tooltip">?
                         <span class="tooltiptext">להוספת אפוטרופוס, יש להקיש על סימן ה + . ניתן להוסיף עד שלושה אפוטרופוסים</span>
                       </div>
-                    <div *ngFor="let guardian in userDetails.guardians">
+                    <div *ngFor="let guardian of userDetails.guardians">
                         <input class="formInput" placeholder="שם" type="text" [(ngModel)]="guardian.guardianName" name="guardianName">
                         <input class="formInput" placeholder="פלאפון" type="text" [(ngModel)]="guardian.PhoneNumber" name="PhoneNumber">
                         <!-- <input class="formInput submitButton smallInput" type="button" value="שלח סיסמא" (click)="sendPassword"> -->

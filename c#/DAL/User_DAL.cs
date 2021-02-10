@@ -84,6 +84,13 @@ namespace DAL
             if (res == null) return "404";
             return res.childId;
         }
+
+        public long GetUserIdByChildId(string childId)
+        {
+            User res = _DB.Users.FirstOrDefault(u => u.childId.Equals(childId));
+            if (res == null) return 404;
+            return res.Id;
+        }
         public void Edit(User details)
         {
             _DB.Entry(details);

@@ -104,7 +104,10 @@ namespace BL
                 for (int i = 0; i < guardiansToUser.Count; i++)
                 {
                     Guardian guardian = _guardiansDAL.Get(guardiansToUser[i].guardianId);
-                    _details.Guardians[i] = guardian;
+
+                    _details.Guardians.Add(guardian);
+                  //      new Guardian();
+                  //  _details.Guardians[i] = guardian;
                 }
 
                 _details.TimeOfDays = new List<TimeOfDay>();
