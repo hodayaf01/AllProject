@@ -25,8 +25,11 @@ namespace DAL.HMO_DB_DAL
         {//שולף את הת.ז של הילד לפי קוד וכך שולף את כל התרופות מקליינט
             //string childId = _User_DAL.GetChildIdByToken(userId);
             string childId = _User_DAL.GetChildIdByUserId(userId);
-            List<MedicinesToClient> res = _DB.MedicinesToClients.ToList().FindAll(m => m.Client.clientId.Equals(childId)).ToList();
-            return res;
+            if (childId != null)
+            {
+                List<MedicinesToClient> res = _DB.MedicinesToClients.ToList().FindAll(m => m.Client.clientId.Equals(childId)).ToList();
+                return res;
+            } return null;
         }
 
 

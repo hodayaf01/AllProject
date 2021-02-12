@@ -39,7 +39,7 @@ namespace DAL
         internal string GetChildIdByUserId(long userId)
         {
             User res = _DB.Users.FirstOrDefault(u => u.Id==userId);
-            if (res == null) return "404";
+            if (res == null) return null;
             return res.childId;
         }
 

@@ -16,9 +16,10 @@ namespace Project.Controllers
         Alert_BL _alert_BL = new Alert_BL();
         [Route("api/Alert/V")]
         [HttpPost]
-        public void AlertV(CodeTimeToUser codeTimeToUser)
+        public int AlertV(CodeTimeToUser codeTimeToUser)
         {
-            _alert_BL.RemoveSnooze(codeTimeToUser);
+            //מחזיר את כמות הנודניקים שהיו לילד כדי להעביר לקיחת רשימת תרופות
+            return _alert_BL.RemoveSnooze(codeTimeToUser);
         }
     }
 }

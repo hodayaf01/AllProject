@@ -74,30 +74,45 @@ namespace DAL
             {
                 List<TimeOfDay> timesToMedicine = _TimeOfDay_DAL.GetListByUserId(user.Id);
                 List<Models.HMO_db.MedicinesToClient> medicinesToClients = _MedicinesToClient_DAL.GetByUserId(user.Id);
-                foreach (var item in medicinesToClients)
+                ArchiveDAL _archiveDAL = new ArchiveDAL();
+                if (medicinesToClients != null)
                 {
-                    MedicinesToChild medicinesToChild = new MedicinesToChild()
+                    foreach (var item in medicinesToClients)
                     {
-                        medicineId = item.medicinesId,
-                        userId = user.Id,
-                        kindOfDosage = item.kindOfDosage,
-                        Dosage = item.Dosage,
-                    };
-                    _DB.MedicinesToChilds.Add(medicinesToChild);
-
-                    //עבור כל תרופה לילד להכניס לזמן לילד
-                    //שליפה מזמנים לילד והצבה עם זמנים לקליינט
-                    foreach (var timeToMed in item.TimeToMedicinesForClients)
-                    {
-                        _DB.TimeToMedicinesForChilds.Add(new TimeToMedicinesForChild()
+                        MedicinesToChild medicinesToChild = new MedicinesToChild()
                         {
-                            idMedicineToChild = medicinesToChild.Id,
-                            idTimeOfDay = timesToMedicine.First(t => t.timeCode == timeToMed.timeCode).timeId
-                        });
-                    }
+                            medicineId = item.medicinesId,
+                            userId = user.Id,
+                            kindOfDosage = item.kindOfDosage,
+                            Dosage = item.Dosage
+                        };
+                        _DB.MedicinesToChilds.Add(medicinesToChild);
 
+                        //עבור כל תרופה לילד להכניס לזמן לילד
+                        //שליפה מזמנים לילד והצבה עם זמנים לקליינט
+                        foreach (var timeToMed in item.TimeToMedicinesForClients)
+                        {
+
+                            TimeToMedicinesForChild timeToChild = new TimeToMedicinesForChild()
+                            {
+                                idMedicineToChild = medicinesToChild.Id,
+                                idTimeOfDay = timesToMedicine.First(t => t.timeCode == timeToMed.timeCode).timeId,
+                                status=false
+                            };
+                            _DB.TimeToMedicinesForChilds.Add(timeToChild);
+                            _archiveDAL.Add(
+               new ArchiveTakeMedicine
+               {
+                   userId = user.Id,
+                   medicineToChild = timeToChild.Id,
+                   date = DateTime.Now.Date
+               });
+                        }
+
+
+                    }
                 }
-                
+
             }
             if (_DB.SaveChanges() == 0)
                 return false;
@@ -118,7 +133,7 @@ namespace DAL
         public List<MedicinesToChild> GetByUserInSomeTime(CodeTimeToUser details)
         {
             //List<MedicinesToChild> res = _DB.MedicinesToChilds.Where(m => m.userId == details.UserID && m.TimeToMedicinesForChilds.All(t=>t.TimeOfDay.timeCode==details.TimeOfDay)).ToList();
-            List<MedicinesToChild> res = _DB.MedicinesToChilds.Where(m => m.userId == details.UserID).ToList();
+            List<MedicinesToChild> res = _DB.MedicinesToChilds.Where(m => m.userId == details.UserID&&m.TimeToMedicinesForChilds.All(t=>t.status==false)).ToList();
 
             List<MedicinesToChild> res2 = new List<MedicinesToChild>();
             foreach (var item in res)

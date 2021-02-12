@@ -5,24 +5,24 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="35c9bd7d988c49a18497f9f8ecb44f2d" Name="Diagram1">
-        <EntityTypeShape EntityType="MediDBModel.ArchiveTakeMedicine" Width="1.5" PointX="0.625" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MediDBModel.Guardian" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MediDBModel.guardiansToUser" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MediDBModel.HMO" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MediDBModel.KingOfDosage" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MediDBModel.Medicine" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MediDBModel.MedicinesToChild" Width="1.5" PointX="8.25" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MediDBModel.TimeOfDay" Width="1.5" PointX="10" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MediDBModel.TimeToMedicinesForChild" Width="1.5" PointX="10.5" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MediDBModel.User" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
         <AssociationConnector Association="MediDBModel.fk_guardianId" ManuallyRouted="false" />
-        <AssociationConnector Association="MediDBModel.fk_userId" ManuallyRouted="false" />
-        <AssociationConnector Association="MediDBModel.fk_userHMO" ManuallyRouted="false" />
-        <AssociationConnector Association="MediDBModel.fk_KingOfDosage" ManuallyRouted="false" />
-        <AssociationConnector Association="MediDBModel.fk_medicineId" ManuallyRouted="false" />
-        <AssociationConnector Association="MediDBModel.fk_childId" ManuallyRouted="false" />
-        <AssociationConnector Association="MediDBModel.fk_MedicineToChild" ManuallyRouted="false" />
-        <AssociationConnector Association="MediDBModel.fk_timeOfDay" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MediDBModel.MedicinesToChild" Width="1.5" PointX="8.25" PointY="2.375" />
+        <AssociationConnector Association="MediDBModel.fk_KingOfDosage" />
+        <AssociationConnector Association="MediDBModel.fk_medicineId" />
+        <EntityTypeShape EntityType="MediDBModel.User" Width="1.5" PointX="3" PointY="2.875" />
+        <AssociationConnector Association="MediDBModel.fk_userId" />
+        <AssociationConnector Association="MediDBModel.fk_userHMO" />
+        <AssociationConnector Association="MediDBModel.fk_childId" />
+        <EntityTypeShape EntityType="MediDBModel.TimeToMedicinesForChild" Width="1.5" PointX="12.25" PointY="4.5" />
+        <AssociationConnector Association="MediDBModel.fk_MedicineToChild" />
+        <AssociationConnector Association="MediDBModel.fk_timeOfDay" />
+        <EntityTypeShape EntityType="MediDBModel.ArchiveTakeMedicine" Width="1.5" PointX="5.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

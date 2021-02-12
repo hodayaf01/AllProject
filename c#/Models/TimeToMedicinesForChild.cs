@@ -17,6 +17,7 @@ namespace Models
         public int Id { get; set; }
         public long idMedicineToChild { get; set; }
         public long idTimeOfDay { get; set; }
+        public Nullable<bool> status { get; set; }
     
         public virtual MedicinesToChild MedicinesToChild { get; set; }
         public virtual TimeOfDay TimeOfDay { get; set; }

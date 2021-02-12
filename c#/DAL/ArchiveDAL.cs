@@ -15,5 +15,18 @@ namespace DAL
             _DB.ArchiveTakeMedicines.Add(archiveTakeMedicine);
             _DB.SaveChanges();
         }
+
+        public List<ArchiveTakeMedicine> Get(long userId)
+        {
+            var res = _DB.ArchiveTakeMedicines.Where(a => a.userId==userId&&a.date.Equals(DateTime.Now.Date)).ToList();
+            res = res == null ? new List<ArchiveTakeMedicine>() : res;
+            return res;
+        }
+
+        public void Edit(ArchiveTakeMedicine details)
+        {
+            _DB.Entry(details);
+            _DB.SaveChanges();
+        }
     }
 }

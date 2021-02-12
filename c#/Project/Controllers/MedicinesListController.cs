@@ -26,7 +26,7 @@ namespace Project.Controllers
         [Route("api/MedicinesList/Update")]
         [HttpPost]
         //עדכון כל התרופות שנלקחו
-        public void Update(CodeTimeToUser _details)
+        public void Update(UpdateListMedicines _details)
         {
            _medicinesListBL.Update(_details);
         }

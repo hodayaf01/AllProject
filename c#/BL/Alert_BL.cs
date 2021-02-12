@@ -15,37 +15,14 @@ namespace BL
 {
     public class Alert_BL
     {
-        static System.Timers.Timer t;
-
-        public void RemoveSnooze(CodeTimeToUser codeTimeToUser)
-        {
-            DateTime now = DateTime.Now;
-            //למחוק מהמטריצה את הנודניק
-            for (int i = now.Hour; i < 15; i++)
-            {
-                for (int j = now.Minute; j < 15; j++)
-                {
-                    
-                    DetailsAlert snoozeToRemove= _userDetailsOfAlert[i, j].FirstOrDefault(a=>a.snooze.userId==codeTimeToUser.UserID&&a.CodeTime==codeTimeToUser.TimeOfDay);
-                    if(snoozeToRemove !=null)
-                    {
-                        _userDetailsOfAlert[i, j].Remove(snoozeToRemove); //??
-                        break;
-                    }
-                }
-            }
-            
-        }
-
-        //public static List<ChildMedicin>[,] timeOfChildrenMat = new List<ChildMedicin>  [24, 60];
-        //public static List<string>[,] _userToken = new List<string>  [24, 60];
+        static System.Timers.Timer t;      
         public static List<DetailsAlert>[,] _userDetailsOfAlert = new List<DetailsAlert>[24, 60];
         public static TimeOfDay_DAL _timeOfDay_DAL = new TimeOfDay_DAL();
         public static GuardiansDAL _GuardiansDAL = new GuardiansDAL();
         public static MedicinesToChild_DAL _MedicinesToChild_DAL = new MedicinesToChild_DAL();
         SMSCOMMS SMSEngine;
 
-        
+
         //Creating a class while running the project
         static Alert_BL()
         {
@@ -57,8 +34,8 @@ namespace BL
          Called every day at midnight.*/
         public static void Beginning()
         {
-           // if (_MedicinesToChild_DAL.UpdateMedicinceToUsers())
-                CreatMatForChildMedicines(); 
+            if (_MedicinesToChild_DAL.UpdateMedicinceToUsers())
+            CreatMatForChildMedicines();
 
             //play this fucn every day- fill mat details
             FillUserDetailsMat();
@@ -78,8 +55,6 @@ namespace BL
             {
                 for (int j = 0; j < 60; j++)
                 {
-                    // timeOfChildrenMat[i, j] = new List<ChildMedicin>();
-                    // _userToken[i, j] = new List<string>();
                     _userDetailsOfAlert[i, j] = new List<DetailsAlert>();
                 }
             }
@@ -100,74 +75,73 @@ namespace BL
                 t.Interval = GetInterval();
                 t.Start();
 
-                //List<ChildMedicin> listChildMedicinsNow =  timeOfChildrenMat[now.Hour,now.Minute].OrderBy(o => o.userId).ToList();
-                // foreach (var childrenAlert in listChildMedicinsNow)
-                //  foreach (var childrenAlert in _userToken[now.Hour, now.Minute])
 
                 foreach (var childrenAlert in _userDetailsOfAlert[now.Hour, now.Minute])
                 {
-                    //List<ChildMedicin> childMedicins = listChildMedicinsNow.FindAll(m => m.userId.Equals(childrenAlert.userId)).ToList();
-                    //listChildMedicinsNow.RemoveAll(m => m.userId.Equals(childrenAlert.userId));
-
-
-                    //send alert to send by firabase
-                    WebRequest tRequest = WebRequest.Create("https://fcm.googleapis.com/fcm/send");
-                    tRequest.Method = "post";
-                    //serverKey - Key from Firebase cloud messaging server  
-                    //tRequest.Headers.Add(string.Format("Authorization: key={0}", "key=AAAAat--WUo:APA91bHssfs8jZ9WQvhNjr-zp5KcoefJu6HgbA4cud2TIGcH_o6omHgn6TC_wE_JXnqakpbKfSfuAd_B5uVTtGWItGoSRsn7J5RCTxO6rzJdARoXup0vbhxjW60vgacvi5DL-t6k2hwg"));
-                    tRequest.Headers.Add(HttpRequestHeader.Authorization, "key=AAAAat--WUo:APA91bHssfs8jZ9WQvhNjr-zp5KcoefJu6HgbA4cud2TIGcH_o6omHgn6TC_wE_JXnqakpbKfSfuAd_B5uVTtGWItGoSRsn7J5RCTxO6rzJdARoXup0vbhxjW60vgacvi5DL-t6k2hwg");
-                    ////Sender Id - From firebase project setting  
-                    //tRequest.Headers.Add(string.Format("Sender: id={0}", "XXXXX.."));
-                    tRequest.ContentType = "application/json";
-                    var payload = new
+                    if (childrenAlert.snooze.snoozeCounter > childrenAlert.AlertCount)
                     {
-                        //to = "eL1D6oH3L8U:APA91bF5oV8g-4JisK84aw6XmatgJ_5ArOidF6hCXjASj0mI6xlCjgvfZK4zb1wXktdHDAh5HdjP-RhUoldXBZua2059-e4IJEoOx2DPSjDtVZaKnfWOVxNHk_rAWo9j7DAeHlR4QQHZ",
-                        to= "eihgr9lcIow:APA91bFjK4PjT-5zDS088pMGjT7E0XFsi5kRPkDw1l4DjHKbOv-XAQaCbbmU_uc5BTq-GB5GxPsMPSwLqrQB8uX70G_ti9Ru4kKij4_9FOcTUNTD3itlPpqxqeD7Lllu5TPCz8JkNOWU",
-                        //to = childrenAlert.UserToken,
-                        //priority = "high",
-                        content_available = true,
-                        notification = new
-                        {
-                            body = "הגיע הזמן לקחת תרופה",
-                            title = "שלום לך!",
-                            badge = 1,
-                            click_action = "http://localhost:4200/Alert/40010/"+childrenAlert.CodeTime,//לשלוח קוד ילד
-                            icon = "C:/Users/User/Desktop/AllProject/example/src/assets/images/LOGO.PNG"
-                        },
-                        data = new
-                        {
-                            key1 = now.Hour.ToString(),
-                            key2 = now.Minute.ToString()
-                        }
 
-                    };
-
-                    string postbody = JsonConvert.SerializeObject(payload).ToString();
-                    Byte[] byteArray = Encoding.UTF8.GetBytes(postbody);
-                    tRequest.ContentLength = byteArray.Length;
-                    using (Stream dataStream = tRequest.GetRequestStream())
-                    {
-                        dataStream.Write(byteArray, 0, byteArray.Length);
-                        using (WebResponse tResponse = tRequest.GetResponse())
+                        //send alert to send by firabase
+                        WebRequest tRequest = WebRequest.Create("https://fcm.googleapis.com/fcm/send");
+                        tRequest.Method = "post";
+                        //serverKey - Key from Firebase cloud messaging server  
+                        //tRequest.Headers.Add(string.Format("Authorization: key={0}", "key=AAAAat--WUo:APA91bHssfs8jZ9WQvhNjr-zp5KcoefJu6HgbA4cud2TIGcH_o6omHgn6TC_wE_JXnqakpbKfSfuAd_B5uVTtGWItGoSRsn7J5RCTxO6rzJdARoXup0vbhxjW60vgacvi5DL-t6k2hwg"));
+                        tRequest.Headers.Add(HttpRequestHeader.Authorization, "key=AAAAat--WUo:APA91bHssfs8jZ9WQvhNjr-zp5KcoefJu6HgbA4cud2TIGcH_o6omHgn6TC_wE_JXnqakpbKfSfuAd_B5uVTtGWItGoSRsn7J5RCTxO6rzJdARoXup0vbhxjW60vgacvi5DL-t6k2hwg");
+                        ////Sender Id - From firebase project setting  
+                        //tRequest.Headers.Add(string.Format("Sender: id={0}", "XXXXX.."));
+                        tRequest.ContentType = "application/json";
+                        var payload = new
                         {
-                            using (Stream dataStreamResponse = tResponse.GetResponseStream())
+                            //to = "eL1D6oH3L8U:APA91bF5oV8g-4JisK84aw6XmatgJ_5ArOidF6hCXjASj0mI6xlCjgvfZK4zb1wXktdHDAh5HdjP-RhUoldXBZua2059-e4IJEoOx2DPSjDtVZaKnfWOVxNHk_rAWo9j7DAeHlR4QQHZ",
+                            to = "eihgr9lcIow:APA91bFjK4PjT-5zDS088pMGjT7E0XFsi5kRPkDw1l4DjHKbOv-XAQaCbbmU_uc5BTq-GB5GxPsMPSwLqrQB8uX70G_ti9Ru4kKij4_9FOcTUNTD3itlPpqxqeD7Lllu5TPCz8JkNOWU",
+                            //to = childrenAlert.UserToken,
+                            //priority = "high",
+                            content_available = true,
+                            notification = new
                             {
-                                if (dataStreamResponse != null) using (StreamReader tReader = new StreamReader(dataStreamResponse))
-                                    {
-                                        String sResponseFromServer = tReader.ReadToEnd();
-                                        //result.Response = sResponseFromServer;
-                                    }
+                                body = "הגיע הזמן לקחת תרופה",
+                                title = "שלום לך!",
+                                badge = 1,
+                                click_action = "http://localhost:4200/Alert/30010/" + childrenAlert.CodeTime,//לשלוח קוד ילד
+                                icon = "C:/Users/User/Desktop/AllProject/example/src/assets/images/LOGO.PNG"
+                            },
+                            data = new
+                            {
+                                key1 = now.Hour.ToString(),
+                                key2 = now.Minute.ToString()
+                            }
+
+                        };
+
+                        string postbody = JsonConvert.SerializeObject(payload).ToString();
+                        Byte[] byteArray = Encoding.UTF8.GetBytes(postbody);
+                        tRequest.ContentLength = byteArray.Length;
+                        using (Stream dataStream = tRequest.GetRequestStream())
+                        {
+                            dataStream.Write(byteArray, 0, byteArray.Length);
+                            using (WebResponse tResponse = tRequest.GetResponse())
+                            {
+                                using (Stream dataStreamResponse = tResponse.GetResponseStream())
+                                {
+                                    if (dataStreamResponse != null) using (StreamReader tReader = new StreamReader(dataStreamResponse))
+                                        {
+                                            String sResponseFromServer = tReader.ReadToEnd();
+                                            //result.Response = sResponseFromServer;
+                                        }
+                                }
                             }
                         }
-                    }
 
-                    childrenAlert.AlertCount++;
-                    PlaySnooze(childrenAlert.snooze.userId, DateTime.Now);
+                        childrenAlert.AlertCount++;
+                        PlaySnooze(childrenAlert.snooze.userId, DateTime.Now);
+                    }
+                    else if(childrenAlert.snooze.snoozeCounter == childrenAlert.AlertCount)
+                        SendSMSToGuardians(childrenAlert);
                 }
             }
             else
             {
-              
+
                 t.Stop();
                 Beginning();
             }
@@ -214,7 +188,6 @@ namespace BL
             //}
         }
 
-      //  צריך לבדוק שתקין
         //פונקצי לשליחת הודעה דרך אסאמס4יו
         static async Task SendUsingAPIAsync(string guardianPhone, string childName)
         {
@@ -244,18 +217,30 @@ namespace BL
         //הפעלת נודניק על ידי הילד. 
         //שליחה של זמן ההתראה ע"י הפיירבייס
 
+        public static void SendSMSToGuardians(DetailsAlert childrenAlert)
+        {
+            //הילד חרג בהפעלת הנודניק- שליחת הודעה להורים
+            List<Guardian> _guardiansDetails = _GuardiansDAL.GetGuardiansByUserId(childrenAlert.snooze.userId);
+            foreach (var guardians in _guardiansDetails)
+            {
+                Console.WriteLine(guardians.guardianName + " " + guardians.PhoneNumber + " child name " + childrenAlert.UserName);
+                SendUsingAPIAsync(guardians.PhoneNumber, childrenAlert.UserName); //This Method Sends Using API and its ASYNC (You have to wait until the process ends)
+                Thread.Sleep(5000); //Sleep for 5 SECOND Until API FINISH His Work
+            }
+            //return true;
+        }
 
 
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //public static void PlaySnooze(CodeTimeToUser _codeTimeToUser, long timeId)
-        public static void PlaySnooze(long  userId, DateTime time)
-           //מקבל קוד ילד וזמן שההתראה התבצעה
+        public static void PlaySnooze(long userId, DateTime time)
+        //מקבל קוד ילד וזמן שההתראה התבצעה
         {
             int hour = time.Hour, minute = time.Minute;
             if ((hour >= 0 && hour <= 23) && (minute >= 0 && minute <= 59))
             {
                 DetailsAlert smoozeUserDidNotTakeMedicines = _userDetailsOfAlert[hour, minute].Find(u => u.snooze.userId == userId);
-                if (smoozeUserDidNotTakeMedicines.snooze.snoozeCounter < smoozeUserDidNotTakeMedicines.AlertCount)
+                if (smoozeUserDidNotTakeMedicines.snooze.snoozeCounter >= smoozeUserDidNotTakeMedicines.AlertCount)
                 {
                     if (minute + smoozeUserDidNotTakeMedicines.snooze.snoozePeriod < 60)
                     {
@@ -268,18 +253,46 @@ namespace BL
                         //else?
                     }
                 }
-                else
-                //הילד חרג בהפעלת הנודניק- שליחת הודעה להורים
+
+            }
+        }
+
+        public int RemoveSnooze(CodeTimeToUser codeTimeToUser)
+        {
+            //למחוק מהמטריצה את הנודניק
+            DateTime now = DateTime.Now;
+            int hour = now.Hour;
+            codeTimeToUser.UserID = 30010;
+            codeTimeToUser.TimeOfDay = 1;
+            bool continueLoop = true;
+            int countSnooze=0;
+            for (int j = now.Minute + 1; j < now.Minute + 15 && continueLoop; j++)
+            {
+                if (j <= 59)
                 {
-                    //ניסיון לשליחת הההודעה
-                    List<Guardian> _guardiansDetails = _GuardiansDAL.GetGuardiansByUserId(smoozeUserDidNotTakeMedicines.snooze.userId);
-                    foreach (var guardians in _guardiansDetails)
+                    DetailsAlert snoozeToRemove = _userDetailsOfAlert[hour, j].FirstOrDefault(a => a.snooze.userId == codeTimeToUser.UserID && a.CodeTime == codeTimeToUser.TimeOfDay);
+                    if (snoozeToRemove != null)
                     {
-                        SendUsingAPIAsync(guardians.PhoneNumber, smoozeUserDidNotTakeMedicines.UserName); //This Method Sends Using API and its ASYNC (You have to wait until the process ends)
-                        Thread.Sleep(5000); //Sleep for 5 SECOND Until API FINISH His Work
+                        countSnooze = snoozeToRemove.AlertCount;
+                        _userDetailsOfAlert[hour, j].Remove(snoozeToRemove);
+                        continueLoop = false;
                     }
+                    //snoozeToRemove = _userDetailsOfAlert[hour, j].RemoveAll(a => a.snooze.userId == codeTimeToUser.UserID && a.CodeTime == codeTimeToUser.TimeOfDay);
+                }
+                else
+                {
+                    DetailsAlert snoozeToRemove = _userDetailsOfAlert[hour + 1, j - 60].FirstOrDefault(a => a.snooze.userId == codeTimeToUser.UserID && a.CodeTime == codeTimeToUser.TimeOfDay);
+                    if (snoozeToRemove != null)
+                    {
+                        countSnooze = snoozeToRemove.AlertCount;
+                        _userDetailsOfAlert[hour + 1, j - 60].Remove(snoozeToRemove);
+                        continueLoop = false;
+                    }
+                    //snoozeToRemove = _userDetailsOfAlert[hour+1, j - 60].RemoveAll(a => a.snooze.userId == codeTimeToUser.UserID && a.CodeTime == codeTimeToUser.TimeOfDay);
                 }
             }
+            return countSnooze;
         }
     }
 }
+

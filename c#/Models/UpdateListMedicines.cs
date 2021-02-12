@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class CodeTimeToUser
+    public class UpdateListMedicines
     {
-        public long UserID { get; set; }
-        public int TimeOfDay { get; set; }
+        public List<GenerateMedicine> ListMedicines { get; set; }
+        public CodeTimeToUser CodeTimeToUser { get; set; }
         public int CountSnooze { get; set; }
     }
 }

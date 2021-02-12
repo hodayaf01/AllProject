@@ -250,6 +250,7 @@
     <Compile Include="TimeToMedicinesForChild.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="UpdateListMedicines.cs" />
     <Compile Include="User.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
