@@ -4,7 +4,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { InjectableCompiler } from '@angular/compiler/src/injectable_compiler';
 import { ImplicitReceiver } from '@angular/compiler';
 import { Settings } from '../Models/Settings.model';
-import { SettingsReq } from '../Models/settingsReq.model';
+//import { SettingsReq } from '../Models/settingsReq.model';
+import { PasswordToUser } from 'src/app/Models/PasswordToUser.model';
 
 const httpOptions = { headers: new HttpHeaders({ 'Content-type': 'application/json' }) }
 
