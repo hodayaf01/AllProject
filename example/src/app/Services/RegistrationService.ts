@@ -5,6 +5,7 @@ import { InjectableCompiler } from '@angular/compiler/src/injectable_compiler';
 import { ImplicitReceiver } from '@angular/compiler';
 import { User } from '../Models/User.model';
 import { Registration } from '../Models/Registration.model';
+import { SendNewPassword } from '../Models/SendNewPasswordReq.mode';
 
 const httpOptions ={headers:new HttpHeaders({'Content-type':'application/json'})}
 
@@ -23,5 +24,9 @@ export class RegistrationService{
 
     get(userCode:string):Observable<User>{
         return this.http.get<User>(`${this.url+'/Get?'}`)
+    }
+
+    sendNewPassword(userDetail: SendNewPassword):Observable<any>{
+        return this.http.post(`${this.url}/SendNewPassword`,userDetail,httpOptions)
     }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SendNewPassword } from 'src/app/Models/SendNewPasswordReq.mode';
+import { RegistrationService } from 'src/app/Services/RegistrationService';
 
 @Component({
     selector: 'app-PasswordVerefication',
@@ -9,12 +11,15 @@ import { Router } from '@angular/router';
 export class PasswordVereficationComponent implements OnInit{
     
     password: string;
+    newPassword: string;
     email: string;
     isPawwwordCorrect=true;
     tryAgain: boolean = false;
     isChoosePass: boolean = false;
+    subscriber: any;
 
-    constructor(private router:Router){
+    constructor(private router:Router, 
+        private registrarionService: RegistrationService){
 
     }
 
@@ -39,7 +44,6 @@ export class PasswordVereficationComponent implements OnInit{
         this.isPawwwordCorrect=true;
     }
 
-    //chck if need to use this function 
     resendPassword(){
         this.tryAgain==true;
         this.isPawwwordCorrect=true;
@@ -51,11 +55,25 @@ export class PasswordVereficationComponent implements OnInit{
             var i = Math.floor(Math.random() * chars.length);
             pass += chars.charAt(i);
         }
+        this.newPassword=pass;
         
     }
 
     submitNewPassword(){
         this.isChoosePass=false;
         this.tryAgain=false;
+
+        let userDetail: SendNewPassword = new SendNewPassword();
+        userDetail.UserCode= localStorage.getItem('USERCODE');
+        userDetail.Email=this.email;
+        userDetail.Password=this.newPassword;
+
+        this.subscriber = this.registrarionService.sendNewPassword(userDetail).subscribe(
+            response => {
+                localStorage.setItem('PASSWORD', response.Password);
+            }
+        );
+
+
     }
 }

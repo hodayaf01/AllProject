@@ -46,5 +46,18 @@ namespace Project.Controllers
         //    });
         //    return mailSend;
         //}
+
+        [Route("api/Registration/SendNewPassword")]
+        [HttpPost]
+        public PasswordToUser SendNewPassword(Registration registration)
+        {
+            //איתור הילד לפי יוזר
+            //עדכון של המייל
+            //עדכון של סיסמא
+            //שליחת סיסמא למייל של ההורים
+            //החזרה של הסיסמא
+            //return _registration_BL.Add(registration);
+            return null;
+        }
     }
 }
