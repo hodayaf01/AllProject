@@ -56,17 +56,19 @@ export class RegistrationUserComponent implements OnInit {
        
 
         this.subscribe = this.registrationService.add(this.registration).subscribe(
-            result => {
-                this.user.childId = result.UserId;
-                if(this.user.password!=result.Password)
-                alert("סיסמא שגויה");
-                else{
-                     localStorage.setItem('USERCODE', this.user.childId.toString());
-                // sessionStorage.setItem('KEY', 'VALUE');
-                // var value = sessionStorage.getItem('KEY');
-                // sessionStorage.clear('KEY');
-                this.router.navigate(['/TimeOfAlert']);
-                }                   
+            // result => {
+            //     this.user.childId = result.UserId;
+            //     if(this.user.password!=result.Password)
+            //         alert("סיסמא שגויה");
+            //     else{
+            //          localStorage.setItem('USERCODE', this.user.childId.toString());
+            //         this.router.navigate(['/TimeOfAlert']);
+            //     }   
+
+                result => {
+                    this.user.childId = result.UserId;
+                    localStorage.setItem('USERCODE', this.user.childId.toString());
+                    this.router.navigate(['/PasswordVerefication']);              
             }
         );
         

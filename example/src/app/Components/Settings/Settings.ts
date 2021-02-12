@@ -1,7 +1,7 @@
 import {Component,OnInit} from '@angular/core';
 import { SettingsService } from '../../Services/SettingsService';
 import { Settings } from '../../Models/Settings.model';
-import { SettingsReq } from 'src/app/Models/settingsReq.model';
+import { PasswordToUser } from 'src/app/Models/PasswordToUser.model';
 @Component({
         selector:'app-Settings',
         templateUrl:'./Settings.html',
@@ -10,7 +10,7 @@ import { SettingsReq } from 'src/app/Models/settingsReq.model';
     export class SettingsComponent implements OnInit {
         userDetails:Settings;
         password:string;
-        settingReq:SettingsReq;
+        PasswordToUser:PasswordToUser;
         loggedIn:boolean = false;
         subscribe:any;
 
@@ -23,11 +23,11 @@ import { SettingsReq } from 'src/app/Models/settingsReq.model';
         }
 
         checkPasswordAndretriveSettings(){
-            this.settingReq=new SettingsReq();
-            this.settingReq.UserId=30010;
-            // this.settingReq.UserId=+(localStorage.getItem('USERCODE'));
-            this.settingReq.Password = this.password;
-            this.subscribe = this.settingsService.get(this.settingReq).subscribe(
+            this.PasswordToUser=new PasswordToUser();
+            this.PasswordToUser.UserId=1;
+            //this.settingReq.UserId=+(localStorage.getItem('USERCODE'));
+            this.PasswordToUser.Password = this.password;
+            this.subscribe = this.settingsService.getSettings(this.PasswordToUser).subscribe(
                 result => {
                     console.log(result);
                     if(result==null){

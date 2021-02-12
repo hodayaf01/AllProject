@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 body{
     margin: 0;
-    background-color: antiquewhite; 
 }
 header{
     width: 100%;
@@ -21,8 +20,8 @@ header{
 }
 
 .mediLogoBGimg{
-    height: 130px;
-    width: 140px;
+    height: 170px;
+    width: 200px;
     margin: auto;
 }
 

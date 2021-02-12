@@ -9,18 +9,39 @@
 
 <body dir="rtl">
         <header>
-            <div class="containLogo" style="margin-right: 140px;">
+            <div class="containLogo" >
                 <img class="mediLogoBGimg" src="../../../assets/images/LOGOBG.png" >
             </div>
         </header>
     <section>
         <label class="title"></label>
         <div class="timeInDay" >
-            <div  *ngFor = "let time of medicineToUserByTimeResp">
+            <!-- <div  *ngFor = "let time of medicineToUserByTimeResp">
                 <div class="timeInDayItem">{{time.medicineName}}</div>
-                <div class="timeInDayItem">{{time.dosage}}</div>
-                <div class="timeInDayItem">{{time.dosageName}}</div>
-            </div>
+                <div class="timeInDayItem">{{time.Dosage}}</div>
+                <div class="timeInDayItem">{{time.DosageName}}</div>
+            </div> -->
+            <table>
+                <tbody>
+                    <tr *ngFor = "let time of medicineToUserByTimeResp; let i = index">
+                        <td style="width: 10px;" class="timeInDayItem">{{time.medicineName}}</td>
+                        <td style="width: 10px;" class="timeInDayItem">{{time.DosageName}}</td>
+                        <td style="width: 10px;" class="timeInDayItem">{{time.Dosage}}</td>
+                        <td style="width: 10px;" class="timeInDayItem" >
+                            <img *ngIf="time.DosageName=='סירופ'" style="width: 60px; height: 30px;" src="../../../assets/images/syrup.svg" alt="">
+                            <img *ngIf="time.DosageName=='זריקה'" style="width: 60px; height: 30px;" src="../../../assets/images/injection.svg" alt="">
+                            <img *ngIf="time.DosageName=='גלולות'" style="width: 60px; height: 30px;" src="../../../assets/images/pills.svg" alt="">
+                            <img *ngIf="time.DosageName=='שאיפה'" style="width: 60px; height: 30px;" src="../../../assets/images/inhaler.svg" alt="">
+                            <img *ngIf="time.DosageName=='תרסיס'" style="width: 60px; height: 30px;" src="../../../assets/images/spray.svg" alt="">
+                            <img *ngIf="time.DosageName=='טיפות'" style="width: 60px; height: 30px;" src="../../../assets/images/drops.svg" alt="">
+
+                        </td>
+                        <button style="width: 20px;" class="Vmark"  (click)="setStatusToTrue(i)">&#10003;</button>
+                        <button style="width: 20px;" class="Vmark"  (click)="setStatusToFalse(i)">&#10007;</button>
+                    </tr>
+                </tbody>
+            </table>
+
         </div>
         <input class="formInput submitButton" type="button" placeholder="אישור" (click)="updateTokenMedicines()" >
     </section>

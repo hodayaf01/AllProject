@@ -16,9 +16,5 @@ export class User{
         this.userHMO=uHMO;    
         this.token = token;
     }
-
-    addUser(){
-        
-    }
 }
 

@@ -17,7 +17,12 @@ export class AlertService{
     }
 
     cancleAlertAndNavigate(timeForUser:MedicineToUserByTime):Observable<any>{
-        return this.http.post(`${this.url}/X`,timeForUser,httpOptions);
+        return this.http.post(`${this.url}/V`,timeForUser,httpOptions);
+    }
+
+    getMedicineByName(){
+        let input={"val":"אקמול","prescription":false,"healthServices":false,"pageIndex":1,"orderBy":0}
+        return this.http.post("https://esb.gov.il/GovServiceList/IDRServer/SearchByName",input,httpOptions);
     }
 
 }

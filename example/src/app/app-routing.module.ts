@@ -7,6 +7,7 @@ import { HomeComponent } from './Components/Home/Home';
 import { AlertComponent } from './Components/Alert/Alert';
 import { PortalComponent } from './Components/Portal/Portal';
 import { MedicinesListComponent } from './Components/MedicinesList/MedicinesList';
+import { PasswordVereficationComponent } from './Components/PasswordVerefication/PasswordVerefication';
 
 
 export const appRoutes: Routes = [
@@ -16,7 +17,8 @@ export const appRoutes: Routes = [
   {path: 'Home', component:HomeComponent},
   {path:'Alert/:id/:time',component:AlertComponent},
   {path:'Portal',component:PortalComponent},
-  {path:'MedicinesList',component:MedicinesListComponent}
+  {path:'MedicinesList',component:MedicinesListComponent},
+  {path:'PasswordVerefication',component:PasswordVereficationComponent}
 ];
 
 @NgModule({

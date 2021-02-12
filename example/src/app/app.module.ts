@@ -25,6 +25,7 @@ import { environment } from 'src/environments/environment';
 import { MedicinesListService } from './Services/MedicinesListService';
 import { from } from 'rxjs';
 import { AlertService } from './Services/Alert.service';
+import { PasswordVereficationComponent } from './Components/PasswordVerefication/PasswordVerefication';
 
 const appRoutes: Routes = [
   {path: '', component: RegistrationUserComponent},
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
   {path:'Home',component:HomeComponent},
   {path:'Alert',component:AlertComponent},
   {path:'Portal',component:PortalComponent},
-  {path:'MedicinesList',component:MedicinesListComponent}
+  {path:'MedicinesList',component:MedicinesListComponent},
+  {path:'PasswordVerefication', component:PasswordVereficationComponent}
 ];
 
 
@@ -49,7 +51,8 @@ const appRoutes: Routes = [
     HomeComponent,
     AlertComponent,
     PortalComponent,
-    MedicinesListComponent
+    MedicinesListComponent,
+    PasswordVereficationComponent
   ],
   
   imports: [

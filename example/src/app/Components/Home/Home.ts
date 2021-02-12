@@ -12,6 +12,7 @@ import { MedicinesListService } from 'src/app/Services/MedicinesListService';
 export class HomeComponent implements OnInit{
     subscribe: any;
 
+    points: number;
     medicineListToUserByTime: MedicineToUserByTime = new MedicineToUserByTime();
     medicineToUserByTimeResp1: Array<MedicineToUserByTimeResp> = new Array<MedicineToUserByTimeResp>();
     medicineToUserByTimeResp2: Array<MedicineToUserByTimeResp> = new Array<MedicineToUserByTimeResp>();
@@ -33,11 +34,15 @@ export class HomeComponent implements OnInit{
         this.subscribe = this.medicineListService.get(this.medicineListToUserByTime).subscribe(
             result => {
                 console.log(result);
+                this.points= result.Points;
                 for (let i = 0; i < result.length; i++) {
                     this.medicineToUserByTimeResp1[i] = new MedicineToUserByTimeResp();
                     this.medicineToUserByTimeResp1[i].medicineName = result[i].MedicineName;
-                    this.medicineToUserByTimeResp1[i].dosage = result[i].Dosage;
-                    this.medicineToUserByTimeResp1[i].dosageName = result[i].DosageName;
+                    this.medicineToUserByTimeResp1[i].Dosage = result[i].Dosage;
+                    this.medicineToUserByTimeResp1[i].DosageName = result[i].DosageName;
+                    this.medicineToUserByTimeResp1[i].Status = result[i].Status;
+                    this.medicineToUserByTimeResp1[i].Time = result[i].Time;
+                    this.medicineToUserByTimeResp1[i].Points = result[i].Points;
                 }
 
                 this.medicineListToUserByTime.TimeOfDay = 2;
@@ -47,8 +52,10 @@ export class HomeComponent implements OnInit{
                         for (let i = 0; i < result.length; i++) {
                             this.medicineToUserByTimeResp2[i] = new MedicineToUserByTimeResp();
                             this.medicineToUserByTimeResp2[i].medicineName = result[i].MedicineName;
-                            this.medicineToUserByTimeResp2[i].dosage = result[i].Dosage;
-                            this.medicineToUserByTimeResp2[i].dosageName = result[i].DosageName;
+                            this.medicineToUserByTimeResp2[i].Dosage = result[i].Dosage;
+                            this.medicineToUserByTimeResp2[i].DosageName = result[i].DosageName;
+                            this.medicineToUserByTimeResp2[i].Status = result[i].Status;
+                            this.medicineToUserByTimeResp2[i].Time = result[i].Time;
                         }
 
                         this.medicineListToUserByTime.TimeOfDay = 3;
@@ -58,8 +65,10 @@ export class HomeComponent implements OnInit{
                                 for (let i = 0; i < result.length; i++) {
                                     this.medicineToUserByTimeResp3[i]=new MedicineToUserByTimeResp();
                                     this.medicineToUserByTimeResp3[i].medicineName = result[i].MedicineName;
-                                    this.medicineToUserByTimeResp3[i].dosage = result[i].Dosage;
-                                    this.medicineToUserByTimeResp3[i].dosageName = result[i].DosageName;
+                                    this.medicineToUserByTimeResp3[i].Dosage = result[i].Dosage;
+                                    this.medicineToUserByTimeResp3[i].DosageName = result[i].DosageName;
+                                    this.medicineToUserByTimeResp3[i].Status = result[i].Status;
+                                    this.medicineToUserByTimeResp3[i].Time = result[i].Time;
                                 }
 
 
@@ -70,8 +79,10 @@ export class HomeComponent implements OnInit{
                                         for (let i = 0; i < result.length; i++) {
                                             this.medicineToUserByTimeResp4[i]=new MedicineToUserByTimeResp();
                                             this.medicineToUserByTimeResp4[i].medicineName = result[i].MedicineName;
-                                            this.medicineToUserByTimeResp4[i].dosage = result[i].Dosage;
-                                            this.medicineToUserByTimeResp4[i].dosageName = result[i].DosageName;
+                                            this.medicineToUserByTimeResp4[i].Dosage = result[i].Dosage;
+                                            this.medicineToUserByTimeResp4[i].DosageName = result[i].DosageName;
+                                            this.medicineToUserByTimeResp4[i].Status = result[i].Status;
+                                            this.medicineToUserByTimeResp4[i].Time = result[i].Time;
                                         }
                                     }
                                 );

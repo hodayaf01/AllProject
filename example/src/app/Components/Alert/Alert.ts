@@ -28,6 +28,8 @@ import { MedicineToUserByTime } from 'src/app/Models/MdicineToUserByTime.model';
            this.timeForUser.TimeOfDay=this.timeCode;
             this.subscribe = this.alertService.cancleAlertAndNavigate(this.timeForUser).subscribe(
                 result => {
+                    localStorage.setItem('SNOOZECOUNETR', result);
+                   
                     this.router.navigate(['/MedicinesList']);
                 }
             );
@@ -37,7 +39,7 @@ import { MedicineToUserByTime } from 'src/app/Models/MdicineToUserByTime.model';
         this.route.params.subscribe(
             p=>{
                 this.timeCode=p.time;
-             p.time;
+                localStorage.setItem('TIMEOFALERT',p.time);
             })
     }
 

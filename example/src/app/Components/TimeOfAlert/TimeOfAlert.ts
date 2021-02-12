@@ -17,7 +17,7 @@ export class TimeOfAlertComponent implements OnInit {
     timeOfDay: TimeOfDay = new TimeOfDay();
     timeOfAlertForUser: TimeOfAlertForUser = new TimeOfAlertForUser();
     
-    morningTime: string;
+    morningTime=new Date();
     noonTome: string;
     evening:string;
     night:string;
@@ -42,10 +42,9 @@ export class TimeOfAlertComponent implements OnInit {
         // this.snooze.userId= parseInt(localStorage.getItem('USERCODE'));
         this.snooze.userId=40004;
         //this.timeOfDay.timeCode=1; this.timeOfDay.theTime.setHours(+this.morningTime.split(':')[0]); this.timeOfDay.theTime.setMinutes(+this.morningTime.split(':')[1]);
-
         this.timeOfDay = new TimeOfDay();
         this.timeOfDay.timeCode=1; 
-        this.timeOfDay.theTime="08:00:00";
+        this.timeOfDay.theTime=this.morningTime.toString();
         this.timeOfAlertForUser.timeOfDay = new Array<TimeOfDay>();
         this.timeOfAlertForUser.timeOfDay[0]= new TimeOfDay();
         this.timeOfAlertForUser.timeOfDay[0]= this.timeOfDay;

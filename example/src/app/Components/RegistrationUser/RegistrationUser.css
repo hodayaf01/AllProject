@@ -21,7 +21,7 @@ button{
     text-align: right;
     color: #369191;
     background-color: white;
-    border: 1px solid #f6ad4e;
+    border: 2px solid #f6ad4e;
     border-radius: 20px;
     width: 250px;
     height: 35px;
@@ -30,6 +30,7 @@ button{
 }
 .formInput::placeholder{
     color: #369191;
+    opacity: 0.5;
     padding-right: 10px;
 }
 .smallInput{
