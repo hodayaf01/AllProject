@@ -51,9 +51,7 @@ export class RegistrationUserComponent implements OnInit {
             this.user.token=this.messagingService.token;
             this.registration.NewUser=this.user;
             this.registration.Guardians=this.guardians;
-        }
-        console.log(this.registration);
-       
+        }       
 
         this.subscribe = this.registrationService.add(this.registration).subscribe(
             // result => {
@@ -68,7 +66,8 @@ export class RegistrationUserComponent implements OnInit {
                 result => {
                     this.user.childId = result.UserId;
                     localStorage.setItem('USERCODE', this.user.childId.toString());
-                    this.router.navigate(['/PasswordVerefication']);              
+                    localStorage.setItem('PASSWORD', result.Password);
+                    this.router.navigate(['/PasswordVerefication']);            
             }
         );
         
