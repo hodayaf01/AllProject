@@ -49,7 +49,7 @@ namespace Project.Controllers
 
         [Route("api/Registration/SendNewPassword")]
         [HttpPost]
-        public PasswordToUser SendNewPassword(Registration registration)
+        public PasswordToUser SendNewPassword(SendNewPassword _details)
         {
             //איתור הילד לפי יוזר
             //עדכון של המייל
@@ -57,7 +57,7 @@ namespace Project.Controllers
             //שליחת סיסמא למייל של ההורים
             //החזרה של הסיסמא
             //return _registration_BL.Add(registration);
-            return null;
+            return _registration_BL.sendNewPassword(_details);
         }
     }
 }
