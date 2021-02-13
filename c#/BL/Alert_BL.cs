@@ -34,7 +34,8 @@ namespace BL
          Called every day at midnight.*/
         public static void Beginning()
         {
-            if (_MedicinesToChild_DAL.UpdateMedicinceToUsers())
+            //if (_MedicinesToChild_DAL.UpdateMedicincesToUsersEveryDay())
+            bool isSucceeded = _MedicinesToChild_DAL.UpdateMedicincesToUsersEveryDay();
             CreatMatForChildMedicines();
 
             //play this fucn every day- fill mat details

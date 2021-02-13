@@ -20,6 +20,7 @@ namespace Project.Controllers
         [HttpPost]
         public bool Edit(Settings _details)
         {
+            //Settings _details= _settings_BL.Get(password);
             return  _settings_BL.Edit(_details);
         }
 
@@ -28,8 +29,21 @@ namespace Project.Controllers
         public Settings Get(PasswordToUser password)
         {
             //return new Settings();
-            return _settings_BL.Get(password);
+            //Settings settings= _settings_BL.Get(password);
+            Settings settings = new Settings();
+            settings.Guardians = new List<Guardian>() { new Guardian() { Id = 0, guardianName = "nor" } };
+            //settings.Guardians[0].guardianName  "משה";
+            settings.User = new User() { Id = 30010, password = "123", userName = "HodayaF",childId= "207420274" };
+            //settings.User.password = "1234";
+            //settings.User.Id = 30010;
+            //settings.User.userName = "hodaya";
+
+            settings.Guardians.Add(new Guardian() { guardianName = "moran", PhoneNumber = "0548523727" });
+            //settings.TimeOfDays[0].theTime= TimeSpan.
+            _settings_BL.Edit(settings);
             //return null;
+            return _settings_BL.Get(password);
+
         }
     }
 }
