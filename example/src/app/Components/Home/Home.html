@@ -9,64 +9,109 @@
 
 <body dir="rtl">
     <header>
-        <div style="margin-right: 140px;">
-            <img class="mediLogoBGimg" src="../../../assets/images/LOGOBG.png" >
-        </div>
         <button class="containStettings" (click)="navigateToSettings()">
-           <img class="settings" src="../../../assets/images/settingsIconBG.png">
-        </button>
+            <img class="settings" src="../../../assets/images/settingsIconBG.png">
+         </button>
+        <div >
+            <img class="qualaLogo"  src="../../../assets/images/qualaBG.png" >
+        </div>
+        <div style="margin-right: 92px;">
+            <img style="width: 65px; height: 65px;" src="../../../assets/images/bag-iconBG.png" alt="">
+            <span class="conisNum">{{points}}</span>
+        </div>    
+
     </header>
     
     <section>
         <label class="titleHome">מה התוכניות שלנו להיום?</label>
-        <div class="timeInDay" >
-            <!-- add image and make it clickble only for time > current time -->
-            <!-- <img [disabled]="medicineToUserByTimeResp1[0].Time < currentTime" src="" alt=""> -->
-            <div  *ngFor = "let morning of medicineToUserByTimeResp1">
-                <div *ngIf="morning.Status==false">
-                    <div class="timeInDayItem">{{morning.medicineName}}</div>
-                    <div class="timeInDayItem">{{morning.dosage}}</div>
-                    <div class="timeInDayItem">{{morning.dosageName}}</div>
-                </div>
-
+        <div>
+            <div class="containTimeImg"><img style="width: 35px; height: 35px;" src="../../../assets/images/morning.png"></div>
+            <div class="timeInDay" >
+                <!-- <img [disabled]="medicineToUserByTimeResp1[0].Time < currentTime" src="" alt=""> -->  
+                <table style="width: 367px;">
+                    <tbody>
+                        <tr  *ngFor = "let time of medicineToUserByTimeResp1; let i = index">
+                            <td style="width: 100px;" class="timeInDayItem">{{time.medicineName}}</td>
+                            <td style="width: 100px;" class="timeInDayItem">{{time.Dosage}}</td>
+                            <td style="width: 75px;" class="timeInDayItem" >
+                                <img *ngIf="time.DosageName=='סירופ'" style="width: 60px; height: 30px;" src="../../../assets/images/syrup.svg" alt="">
+                                <img *ngIf="time.DosageName=='זריקה'" style="width: 60px; height: 30px;" src="../../../assets/images/injection.svg" alt="">
+                                <img *ngIf="time.DosageName=='גלולות'" style="width: 60px; height: 30px;" src="../../../assets/images/pills.svg" alt="">
+                                <img *ngIf="time.DosageName=='שאיפה'" style="width: 60px; height: 30px;" src="../../../assets/images/inhaler.svg" alt="">
+                                <img *ngIf="time.DosageName=='תרסיס'" style="width: 60px; height: 30px;" src="../../../assets/images/spray.svg" alt="">
+                                <img *ngIf="time.DosageName=='טיפות'" style="width: 60px; height: 30px;" src="../../../assets/images/drops.svg" alt="">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="timeInDay" >
-            <!-- <img [disabled]="medicineToUserByTimeResp2[1].Time < currentTime" src="" alt=""> -->
-            <div  *ngFor = "let morning of medicineToUserByTimeResp2">
-                <div *ngIf="morning.Status==false">
-                    <div class="timeInDayItem">{{morning.medicineName}}</div>
-                    <div class="timeInDayItem">{{morning.dosage}}</div>
-                    <div class="timeInDayItem">{{morning.dosageName}}</div>
-                </div>
-
+        
+        <div>
+            <div class="containTimeImg"><img style="width: 35px; height: 35px;" src="../../../assets/images/noon.png"></div>
+            <div class="timeInDay" >
+                <table style="width: 367px;">
+                    <tbody>
+                        <tr *ngFor = "let time of medicineToUserByTimeResp2; let i = index">
+                            <td style="width: 100px;" class="timeInDayItem">{{time.medicineName}}</td>
+                            <td style="width: 100px;" class="timeInDayItem">{{time.Dosage}}</td>
+                            <td style="width: 75px;" class="timeInDayItem" >
+                                <img *ngIf="time.DosageName=='סירופ'" style="width: 60px; height: 30px;" src="../../../assets/images/syrup.svg" alt="">
+                                <img *ngIf="time.DosageName=='זריקה'" style="width: 60px; height: 30px;" src="../../../assets/images/injection.svg" alt="">
+                                <img *ngIf="time.DosageName=='גלולות'" style="width: 60px; height: 30px;" src="../../../assets/images/pills.svg" alt="">
+                                <img *ngIf="time.DosageName=='שאיפה'" style="width: 60px; height: 30px;" src="../../../assets/images/inhaler.svg" alt="">
+                                <img *ngIf="time.DosageName=='תרסיס'" style="width: 60px; height: 30px;" src="../../../assets/images/spray.svg" alt="">
+                                <img *ngIf="time.DosageName=='טיפות'" style="width: 60px; height: 30px;" src="../../../assets/images/drops.svg" alt="">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="timeInDay" >
-            <!-- <img [disabled]="medicineToUserByTimeResp3[2].Time < currentTime" src="" alt=""> -->
-            <div  *ngFor = "let morning of medicineToUserByTimeResp3">
-                <div *ngIf="morning.Status==false">
-                    <div class="timeInDayItem">{{morning.medicineName}}</div>
-                    <div class="timeInDayItem">{{morning.dosage}}</div>
-                    <div class="timeInDayItem">{{morning.dosageName}}</div>
-                </div>
-
+        
+        <div>
+            <div class="containTimeImg"><img style="width: 35px; height: 35px;" src="../../../assets/images/evening.png"></div>
+            <div class="timeInDay" >
+                <table style="width: 367px;">
+                    <tbody>
+                        <tr *ngFor = "let time of medicineToUserByTimeResp3; let i = index">
+                            <td style="width: 100px;" class="timeInDayItem">{{time.medicineName}}</td>
+                            <td style="width: 100px;" class="timeInDayItem">{{time.Dosage}}</td>
+                            <td style="width: 75px;" class="timeInDayItem" >
+                                <img *ngIf="time.DosageName=='סירופ'" style="width: 60px; height: 30px;" src="../../../assets/images/syrup.svg" alt="">
+                                <img *ngIf="time.DosageName=='זריקה'" style="width: 60px; height: 30px;" src="../../../assets/images/injection.svg" alt="">
+                                <img *ngIf="time.DosageName=='גלולות'" style="width: 60px; height: 30px;" src="../../../assets/images/pills.svg" alt="">
+                                <img *ngIf="time.DosageName=='שאיפה'" style="width: 60px; height: 30px;" src="../../../assets/images/inhaler.svg" alt="">
+                                <img *ngIf="time.DosageName=='תרסיס'" style="width: 60px; height: 30px;" src="../../../assets/images/spray.svg" alt="">
+                                <img *ngIf="time.DosageName=='טיפות'" style="width: 60px; height: 30px;" src="../../../assets/images/drops.svg" alt="">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="timeInDay" >
-            <!-- <img [disabled]="medicineToUserByTimeResp3[2].Time < currentTime" src="" alt=""> -->
-            <div  *ngFor = "let morning of medicineToUserByTimeResp4">
-                <div *ngIf="morning.Status==false">
-                    <div class="timeInDayItem">{{morning.medicineName}}</div>
-                    <div class="timeInDayItem">{{morning.dosage}}</div>
-                    <div class="timeInDayItem">{{morning.dosageName}}</div>
-                </div>
-
+        
+        <div>
+            <div class="containTimeImg"><img style="width: 35px; height: 35px;" src="../../../assets/images/evening.png"></div>
+            <div class="timeInDay" >
+                <table style="width: 367px;">
+                    <tbody>
+                        <tr *ngFor = "let time of medicineToUserByTimeResp4; let i = index">
+                            <td style="width: 100px;" class="timeInDayItem">{{time.medicineName}}</td>
+                            <td style="width: 100px;" class="timeInDayItem">{{time.Dosage}}</td>
+                            <td style="width: 75px;" class="timeInDayItem" >
+                                <img *ngIf="time.DosageName=='סירופ'" style="width: 60px; height: 30px;" src="../../../assets/images/syrup.svg" alt="">
+                                <img *ngIf="time.DosageName=='זריקה'" style="width: 60px; height: 30px;" src="../../../assets/images/injection.svg" alt="">
+                                <img *ngIf="time.DosageName=='גלולות'" style="width: 60px; height: 30px;" src="../../../assets/images/pills.svg" alt="">
+                                <img *ngIf="time.DosageName=='שאיפה'" style="width: 60px; height: 30px;" src="../../../assets/images/inhaler.svg" alt="">
+                                <img *ngIf="time.DosageName=='תרסיס'" style="width: 60px; height: 30px;" src="../../../assets/images/spray.svg" alt="">
+                                <img *ngIf="time.DosageName=='טיפות'" style="width: 60px; height: 30px;" src="../../../assets/images/drops.svg" alt="">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-
-        <div>כמה נקודות יש לנו ? :)</div>
-        <!-- <div>{{medicineToUserByTimeResp1[i].Points}}</div> -->
         
     </section>
     <footer></footer>

@@ -22,7 +22,14 @@
     border: none;
     margin-top: 100px;
     margin-right: 60px;
+    animation: textgrowth 1s alternate infinite;
 }
+
+@keyframes textgrowth {
+    0% {-webkit-transform: scale(1.1,.9); transform: scale(1.1,.9);}
+    50% { -webkit-transform: scale(.9,1.1) translateY(-.5rem)}
+    70% { -webkit-transform: scale(1); transform: scale(1);}
+ }
 
 .Xmark{
     width: 80px;

@@ -16,34 +16,34 @@
     <section>
         <label class="title"></label>
         <div class="timeInDay" >
-            <!-- <div  *ngFor = "let time of medicineToUserByTimeResp">
-                <div class="timeInDayItem">{{time.medicineName}}</div>
-                <div class="timeInDayItem">{{time.Dosage}}</div>
-                <div class="timeInDayItem">{{time.DosageName}}</div>
-            </div> -->
-            <table>
+            <table style="width: 367px;">
                 <tbody>
-                    <tr *ngFor = "let time of medicineToUserByTimeResp; let i = index">
-                        <td style="width: 10px;" class="timeInDayItem">{{time.medicineName}}</td>
-                        <td style="width: 10px;" class="timeInDayItem">{{time.DosageName}}</td>
-                        <td style="width: 10px;" class="timeInDayItem">{{time.Dosage}}</td>
-                        <td style="width: 10px;" class="timeInDayItem" >
-                            <img *ngIf="time.DosageName=='סירופ'" style="width: 60px; height: 30px;" src="../../../assets/images/syrup.svg" alt="">
-                            <img *ngIf="time.DosageName=='זריקה'" style="width: 60px; height: 30px;" src="../../../assets/images/injection.svg" alt="">
-                            <img *ngIf="time.DosageName=='גלולות'" style="width: 60px; height: 30px;" src="../../../assets/images/pills.svg" alt="">
-                            <img *ngIf="time.DosageName=='שאיפה'" style="width: 60px; height: 30px;" src="../../../assets/images/inhaler.svg" alt="">
-                            <img *ngIf="time.DosageName=='תרסיס'" style="width: 60px; height: 30px;" src="../../../assets/images/spray.svg" alt="">
-                            <img *ngIf="time.DosageName=='טיפות'" style="width: 60px; height: 30px;" src="../../../assets/images/drops.svg" alt="">
+                    <ng-container  *ngFor = "let time of medicineToUserByTimeResp; let i = index">
+                        <tr>
+                            <td style="width: 93px; margin-right: 10px;" class="timeInDayItem">{{time.medicineName}}</td>
+                            <td style="width: 75px;" class="timeInDayItem">{{time.Dosage}}</td>
+                            <td style="width: 120px;" class="timeInDayItem" >
+                                <img *ngIf="time.DosageName=='סירופ'" style="width: 60px; height: 30px;" src="../../../assets/images/syrup.svg" alt="">
+                                <img *ngIf="time.DosageName=='זריקה'" style="width: 60px; height: 30px;" src="../../../assets/images/injection.svg" alt="">
+                                <img *ngIf="time.DosageName=='גלולות'" style="width: 60px; height: 30px;" src="../../../assets/images/pills.svg" alt="">
+                                <img *ngIf="time.DosageName=='שאיפה'" style="width: 60px; height: 30px;" src="../../../assets/images/inhaler.svg" alt="">
+                                <img *ngIf="time.DosageName=='תרסיס'" style="width: 60px; height: 30px;" src="../../../assets/images/spray.svg" alt="">
+                                <img *ngIf="time.DosageName=='טיפות'" style="width: 60px; height: 30px;" src="../../../assets/images/drops.svg" alt="">
 
-                        </td>
-                        <button style="width: 20px;" class="Vmark"  (click)="setStatusToTrue(i)">&#10003;</button>
-                        <button style="width: 20px;" class="Vmark"  (click)="setStatusToFalse(i)">&#10007;</button>
-                    </tr>
+                            </td>
+                            <button style="width: 30px;" [class.jump]="medicineToUserByTimeResp[i].Status==false"  class="checkMed" (click)="setStatusToTrue(i)">&#10003;</button>
+                            <!-- <button style="width: 30px;" class="Vmark"  (click)="setStatusToFalse(i)">&#10007;</button> -->
+                        </tr>
+                        <tr style="height: 15px; background-color: #FEF9F4;"><td> </td></tr>
+                    </ng-container>
                 </tbody>
             </table>
-
         </div>
-        <input class="formInput submitButton" type="button" placeholder="אישור" (click)="updateTokenMedicines()" >
+        <div class="contsinVMark">
+            <button class="VmarkSubmit" [class.jump]="isFinishedAllMedicines==true" type="button" (click)="updateTokenMedicines()">&#10003;</button>
+        </div>
+        
+
     </section>
     <footer></footer>
 </body>

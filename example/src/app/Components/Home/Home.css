@@ -14,22 +14,6 @@ label{
     font-size: 30px;
     text-align: center;
 }
-.timeInDay{
-    width: 75%;
-    height: fit-content;
-    background-color: white;
-    border-radius: 15px;
-    margin: 15px auto 15px auto;
-}
-
-.timeInDayItem{
-    display: inline-block;
-    font-size: 17px;
-    color:#369191;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-left: 75px;
-    text-align: center;
-}
 
 .settings{
     width: 50x;
@@ -38,5 +22,34 @@ label{
 .containStettings{
     background: none; 
     border: none; 
-    margin: 20px 57px 66px 10px;
+    margin: 10px 7px 66px 10px;
+}
+
+.timeInDay{
+    display: inline-block;
+    width: 70%;
+    height: fit-content;
+    background-color: white;
+    border-radius: 15px;
+    margin: 15px auto 15px auto;
+}
+
+.timeInDayItem{
+    display: inline-block;
+    font-size: 16px;
+    color:#369191;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+.containTimeImg{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 35px;
+}
+
+.conisNum{
+    font-size: 20px; 
+    color:#369191; 
+    margin-right: 18px; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

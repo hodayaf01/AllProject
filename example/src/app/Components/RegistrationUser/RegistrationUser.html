@@ -36,8 +36,14 @@
                 <!-- <input class="formInput smallInput" placeholder="הכנס סיסמא" type="text" name="password" > -->
                 <input type="button" class="formInput smallInput" (click)="addGuardian()" [disabled]="isLessThanThreeGuardian" value="+" style="box-shadow:teal">
             </div>
-            <input class="formInput" placeholder="סיסמא" type="text" [(ngModel)]="user.password" name="password">
+            <!-- <input class="formInput" placeholder="סיסמא" type="text" [(ngModel)]="user.password" name="password"> -->
             <input class="formInput submitButton" type="button" value="אישור" (click)="addUser()">
+            <div class="containLink">
+              <a class="link" href="/TermsOfUse">תנאי השימוש</a>
+              |
+              <a class="link" href="/Guide">מדריך שימוש באפליקציה</a>  
+            </div>
+            
         </form>
     </section>
 

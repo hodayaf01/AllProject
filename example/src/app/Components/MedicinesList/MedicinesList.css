@@ -15,7 +15,7 @@ label{
     text-align: center;
 }
 .timeInDay{
-    width: 75%;
+    width: 88%;
     height: fit-content;
     background-color: white;
     border-radius: 15px;
@@ -27,7 +27,6 @@ label{
     font-size: 17px;
     color:#369191;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-left: 75px;
     text-align: center;
 }
 button{
@@ -64,4 +63,38 @@ input [type=button]{
     background-color: #f6ad4e !important;
     text-align: center !important;
     font-size: 20px;
+    margin-top: 50px;
 }
+
+.VmarkSubmit{
+    width: 80px;
+    height: 80px;
+    border-radius: 60px;
+    font-size: 50px;
+    background-color: #f6ad4e;
+    color: white;
+    border: none;
+    margin-top: 60px;
+}
+
+.contsinVMark{
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+.jump {
+    animation: textgrowth 1s alternate infinite;
+}
+
+@keyframes textgrowth {
+   0% {-webkit-transform: scale(1.1,.9); transform: scale(1.1,.9);}
+   50% { -webkit-transform: scale(.9,1.1) translateY(-.5rem)}
+   70% { -webkit-transform: scale(1); transform: scale(1);}
+}
+
+.checkMed{
+    outline: none; 
+    font-weight: 600;
+}
+.checkMed:focus{ outline: 0;}

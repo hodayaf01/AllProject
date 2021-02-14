@@ -11,9 +11,12 @@
         </header>
         <section>
             <div class="containTimeOfDatImg">
-                <img class="timeImg" src="../../../assets/images/sunVX.png" alt="">
+                <img *ngIf="timeCode==1" class="timeImg" src="../../../assets/images/morning.png" alt="">
+                <img *ngIf="timeCode==2" class="timeImg" src="../../../assets/images/noon.png" alt="">
+                <img *ngIf="timeCode==3" class="timeImg" src="../../../assets/images/evening.png" alt="">
+                <img *ngIf="timeCode==4" class="timeImg" src="../../../assets/images/evening.png" alt="">
             </div>
-            <button class="Vmark"  (click)="cancleAlertAndNvigateToList()">&#10003;</button>
+            <button class="Vmark" (click)="cancleAlertAndNvigateToList()">&#10003;</button>
             <button class="Xmark">&#10007; </button>
         </section>
 

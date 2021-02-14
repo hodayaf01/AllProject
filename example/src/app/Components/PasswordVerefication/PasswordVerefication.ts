@@ -64,7 +64,7 @@ export class PasswordVereficationComponent implements OnInit{
         this.tryAgain=false;
 
         let userDetail: SendNewPassword = new SendNewPassword();
-        userDetail.UserCode= localStorage.getItem('USERCODE');
+        userDetail.UserCode = 30010; // localStorage.getItem('USERCODE');
         userDetail.Email=this.email;
         userDetail.Password=this.newPassword;
 

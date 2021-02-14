@@ -1,3 +1,7 @@
+body{
+    background-color: #FEF9F4;
+}
+
 label{
     font-size: 17px;
     color:#369191;
@@ -25,7 +29,7 @@ button{
     border-radius: 20px;
     width: 250px;
     height: 35px;
-    margin: 5px auto 5px auto;
+    margin: 7px auto 7px auto;
     outline:none; 
 }
 .formInput::placeholder{
@@ -36,7 +40,7 @@ button{
 .smallInput{
     width: 100px !important;
     display: inline !important;
-    margin-right: 120px;
+    margin-right: 150px;
     text-align: center;
     
 }
@@ -79,7 +83,22 @@ form{
     text-align: center;
 }
 .submitButton{
+    margin-top: 45px;
     background-color: #f6ad4e !important;
     text-align: center !important;
     font-size: 20px;
+}
+
+.link{
+    margin: 0 5px 0 5px;
+    color: #369191;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.containLink{
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    width: fit-content;
 }

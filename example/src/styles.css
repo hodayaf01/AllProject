@@ -25,7 +25,12 @@ header{
     margin: auto;
 }
 
-
+.qualaLogo{
+    height: 85px;
+    width: 100px;
+    margin-right: 63px;
+    margin-top: 10px;
+}
 .containLogo{
     margin-left: auto;
     margin-right: auto;

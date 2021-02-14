@@ -26,6 +26,8 @@ import { MedicinesListService } from './Services/MedicinesListService';
 import { from } from 'rxjs';
 import { AlertService } from './Services/Alert.service';
 import { PasswordVereficationComponent } from './Components/PasswordVerefication/PasswordVerefication';
+import { GuideComponent } from './Components/Guide/Guide';
+import { TermsOfUseComponent } from './Components/TermsOfUser/TermsOfUser';
 
 const appRoutes: Routes = [
   {path: '', component: RegistrationUserComponent},
@@ -37,7 +39,9 @@ const appRoutes: Routes = [
   {path:'Alert',component:AlertComponent},
   {path:'Portal',component:PortalComponent},
   {path:'MedicinesList',component:MedicinesListComponent},
-  {path:'PasswordVerefication', component:PasswordVereficationComponent}
+  {path:'PasswordVerefication', component:PasswordVereficationComponent},
+  {path: 'Guide', component:GuideComponent},
+  {path: 'TermsOfUse', component:TermsOfUseComponent}
 ];
 
 
@@ -52,7 +56,9 @@ const appRoutes: Routes = [
     AlertComponent,
     PortalComponent,
     MedicinesListComponent,
-    PasswordVereficationComponent
+    PasswordVereficationComponent,
+    GuideComponent,
+    TermsOfUseComponent
   ],
   
   imports: [

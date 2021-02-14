@@ -19,20 +19,21 @@ export class MedicinesListComponent implements OnInit{
     points: number;
     medicineListToUserByTime: MedicineToUserByTime = new MedicineToUserByTime();
     medicineToUserByTimeResp: Array<MedicineToUserByTimeResp> = new Array<MedicineToUserByTimeResp>();
+    isFinishedAllMedicines: boolean=false;
     
     constructor(private medicineListService: MedicinesListService,private router: Router){
         
     }
     ngOnInit() {
         this.medicineToUserByTimeResp = [
-            new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null),
-            new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה", null),
-            new MedicineToUserByTimeResp(1, "אופטלגין", 2, "טיפות", null),
-            new MedicineToUserByTimeResp(1, "לאידוע", 2, "תרסיס", null),
-            new MedicineToUserByTimeResp(1, "מוזר", 2, "שאיפה", null),
-            new MedicineToUserByTimeResp(1, "ישתנה", 2, "סירופ", null),
+            new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, false),
+            new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, false),
+            new MedicineToUserByTimeResp(1, "אופטלגין", 2, "טיפות", null, false),
+            new MedicineToUserByTimeResp(1, "לאידוע", 2, "תרסיס", null, false),
+            new MedicineToUserByTimeResp(1, "מוזר", 2, "שאיפה", null, false),
+            new MedicineToUserByTimeResp(1, "ישתנה", 2, "סירופ", null, false),
         ];
-        this.medicineListToUserByTime.UserID = +(localStorage.getItem('USERCODE')); //30010;
+        this.medicineListToUserByTime.UserID =  30010; //+(localStorage.getItem('USERCODE'));
         this.medicineListToUserByTime.TimeOfDay = +(localStorage.getItem('TIMEOFALERT')); //1;
 
         // this.subscribe = this.medicineListService.get(this.medicineListToUserByTime).subscribe(
@@ -52,12 +53,13 @@ export class MedicinesListComponent implements OnInit{
 
     setStatusToTrue(i:number){
         this.medicineToUserByTimeResp[i].Status = true;
-        console.log(this.medicineToUserByTimeResp);
+        let isfinished = true;
+        this.medicineToUserByTimeResp.forEach( e => e.Status == false ?  isfinished=false : '')
+        if(isfinished==true) this.isFinishedAllMedicines=true;
     }
 
     setStatusToFalse(i:number){
         this.medicineToUserByTimeResp[i].Status = false;
-        console.log(this.medicineToUserByTimeResp);
     }
 
     updateTokenMedicines(){

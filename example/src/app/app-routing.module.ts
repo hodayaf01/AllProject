@@ -8,6 +8,8 @@ import { AlertComponent } from './Components/Alert/Alert';
 import { PortalComponent } from './Components/Portal/Portal';
 import { MedicinesListComponent } from './Components/MedicinesList/MedicinesList';
 import { PasswordVereficationComponent } from './Components/PasswordVerefication/PasswordVerefication';
+import { GuideComponent } from './Components/Guide/Guide';
+import { TermsOfUseComponent } from './Components/TermsOfUser/TermsOfUser';
 
 
 export const appRoutes: Routes = [
@@ -18,7 +20,9 @@ export const appRoutes: Routes = [
   {path:'Alert/:id/:time',component:AlertComponent},
   {path:'Portal',component:PortalComponent},
   {path:'MedicinesList',component:MedicinesListComponent},
-  {path:'PasswordVerefication',component:PasswordVereficationComponent}
+  {path:'PasswordVerefication',component:PasswordVereficationComponent},
+  {path: 'Guide', component: GuideComponent},
+  {path: 'TermsOfUse', component: TermsOfUseComponent},
 ];
 
 @NgModule({
