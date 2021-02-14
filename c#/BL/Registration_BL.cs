@@ -48,7 +48,7 @@ namespace BL
 
         public PasswordToUser sendNewPassword(SendNewPassword _details)
         {
-            User user = _userDAL.GetByIdentity(_details.UserID);
+            User user = _userDAL.GetByIdentity(_details.UserCode);
             user.email = _details.Email;
             user.password = _details.Password;
             _userDAL.Edit(user);

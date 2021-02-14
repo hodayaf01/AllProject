@@ -37,28 +37,26 @@ namespace BL
                 {
                     for (int i = 0; i < _details.Guardians.Count; i++)
                     {
-                        if (guardiansToUser.FirstOrDefault(g => g.Id == _details.Guardians[i].Id) != null)//if guardian exist in DB
+                        //אולי בדיקה לפני שם וטלפון אם לא בטוח שמקבלים את הid
+                        if (guardiansToUser.FirstOrDefault(g => g.guardianId == _details.Guardians[i].Id) != null)//if guardian exist in DB
                         {
                             //map
                             Guardian guardianToMap = _guardiansDAL.Get(_details.Guardians[i].Id);
                             guardianToMap.guardianName = _details.Guardians[i].guardianName;
+                            guardianToMap.guardianName = "חיים";
                             guardianToMap.PhoneNumber = _details.Guardians[i].PhoneNumber;
                             _guardiansDAL.Edit(guardianToMap);
                         }
                         else
                         {
-                            //add
-                            Guardian guardianToAdd = new Guardian();
-                            guardianToAdd.PhoneNumber = _details.Guardians[i].PhoneNumber;
-                            guardianToAdd.guardianName = _details.Guardians[i].guardianName;
-                            long guardianID = _guardiansDAL.Add(guardianToAdd);
-                            _gurdiansToUser_DAL.Add(new guardiansToUser { guardianId = guardianID, userId = user.Id });
+                            //add new guardian
+                            AddNewGuardian(i, _details);
 
                         }
                     }
-                }
+                }// add new guardian
 
-                else return false;
+                else  AddNewGuardian(0,_details); 
 
                 //map time for madicine
                 List<MedicinesToChild> medicinesToChildList = _medicinesToChild_DAL.GetByUser(user.Id);
@@ -90,6 +88,14 @@ namespace BL
             return true;
         }
 
+        public void AddNewGuardian(int i,Settings _details)
+        {
+            Guardian guardianToAdd = new Guardian();
+            guardianToAdd.PhoneNumber = _details.Guardians[i].PhoneNumber;
+            guardianToAdd.guardianName = _details.Guardians[i].guardianName;
+            long guardianID = _guardiansDAL.Add(guardianToAdd);
+            _gurdiansToUser_DAL.Add(new guardiansToUser { guardianId = guardianID, userId = _details.User.Id });
+        }
         public Settings Get(PasswordToUser password)
         {
             if (_userDAL.CheckPassword(password)) 
@@ -131,7 +137,6 @@ namespace BL
                 //    TimeOfDay timeOfDay = _timeOfDay_DAL.GetByTimeId(idTimeOfDay);
                 //    _details.TimeOfDays.Add(timeOfDay);
                 //}
-
                 return _details;
             }
             return null;

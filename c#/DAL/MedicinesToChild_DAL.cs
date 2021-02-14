@@ -66,7 +66,7 @@ namespace DAL
             return true;
         }
 
-        public bool UpdateMedicinceToUsers()
+        public bool UpdateMedicincesToUsersEveryDay()
         {
             List<User> users = _DB.Users.ToList();
 

@@ -8,7 +8,7 @@ namespace Models
 {
     public class SendNewPassword
     {
-        public long UserID { get; set; }
+        public long UserCode { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
     }
