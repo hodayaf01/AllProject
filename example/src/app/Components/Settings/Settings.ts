@@ -32,40 +32,41 @@ import { TimeOfDay } from 'src/app/Models/TimeOfDay.model';
             this.PasswordToUser.UserId=30010;
             //this.settingReq.UserId=+(localStorage.getItem('USERCODE'));
             this.PasswordToUser.Password = this.password;
-            if(this.password=="1234"){
+            //if(this.password=="1234"){
+            if(this.password==localStorage.getItem('PASSWORD')){
                 this.loggedIn=true;
             }
             else{
                 alert("password is incorrect");
             }
-            // this.subscribe = this.settingsService.getSettings(this.PasswordToUser).subscribe(
-            //     result => {
-            //         console.log(result);
-            //         if(result==null){
-            //             alert("password is incorrect");
-            //         }
-            //         else{
-            //             this.loggedIn=true;
-            //             this.userDetails=result;
-            //         }
+            this.subscribe = this.settingsService.getSettings(this.PasswordToUser).subscribe(
+                result => {
+                    console.log(result);
+                    if(result==null){
+                        alert("password is incorrect");
+                    }
+                    else{
+                        this.loggedIn=true;
+                        this.userDetails=result;
+                    }
                     
-            //     }
-            // )
+                }
+            )
         }
 
         ngOnInit() {
-            this.userDetails = new Settings();
-            this.userDetails.user= new User("207420274", "אני עייפה", "hodaya.farkash@gmail.com", "", 2, null);
+            // this.userDetails = new Settings();
+            // this.userDetails.user= new User("207420274", "אני עייפה", "hodaya.farkash@gmail.com", "", 2, null);
 
-            this.userDetails.guardians= new Array<Guardian>();
-            this.userDetails.guardians[0]= new Guardian(1, "אמא", "0587828027");
-            this.userDetails.guardians[1]= new Guardian(2, "אבא", "0587828027");
+            // this.userDetails.guardians= new Array<Guardian>();
+            // this.userDetails.guardians[0]= new Guardian(1, "אמא", "0587828027");
+            // this.userDetails.guardians[1]= new Guardian(2, "אבא", "0587828027");
 
-            this.userDetails.timeOfAlert = new Array<TimeOfDay>();
-            this.userDetails.timeOfAlert[0]=new TimeOfDay(1, 1); this.userDetails.timeOfAlert[0].theTime="08:00:00";
-            this.userDetails.timeOfAlert[1]=new TimeOfDay(1, 1); this.userDetails.timeOfAlert[1].theTime="08:00:00";
-            this.userDetails.timeOfAlert[2]=new TimeOfDay(1, 1); this.userDetails.timeOfAlert[2].theTime="08:00:00";
-            this.userDetails.timeOfAlert[3]=new TimeOfDay(1, 1); this.userDetails.timeOfAlert[3].theTime="08:00:00";
+            // this.userDetails.timeOfAlert = new Array<TimeOfDay>();
+            // this.userDetails.timeOfAlert[0]=new TimeOfDay(1, 1); this.userDetails.timeOfAlert[0].theTime="08:00:00";
+            // this.userDetails.timeOfAlert[1]=new TimeOfDay(1, 1); this.userDetails.timeOfAlert[1].theTime="08:00:00";
+            // this.userDetails.timeOfAlert[2]=new TimeOfDay(1, 1); this.userDetails.timeOfAlert[2].theTime="08:00:00";
+            // this.userDetails.timeOfAlert[3]=new TimeOfDay(1, 1); this.userDetails.timeOfAlert[3].theTime="08:00:00";
         }
 
         // showUserDetails()

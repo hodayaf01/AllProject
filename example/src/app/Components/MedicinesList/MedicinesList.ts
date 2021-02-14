@@ -25,29 +25,29 @@ export class MedicinesListComponent implements OnInit{
         
     }
     ngOnInit() {
-        this.medicineToUserByTimeResp = [
-            new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, false),
-            new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, false),
-            new MedicineToUserByTimeResp(1, "אופטלגין", 2, "טיפות", null, false),
-            new MedicineToUserByTimeResp(1, "לאידוע", 2, "תרסיס", null, false),
-            new MedicineToUserByTimeResp(1, "מוזר", 2, "שאיפה", null, false),
-            new MedicineToUserByTimeResp(1, "ישתנה", 2, "סירופ", null, false),
-        ];
-        this.medicineListToUserByTime.UserID =  30010; //+(localStorage.getItem('USERCODE'));
+        // this.medicineToUserByTimeResp = [
+        //     new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, false),
+        //     new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, false),
+        //     new MedicineToUserByTimeResp(1, "אופטלגין", 2, "טיפות", null, false),
+        //     new MedicineToUserByTimeResp(1, "לאידוע", 2, "תרסיס", null, false),
+        //     new MedicineToUserByTimeResp(1, "מוזר", 2, "שאיפה", null, false),
+        //     new MedicineToUserByTimeResp(1, "ישתנה", 2, "סירופ", null, false),
+        // ];
+        this.medicineListToUserByTime.UserID =  +(localStorage.getItem('USERCODE')); //30010; 
         this.medicineListToUserByTime.TimeOfDay = +(localStorage.getItem('TIMEOFALERT')); //1;
 
-        // this.subscribe = this.medicineListService.get(this.medicineListToUserByTime).subscribe(
-        //     result => {
-        //         this.points=result.Points;
-        //         console.log(result);
-        //         for (let i = 0; i < result.length; i++) {
-        //             this.medicineToUserByTimeResp[i] = new MedicineToUserByTimeResp();
-        //             this.medicineToUserByTimeResp[i].medicineName = result[i].MedicineName;
-        //             this.medicineToUserByTimeResp[i].Dosage = result[i].Dosage;
-        //             this.medicineToUserByTimeResp[i].DosageName = result[i].DosageName;
-        //         }
-        //     }
-        // );
+        this.subscribe = this.medicineListService.get(this.medicineListToUserByTime).subscribe(
+            result => {
+                this.points=result.Points;
+                console.log(result);
+                for (let i = 0; i < result.length; i++) {
+                    this.medicineToUserByTimeResp[i] = new MedicineToUserByTimeResp();
+                    this.medicineToUserByTimeResp[i].medicineName = result[i].MedicineName;
+                    this.medicineToUserByTimeResp[i].Dosage = result[i].Dosage;
+                    this.medicineToUserByTimeResp[i].DosageName = result[i].DosageName;
+                }
+            }
+        );
 
     }
 
