@@ -53,3 +53,12 @@ label{
     margin-right: 18px; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.timeSpent{
+    background-color: antiquewhite;
+}
+
+.missedMed{
+    color: red;
+    font-weight: 600;
+}

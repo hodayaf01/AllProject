@@ -27,25 +27,25 @@ export class HomeComponent implements OnInit{
     ngOnInit(): void {
         this.medicineToUserByTimeResp1 = [
             new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, false),
-            new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, false),
+            new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, true),
         ];
 
         this.medicineToUserByTimeResp2 = [
-            new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, false),
-            new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, false),
-            new MedicineToUserByTimeResp(1, "אופטלגין", 2, "טיפות", null, false),
-            new MedicineToUserByTimeResp(1, "לאידוע", 2, "תרסיס", null, false),
+            new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, true),
+            new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, true),
+            new MedicineToUserByTimeResp(1, "אופטלגין", 2, "טיפות", null, true),
+            new MedicineToUserByTimeResp(1, "לאידוע", 2, "תרסיס", null, true),
         ];
 
         this.medicineToUserByTimeResp3 = [
-            new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, false),
-            new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, false),
-            new MedicineToUserByTimeResp(1, "אופטלגין", 2, "טיפות", null, false),
+            new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, true),
+            new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, true),
+            new MedicineToUserByTimeResp(1, "אופטלגין", 2, "טיפות", null, true),
         ];
 
         this.medicineToUserByTimeResp4 = [
-            new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, false),
-            new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, false),
+            new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, true),
+            new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, true),
         ];
 
         this.points=125;

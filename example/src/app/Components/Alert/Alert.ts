@@ -38,8 +38,8 @@ import { MedicineToUserByTime } from 'src/app/Models/MdicineToUserByTime.model';
     ngOnInit() {
         this.route.params.subscribe(
             p=>{
-                this.timeCode=p.time;
-                //this.timeCode = 1;
+                //this.timeCode=p.time;
+                this.timeCode = 1;
                 localStorage.setItem('TIMEOFALERT',p.time);
             })
     }

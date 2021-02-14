@@ -61,3 +61,34 @@ label{
 input [type=button]{
     background-color: #f6ad4d;
 }
+.smallInput{
+    width: 100px !important;
+    display: inline !important;
+    margin-right: 40px;
+    text-align: center;
+    display: inline-block;
+    
+}
+.submitButton{
+    margin-top: 20px;
+    background-color: #f6ad4e !important;
+    text-align: center !important;
+    font-size: 20px;
+}
+
+.timeImg{
+    margin-left: 10px;
+    height:42px;
+    width: 42px;
+    display: inline-block;
+}
+
+.containTime{
+    margin: 20px auto 20px auto;
+    width: fit-content;
+}
+.qualaLogo{
+    width: 70px;
+    height: 65px;
+    margin-right: 325px;
+}
