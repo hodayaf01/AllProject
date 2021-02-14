@@ -99,7 +99,7 @@ namespace DAL
 
         public bool CheckPassword(PasswordToUser password)
         {
-            return _DB.Users.First(u => u.Id == password.UserId).password == password.Password;
+            return _DB.Users.FirstOrDefault(u => u.Id == password.UserId)?.password == password.Password;
         }
     }
 }

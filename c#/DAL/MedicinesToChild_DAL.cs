@@ -17,6 +17,7 @@ namespace DAL
         TimeToMedicinesForClient_DAL _timeToMedicinesForClient_DAL = new TimeToMedicinesForClient_DAL();
         TimeToMedicinesForChild_DAL _timeToMedicinesForChild_DAL = new TimeToMedicinesForChild_DAL();
         TimeOfDay_DAL _TimeOfDay_DAL = new TimeOfDay_DAL();
+       // MedicinesToChild_DAL _MedicinesToChild_DAL = new MedicinesToChild_DAL();
 
         User_DAL _User_DAL = new User_DAL();
         public MedicinesToChild Get()
@@ -31,39 +32,54 @@ namespace DAL
         {
             //List<MedicinesToClient> medicinesToClients = _MedicinesToClient_DAL.Get(token);
             List<Models.HMO_db.MedicinesToClient> medicinesToClients = _MedicinesToClient_DAL.GetByUserId(timeOfAlertForUser.snooze.userId);
-
-            foreach (var item in medicinesToClients)
+            
+            if (medicinesToClients.Count() != 0)
             {
-                //_DB.Medicines.Add(new Medicine() { medicineId = item.medicineId, midicineName = item.midicineName });
-                MedicinesToChild medicinesToChild = new MedicinesToChild()
+                foreach (var item in medicinesToClients)
                 {
-                    medicineId = item.medicinesId,
-                    userId = timeOfAlertForUser.snooze.userId,
-                    kindOfDosage = item.kindOfDosage,
-                    Dosage = item.Dosage,
-                };
-                _DB.MedicinesToChilds.Add(medicinesToChild);
-
-                //List<> _timeOfDay_DAL.Get().TimeToMedicinesForC.Where(t=>t.)
-              
-                ///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!?????
-                List<TimeToMedicinesForClient> timesToMedicine = _timeToMedicinesForClient_DAL.GetTimeOfDaysByTimeMidicineToClient(medicinesToChild.Id);
-                foreach (var timeList in timesToMedicine)
-                {
-
-                    _DB.TimeToMedicinesForChilds.Add(new TimeToMedicinesForChild()
+                    //_DB.Medicines.Add(new Medicine() { medicineId = item.medicineId, midicineName = item.midicineName });
+                    MedicinesToChild medicinesToChild = new MedicinesToChild()
                     {
-                        idMedicineToChild = medicinesToChild.Id,
-                        //idTimeOfDay = listTimeOfDays.Find(t => t.timeCode == item.TimeToMedicinesForClients.Where(tC => tC.TimeOfDay.timeId)).timeId
-                        idTimeOfDay = timeOfAlertForUser.timeOfDay.Find(t => t.timeCode == timeList.timeCode).timeId
-                    });
+                        medicineId = item.medicinesId,
+                        userId = timeOfAlertForUser.snooze.userId,
+                        kindOfDosage = item.kindOfDosage,
+                        Dosage = item.Dosage,
+                    };
+                    long medicinesToChildId= Add(medicinesToChild);
+
+                    //List<> _timeOfDay_DAL.Get().TimeToMedicinesForC.Where(t=>t.)
+
+                    ///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!?????
+                    List<TimeToMedicinesForClient> timesToMedicine = _timeToMedicinesForClient_DAL.GetTimeOfDaysByTimeMidicineToClient(item.Id);
+                    if (timesToMedicine.Count() != 0)
+                    {
+                        foreach (var timeList in timesToMedicine)
+                        {
+                            
+                            //_DB.TimeOfDays.Add();
+                            _DB.TimeToMedicinesForChilds.Add(new TimeToMedicinesForChild()
+                            {
+                                idMedicineToChild = medicinesToChildId,
+                                //idTimeOfDay = listTimeOfDays.Find(t => t.timeCode == item.TimeToMedicinesForClients.Where(tC => tC.TimeOfDay.timeId)).timeId
+                                idTimeOfDay = timeOfAlertForUser.timeOfDay.Find(t => t.timeCode == timeList.timeCode).timeId
+                            });
+                        }
+                    }
+                    // int codeTimeToClient = item.TimeToMedicinesForClients.FirstOrDefault(t=>t.TimeOfDay.timeCode)
+
                 }
-                // int codeTimeToClient = item.TimeToMedicinesForClients.FirstOrDefault(t=>t.TimeOfDay.timeCode)
-               
             }
             if (_DB.SaveChanges() == 0)
                 return false;
             return true;
+        }
+
+        public long Add(MedicinesToChild medicinesToChild)
+        {
+            _DB.MedicinesToChilds.Add(medicinesToChild);
+            _DB.SaveChanges();
+            return medicinesToChild.Id;
+
         }
 
         public bool UpdateMedicincesToUsersEveryDay()

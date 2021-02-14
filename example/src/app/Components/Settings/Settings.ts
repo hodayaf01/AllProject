@@ -24,7 +24,7 @@ import { PasswordToUser } from 'src/app/Models/PasswordToUser.model';
 
         checkPasswordAndretriveSettings(){
             this.PasswordToUser=new PasswordToUser();
-            this.PasswordToUser.UserId=1;
+            this.PasswordToUser.UserId=30010;
             //this.settingReq.UserId=+(localStorage.getItem('USERCODE'));
             this.PasswordToUser.Password = this.password;
             this.subscribe = this.settingsService.getSettings(this.PasswordToUser).subscribe(

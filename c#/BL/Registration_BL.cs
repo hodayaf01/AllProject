@@ -46,23 +46,5 @@ namespace BL
             return new PasswordToUser() { }; ;
         }
 
-        public PasswordToUser sendNewPassword(SendNewPassword _details)
-        {
-            User user = _userDAL.GetByIdentity(_details.UserCode);
-            user.email = _details.Email;
-            user.password = _details.Password;
-            _userDAL.Edit(user);
-
-            //שליחת מייל               
-            bool mailSend = Models.SendMail.SendEMail(new MessageGmail()
-            {
-                sendTo = _details.Email,
-                Subject = "הרשמה לאפליקציית Medi",
-                Body = string.Format("היי {0} \n הסיסמא שלך לאפליקציה: {1}", user.userName, user.password)
-            });
-
-            return new PasswordToUser() { UserId = user.Id, Password= user.password };
-        }
-
     }
 }
