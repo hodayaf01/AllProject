@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    class Report_BL
+    public class Report_BL
     {
     }
 }

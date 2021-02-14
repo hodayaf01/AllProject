@@ -35,7 +35,7 @@ namespace BL
         public static void Beginning()
         {
             //if (_MedicinesToChild_DAL.UpdateMedicincesToUsersEveryDay())
-            bool isSucceeded = _MedicinesToChild_DAL.UpdateMedicincesToUsersEveryDay();
+            //bool isSucceeded = _MedicinesToChild_DAL.UpdateMedicincesToUsersEveryDay();
             CreatMatForChildMedicines();
 
             //play this fucn every day- fill mat details
@@ -258,7 +258,7 @@ namespace BL
             }
         }
 
-        public int RemoveSnooze(CodeTimeToUser codeTimeToUser)
+        public static int RemoveSnooze(CodeTimeToUser codeTimeToUser)
         {
             //למחוק מהמטריצה את הנודניק
             DateTime now = DateTime.Now;

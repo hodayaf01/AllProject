@@ -16,6 +16,7 @@ namespace BL
         ArchiveDAL _archiveDAL = new ArchiveDAL();
         TimeOfDay_DAL _TimeOfDay_DAL = new TimeOfDay_DAL();
         User_DAL _User_DAL = new User_DAL();
+        //Alert_BL _alert_BL = new Alert_BL();
 
         //שליפת רשימת התרופות לפי קוד ילד וקוד זמן ביום
         public List<GenerateMedicine> Get(CodeTimeToUser _details)
@@ -65,7 +66,7 @@ namespace BL
         {
             //עדכון סטטוס התרופות לאחר שהמשתמש אישר שלקח אותם
             List<MedicinesToChild> _medicinesToChild = _medicinesToChild_DAL.GetByUserInSomeTime(_details.CodeTimeToUser);
-            List<ArchiveTakeMedicine> archives = _archiveDAL.Get(_details.CodeTimeToUser.UserID);
+            List<ArchiveTakeMedicine> archives = _archiveDAL.GetToDay(_details.CodeTimeToUser.UserID);
             foreach (var _medicines in _medicinesToChild)
             {
                 if (_details.ListMedicines.Find(m => m.Id == _medicines.Id).Status)
@@ -75,17 +76,37 @@ namespace BL
                     _TimeToMedicinesForChild_DAL.Edit(timeToMedicinesForChild);
                     ArchiveTakeMedicine archiveTake= archives.Find(a=>a.medicineToChild==timeToMedicinesForChild.Id);
                     archiveTake.time = DateTime.Now.TimeOfDay;
-                    archiveTake.onTime = !(_details.CountSnooze > timeToMedicinesForChild.MedicinesToChild.User.snoozeCounter);
-                    _archiveDAL.Edit(archiveTake);
+                    //archiveTake.onTime = !(_details.CountSnooze > timeToMedicinesForChild.MedicinesToChild.User.snoozeCounter);
                     User user = _User_DAL.GetByIdentity(_details.CodeTimeToUser.UserID);
-                    if (_details.CountSnooze <= timeToMedicinesForChild.MedicinesToChild.User.snoozeCounter / 2)
+                    int maxMinute = (int)user.snoozePeriod * (int)user.snoozeCounter;
+                    TimeSpan temp = new TimeSpan(0, maxMinute, 0);
+                    TimeSpan maxTime = timeToMedicinesForChild.TimeOfDay.theTime.Add(temp);
+                    temp = DateTime.Now.TimeOfDay;
+                    //if (_details.CountSnooze <= timeToMedicinesForChild.MedicinesToChild.User.snoozeCounter / 2)
+                    if (maxTime >= DateTime.Now.TimeOfDay)
                     {
-                        user.points += 2;
+                        temp = timeToMedicinesForChild.TimeOfDay.theTime;
+                        int count = 0;
+                        bool flag = true;
+                        while (flag)
+                        {
+                            temp.Add(new TimeSpan(0, (int)user.snoozePeriod, 0));
+                            count++;
+                            if (temp >= DateTime.Now.TimeOfDay)
+                                flag = false;
+                        }
+                        if (count <= timeToMedicinesForChild.MedicinesToChild.User.snoozeCounter / 2) user.points += 2;
+                        //if(temp <= timeToMedicinesForChild.TimeOfDay.theTime.Add(new TimeSpan(0,(int)timeToMedicinesForChild.MedicinesToChild.User.snoozeCounter / 2* (int)timeToMedicinesForChild.MedicinesToChild.User.snoozePeriod,0)))
+                        else user.points += 1;
+                        archiveTake.onTime = true;
+                        //למחוק מההתראות
+                        Alert_BL.RemoveSnooze(_details.CodeTimeToUser);
                     }
-                    else if (_details.CountSnooze <= timeToMedicinesForChild.MedicinesToChild.User.snoozeCounter)
-                        user.points += 1;
-
+                    else archiveTake.onTime = false;
+                    //else if (_details.CountSnooze <= timeToMedicinesForChild.MedicinesToChild.User.snoozeCounter)
                     _User_DAL.Edit(user);
+                    _archiveDAL.Edit(archiveTake);
+
 
                 }
             }

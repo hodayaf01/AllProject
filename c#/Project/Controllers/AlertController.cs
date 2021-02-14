@@ -13,13 +13,14 @@ namespace Project.Controllers
     [EnableCors("*", "*", "*")]
     public class AlertController : ApiController
     {
-        Alert_BL _alert_BL = new Alert_BL();
+        //Alert_BL _alert_BL = new Alert_BL();
         [Route("api/Alert/V")]
         [HttpPost]
         public int AlertV(CodeTimeToUser codeTimeToUser)
         {
             //מחזיר את כמות הנודניקים שהיו לילד כדי להעביר לקיחת רשימת תרופות
-            return _alert_BL.RemoveSnooze(codeTimeToUser);
+            //todo check static
+            return  Alert_BL.RemoveSnooze(codeTimeToUser);
         }
     }
 }

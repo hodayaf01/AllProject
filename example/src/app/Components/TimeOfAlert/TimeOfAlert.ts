@@ -17,7 +17,7 @@ export class TimeOfAlertComponent implements OnInit {
     timeOfDay: TimeOfDay = new TimeOfDay();
     timeOfAlertForUser: TimeOfAlertForUser = new TimeOfAlertForUser();
     
-    morningTime=new Date();
+    morningTime:string;
     noonTome: string;
     evening:string;
     night:string;
@@ -40,7 +40,7 @@ export class TimeOfAlertComponent implements OnInit {
     setTimeInDay() {
         
         // this.snooze.userId= parseInt(localStorage.getItem('USERCODE'));
-        this.snooze.userId=40004;
+        this.snooze.userId=30010;
         //this.timeOfDay.timeCode=1; this.timeOfDay.theTime.setHours(+this.morningTime.split(':')[0]); this.timeOfDay.theTime.setMinutes(+this.morningTime.split(':')[1]);
         this.timeOfDay = new TimeOfDay();
         this.timeOfDay.timeCode=1; 
@@ -52,19 +52,20 @@ export class TimeOfAlertComponent implements OnInit {
 
         this.timeOfDay = new TimeOfDay();
         this.timeOfDay.timeCode=2; 
-        this.timeOfDay.theTime="13:00:00";
+        this.timeOfDay.theTime=this.noonTome;
+
         this.timeOfAlertForUser.timeOfDay[1]= new TimeOfDay();
         this.timeOfAlertForUser.timeOfDay[1]= this.timeOfDay;
 
         this.timeOfDay = new TimeOfDay();
         this.timeOfDay.timeCode=3; 
-        this.timeOfDay.theTime="18:00:00";
+        this.timeOfDay.theTime=this.evening;
         this.timeOfAlertForUser.timeOfDay[2]= new TimeOfDay();
         this.timeOfAlertForUser.timeOfDay[2]= this.timeOfDay;
 
         this.timeOfDay = new TimeOfDay();
         this.timeOfDay.timeCode=4; 
-        this.timeOfDay.theTime="20:00:00";
+        this.timeOfDay.theTime=this.night;
         this.timeOfAlertForUser.timeOfDay[3]= new TimeOfDay();
         this.timeOfAlertForUser.timeOfDay[3]= this.timeOfDay;
 
