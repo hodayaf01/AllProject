@@ -43,16 +43,18 @@ label{
     border-radius: 6px;
     position: absolute;
     z-index: 1;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
 }
 .tooltip{
     text-align: center; 
     width: 20px; 
     height: 20px; 
-    background-color: #f6ad4e; 
     border-radius: 50px;
+    border: 1px solid #f6ad4e;
+    color: #369191;
     position: relative;
     display: inline-block;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .tooltip:hover .tooltiptext {
     visibility: visible;
@@ -90,5 +92,34 @@ input [type=button]{
 .qualaLogo{
     width: 70px;
     height: 65px;
-    margin-right: 325px;
+    margin-right: 200px;
+    margin-top: 0 ;
+}
+.plusButton{
+    width: 47px;
+    height: 40px;
+    border-radius: 30px;
+    border: none;
+    background-color: transparent;
+    color: #369191;
+    font-size: 23px;
+ 
+}
+.containPlusButton{
+    width: fit-content;
+    margin-right: 280px;
+    border: 1px solid #f6ad4e;
+    border-radius: 30px;
+    margin-top: 10px;
+    background-color: white;
+    font-weight: 600;
+}
+
+.titleRegistration{
+vertical-align: top;
+    font-weight: bold;
+    display: inline;
+    font-size: 30px;
+    text-align: center;
+    margin-right: 25px;
 }

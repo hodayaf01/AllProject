@@ -4,17 +4,18 @@
         <header>
             <div *ngIf="loggedIn==false">
                 <div class="containLogo">
-                    <img class="mediLogoBGimg" src="../../../assets/images/LOGOBG.png" >
+                    <img style="margin-right: 100px; margin-top: 50px;" class="mediLogoBGimg" src="../../../assets/images/LOGOBG.png" >
                 </div>
             </div>
-            <div *ngIf="loggedIn==true">
+            <div *ngIf="loggedIn==true" style="margin-top: 15px;">
                 <div class="containLogo">
+                    <label class="titleRegistration">הגדרות</label>
                     <img class="qualaLogo" src="../../../assets/images/qualaBG.png" >
                 </div>
             </div>
         </header>
         <section>
-            <div *ngIf="loggedIn==false">
+            <div style="margin-top: 100px;" *ngIf="loggedIn==false">
                 <input class="formInput" type="password" name="userPassword" [(ngModel)]="password" placeholder="הקש סיסמא">
                 <button class="formInput submitButton" value="אישור" (click)="checkPasswordAndretriveSettings()">אישור</button>
             </div>
@@ -22,10 +23,10 @@
                 <div>
                    <label style="margin-right: 50px;">פרטי הגיבור</label>
                     <div >
-                        <input class="formInput" placeholder="שם הגיבור" name="userName" [(ngModel)]="userDetails.user.userName" type="text">
-                        <input class="formInput" placeholder="תעודת זהות" name="userId" [(ngModel)]="userDetails.user.childId" type="text">
-                        <input class="formInput" placeholder="אימייל" name="userEmail" [(ngModel)]="userDetails.user.email" type="text">
-                        <select class="formInput" name="HMO" id="HmoCode" [(ngModel)]="userDetails.user.userHMO">
+                        <input class="formInput" placeholder="שם הגיבור" name="userName" [(ngModel)]="userDetails.User.userName" type="text">
+                        <input class="formInput" placeholder="תעודת זהות" name="userId" [(ngModel)]="userDetails.User.childId" type="text">
+                        <input class="formInput" placeholder="אימייל" name="userEmail" [(ngModel)]="userDetails.User.email" type="text">
+                        <select class="formInput" name="HMO" id="HmoCode" [(ngModel)]="userDetails.User.userHMO">
                             <option value="0">קופת חולים</option>
                             <option value="1">כללית</option>
                             <option value="2">מאוחדת</option>
@@ -40,41 +41,44 @@
                     <div class="tooltip">?
                         <span class="tooltiptext">להוספת אפוטרופוס, יש להקיש על סימן ה + . ניתן להוסיף עד שלושה אפוטרופוסים</span>
                       </div>
-                    <div *ngFor="let guardian of userDetails.guardians; let i = index">
-                        <input style="margin-right: 85px;" class="formInput smallInput" placeholder="שם" type="text"  [(ngModel)]="userDetails.guardians[i].guardianName" name="guardianName">
-                        <input class="formInput smallInput" placeholder="פלאפון" type="text"  [(ngModel)]="userDetails.guardians[i].PhoneNumber" name="PhoneNumber">
-                        <!-- <input class="formInput submitButton smallInput" type="button" value="שלח סיסמא" (click)="sendPassword"> -->
-                        <!-- <input class="formInput smallInput" placeholder="הכנס סיסמא" type="text" name="password" > -->
-                        <!-- <input type="button" class="formInput smallInput" (click)="addGuardian()" [disabled]="isLessThanThreeGuardian" value="+" style="box-shadow:teal"> -->
+                    <div *ngFor="let Guardian of userDetails.Guardians; let i = index">
+                        <input style="margin-right: 85px;" class="formInput smallInput" placeholder="שם" type="text"  [(ngModel)]="userDetails.Guardians[i].guardianName" name="guardianName">
+                        <input class="formInput smallInput" placeholder="פלאפון" type="text"  [(ngModel)]="userDetails.Guardians[i].PhoneNumber" name="PhoneNumber">
                     </div>
+                    <div class="containPlusButton">
+                        <input type="button" class=" plusButton " (click)="addGuardian()" [disabled]="userDetails.Guardians.length==3" value="+" >
+                        /
+                        <input type="button" class=" plusButton " (click)="removeGuardian()" [disabled]="userDetails.Guardians.length==1" value="-" >
+                    </div>
+
                 </div>
 
                 <div id="timeOfAlertDetails">
                     <div>
-                        <label style="margin-right: 50px;  width: 100px; margin-top: 20px;" >זמני התראה</label>
+                        <label style="margin-right: 50px;  width: 100px;" >זמני התראה</label>
                         <div  class="containTime">
                             <div style="margin-bottom: 10px;">
                                 <img src="../../../assets/images/morning.png" class="timeImg" >
-                                <input style="display: inline-block; vertical-align: bottom;" class="formInput" type="time"  [(ngModel)]="morningTime">
+                                <input style="display: inline-block; vertical-align: bottom;" class="formInput" type="time"  [(ngModel)]="userDetails.TimeOfAlert[0].theTime">
                             </div>
                             <div style="margin-bottom: 10px;">
                                 <img src="../../../assets/images/noon.png" class="timeImg">
-                                <input style="display: inline-block; vertical-align: bottom;" class="formInput" type="time" [(ngModel)]="noonTome">
+                                <input style="display: inline-block; vertical-align: bottom;" class="formInput" type="time" [(ngModel)]="userDetails.TimeOfAlert[1].theTime">
                             </div>
                             <div style="margin-bottom: 10px;">
                                 <img src="../../../assets/images/evening.png" class="timeImg">
-                                <input style="display: inline-block; vertical-align: bottom;" class="formInput" type="time" [(ngModel)]="evening">
+                                <input style="display: inline-block; vertical-align: bottom;" class="formInput" type="time" [(ngModel)]="userDetails.TimeOfAlert[2].theTime">
                             </div>
                             <div>
                                 <img src="../../../assets/images/evening.png" class="timeImg">
-                                <input style="display: inline-block; vertical-align: bottom;" class="formInput" type="time" [(ngModel)]="night">
+                                <input style="display: inline-block; vertical-align: bottom;" class="formInput" type="time" [(ngModel)]="userDetails.TimeOfAlert[3].theTime">
                             </div>
                         </div>
                     </div>
 
                     <div>
                         <label style="margin-top: 20px; margin-right: 50px;" class="timeOfAlertSubTitle">הגדרות נודניק</label>
-                        <select class="formInput" name="snoozeCounter" id="snoozeCounter" [(ngModel)]="userDetails.user.snoozeCounter">
+                        <select class="formInput" name="snoozeCounter" id="snoozeCounter" [(ngModel)]="userDetails.User.snoozeCounter">
                             <option value="0">מספר חזרות</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -83,7 +87,7 @@
                             <option value="5">5</option>
                         </select>
         
-                        <select class="formInput" name="snoozePeriod" id="snoozePeriod" [(ngModel)]="userDetails.user.snoozePeriod">
+                        <select class="formInput" name="snoozePeriod" id="snoozePeriod" [(ngModel)]="userDetails.User.snoozePeriod">
                             <option value="0">השהייה בין כל חזרה</option>
                             <option value="5">5 דקות</option>
                             <option value="10">10 דקות</option>
@@ -93,7 +97,7 @@
                 </div>
 
                 <div>
-                    <input type="button" value="אישור" (click)="editUser()">
+                    <input class="formInput submitButton" type="button" value="אישור" (click)="editUser()">
                 </div>
             </div>
         </section>
