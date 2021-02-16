@@ -8,7 +8,7 @@ namespace Models
 {
     public class Settings
     {
-        public User User { get; set; }
+        public UserDetails User { get; set; }
         public List<Guardian> Guardians { get; set; }
         public List<TimeOfDay> TimeOfDays { get; set; }
     }

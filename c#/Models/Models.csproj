@@ -254,6 +254,7 @@
     <Compile Include="User.cs">
       <DependentUpon>Medi_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

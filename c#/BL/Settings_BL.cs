@@ -80,7 +80,16 @@ namespace BL
                         //}
                     }
                 }
-                 
+                
+                TimeOfAlertForUser timeOfAlertForUser=new TimeOfAlertForUser() { 
+                    snooze = new Snooze() {
+                        userId = user.Id, snoozeCounter = (int)user.snoozeCounter, snoozePeriod = (int)user.snoozePeriod 
+                    }, timeOfDay=_details.TimeOfDays
+                };
+
+                //if (!Alert_BL.EditSnoozeToUser( timeOfAlertForUser))
+                //    return false;
+
             }
             catch (Exception e)
             {
@@ -92,14 +101,25 @@ namespace BL
 
         public Settings Get(PasswordToUser password)
         {
-            if (_userDAL.CheckPassword(password)) 
+            if (_userDAL.CheckPassword(password)) //V
             {
                 Settings _details = new Settings();
 
                 //find user, guardians and time to user
-                _details.User = _userDAL.GetByIdentity(password.UserId);
-
-                List<guardiansToUser> guardiansToUser = _gurdiansToUser_DAL.GetByUser(password.UserId);
+                //_details.User = _userDAL.GetByIdentity(password.UserId);
+                 User u =_userDAL.GetByIdentity(password.UserId);
+                _details.User = new UserDetails() {
+                    childId=u.childId,
+                    Id=u.Id,
+                    userName=u.userName,
+                    email=u.email,
+                    password=u.password,
+                    points=u.points,
+                    snoozeCounter=u.snoozeCounter,
+                    snoozePeriod=u.snoozePeriod,
+                    token=u.token
+                };
+                List <guardiansToUser> guardiansToUser = _gurdiansToUser_DAL.GetByUser(password.UserId);
                 _details.Guardians = new List<Guardian>();
                 for (int i = 0; i < guardiansToUser.Count; i++)
                 {
@@ -111,16 +131,21 @@ namespace BL
                 }
 
                 _details.TimeOfDays = new List<TimeOfDay>();
-                List<TimeToMedicinesForChild> timeToMedicinesForChildList = _timeToMedicinesForChild_DAL.GetByMedicineToChild(password.UserId);
-                timeToMedicinesForChildList.GroupBy(t => t.idTimeOfDay).ToList();
-                foreach (var time in timeToMedicinesForChildList)
-                {
-                    _details.TimeOfDays.Add(new TimeOfDay {
-                        timeId=time.idTimeOfDay,
-                    timeCode=time.TimeOfDay.timeCode,
-                    theTime=time.TimeOfDay.theTime
-                    });
-                }
+                //List<TimeToMedicinesForChild> timeToMedicinesForChildList = _timeToMedicinesForChild_DAL.GetByMedicineToChild(password.UserId);
+                //timeToMedicinesForChildList.GroupBy(t => t.idTimeOfDay).ToList();
+                List<TimeOfDay> _timeOfDayChildList = _timeOfDay_DAL.GetListByUserId(password.UserId);
+                //foreach (var time in timeToMedicinesForChildList)
+                //foreach (var time in _timeOfDayChildList)
+                //{
+                //    _details.TimeOfDays.Add(new TimeOfDay {
+                //        timeId=time.idTimeOfDay,
+                //    timeCode=time.TimeOfDay.timeCode,
+                //    theTime=time.TimeOfDay.theTime
+                //    });
+                //}
+
+                _details.TimeOfDays=_timeOfDayChildList;
+
 
                 //--------------------------------
                 //var timeToMedicinesForChildrenListgroup = timeToMedicinesForChildList.GroupBy(t => t.idTimeOfDay).Select(t => t.ToList()).ToList();

@@ -18,7 +18,7 @@ namespace Models
         public long userId { get; set; }
         public long medicineToChild { get; set; }
         public System.DateTime date { get; set; }
-        public System.TimeSpan time { get; set; }
+        public Nullable<System.TimeSpan> time { get; set; }
         public Nullable<bool> onTime { get; set; }
     }
 }

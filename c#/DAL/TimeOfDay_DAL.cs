@@ -64,5 +64,7 @@ namespace DAL
             _DB.Entry(details);
             _DB.SaveChanges();
         }
+
+
     }
 }

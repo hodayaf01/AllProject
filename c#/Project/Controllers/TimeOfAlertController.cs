@@ -15,28 +15,15 @@ namespace Project.Controllers
     [EnableCors("*", "*", "*")]
     public class TimeOfAlertController : ApiController
     {
-        
-        // GET: TimeOfAlert
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
+       
         TimeOfAlert_BL _timeOfAlert_BL = new TimeOfAlert_BL();
 
         
         [Route("api/TimeOfAlert/Add")]
         [HttpPost]
-        //public bool Add(Snooze snoozeDetails, List<TimeOfDay> listTimeOfDay)
         public bool Add(TimeOfAlertForUser timeOfAlertForUser)
         {
-            return _timeOfAlert_BL.Add(timeOfAlertForUser);
+            return _timeOfAlert_BL.Add(timeOfAlertForUser);//v
         }
-        //[HttpGet]
-        //public bool Add()
-        //{
-        //    //return _timeOfAlert_BL.Add(snoozeDetails, listTimeOfDay, token);
-        //    return true;
-        //}
     }
 }

@@ -32,7 +32,8 @@ namespace DAL
             if (res == null) return false;
             res.snoozeCounter = snoozeDetails.snoozeCounter;
             res.snoozePeriod = snoozeDetails.snoozePeriod;
-            _DB.SaveChanges();
+            if (_DB.SaveChanges() == 0)
+                return false;
             return true;
         }
 

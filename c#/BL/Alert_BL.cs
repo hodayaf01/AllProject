@@ -21,7 +21,8 @@ namespace BL
         public static GuardiansDAL _GuardiansDAL = new GuardiansDAL();
         public static MedicinesToChild_DAL _MedicinesToChild_DAL = new MedicinesToChild_DAL();
         SMSCOMMS SMSEngine;
-
+        public static User_DAL _user_DAL = new User_DAL();
+        public static TimeToMedicinesForChild_DAL _timeToMedicinesForChild_DAL = new TimeToMedicinesForChild_DAL();
 
         //Creating a class while running the project
         static Alert_BL()
@@ -35,7 +36,7 @@ namespace BL
         public static void Beginning()
         {
             //if (_MedicinesToChild_DAL.UpdateMedicincesToUsersEveryDay())
-            //bool isSucceeded = _MedicinesToChild_DAL.UpdateMedicincesToUsersEveryDay();
+            bool isSucceeded = _MedicinesToChild_DAL.UpdateMedicincesToUsersEveryDay();
             CreatMatForChildMedicines();
 
             //play this fucn every day- fill mat details
@@ -152,40 +153,95 @@ namespace BL
         {
             List<TimeOfDay> allTimes = _timeOfDay_DAL.GetAll();
 
-            var allHours = allTimes.GroupBy(t => new { t.theTime.Hours, t.theTime.Minutes });
-            //fill userDetailsAlert matrix in detailes
-            foreach (var hour in allHours)
+            foreach (var time in allTimes)
             {
-                //_userToken[hour.Key.Hours, hour.Key.Minutes] = hour.ToList().Select(t => t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.token).ToList();
-                if (hour.ToList().Find(t => t.TimeToMedicinesForChilds.Count > 0) != null)
+
+                List<TimeToMedicinesForChild> isExsit = _timeToMedicinesForChild_DAL.GetByMedicineToChildToDay((long)time.userId, time.timeCode);
+                //if (_timeToMedicinesForChild_DAL.GetByMedicineToChildToDay((long)time.userId,time.timeCode).Count>0 )
+                if(isExsit.Count>0)
                 {
-                    _userDetailsOfAlert[hour.Key.Hours, hour.Key.Minutes] = hour.ToList().Select(t => new DetailsAlert
+
+                    _userDetailsOfAlert[time.theTime.Hours, time.theTime.Minutes].Add(new DetailsAlert()
                     {
-                        UserToken = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.token,
+                        UserToken = time.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.token,
                         AlertCount = 0,
-                        UserName = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.userName,
+                        UserName = time.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.userName,
                         snooze = new Snooze
                         {
-                            userId = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.userId,
-                            snoozePeriod = (int)t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.snoozePeriod,
-                            snoozeCounter = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.snoozeCounter.Value,
+                            userId = time.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.userId,
+                            snoozePeriod = (int)time.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.snoozePeriod,
+                            snoozeCounter = time.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.snoozeCounter.Value,
                         },
-                        CodeTime = t.timeCode
-                    }).ToList();
+                        CodeTime = time.timeCode
+                    });
                 }
+                
             }
 
-            //foreach (var hour in allHours)
-            ////t is imstance of TimeOfDay which contain all detaild about the child by kishrey gomlin
+                //---------------------
+                //List<TimeOfDay> allTimes = _timeOfDay_DAL.GetAll();
+
+                //var allHours = allTimes.GroupBy(t => new { t.theTime.Hours, t.theTime.Minutes });
+                ////fill userDetailsAlert matrix in detailes
+                //foreach (var hour in allHours)
+                //{
+                //    //_userToken[hour.Key.Hours, hour.Key.Minutes] = hour.ToList().Select(t => t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.token).ToList();
+                //    if (hour.ToList().FirstOrDefault(t => t.TimeToMedicinesForChilds.Count > 0) != null)
+                //    {
+
+                //        _userDetailsOfAlert[hour.Key.Hours, hour.Key.Minutes] = hour.ToList().Select(t => new DetailsAlert
+                //        {
+                //            UserToken = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.token,
+                //            AlertCount = 0,
+                //            UserName = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.userName,
+                //            snooze = new Snooze
+                //            {
+                //                userId = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.userId,
+                //                snoozePeriod = (int)t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.snoozePeriod,
+                //                snoozeCounter = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.snoozeCounter.Value,
+                //            },
+                //            CodeTime = t.timeCode
+                //        }).ToList();
+                //    }
+                //}
+                //----------------------------------
+
+                //foreach (var hour in allHours)
+                ////t is imstance of TimeOfDay which contain all detaild about the child by kishrey gomlin
+                //{
+                //    timeOfChildrenMat[hour.Key.Hours, hour.Key.Minutes] = hour.ToList().Select(t => new ChildMedicin {
+                //        userName = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.userName,
+                //        Dosage = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.Dosage,
+                //        kindOfDosageName = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.KingOfDosage.kindOfDosageName,
+                //        userId = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.Id,
+                //        medicineToChildId = t.TimeToMedicinesForChilds.FirstOrDefault().idMedicineToChild,
+                //        medicineName = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.Medicine.midicineName
+                //    }).ToList();
+                //}
+            
+        }
+        public static void AddTimesToMatForNewUser(TimeOfAlertForUser dAlert)//V
+        {
+            User user = _user_DAL.GetByIdentity(dAlert.snooze.userId);
+            //for (int i = 0; i < time.Count(); i++)
             //{
-            //    timeOfChildrenMat[hour.Key.Hours, hour.Key.Minutes] = hour.ToList().Select(t => new ChildMedicin {
-            //        userName = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.userName,
-            //        Dosage = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.Dosage,
-            //        kindOfDosageName = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.KingOfDosage.kindOfDosageName,
-            //        userId = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.Id,
-            //        medicineToChildId = t.TimeToMedicinesForChilds.FirstOrDefault().idMedicineToChild,
-            //        medicineName = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.Medicine.midicineName
-            //    }).ToList();
+                foreach (var time in dAlert.timeOfDay)
+                {
+                    _userDetailsOfAlert[time.theTime.Hours, time.theTime.Minutes].Add(new DetailsAlert() 
+                    { 
+                        AlertCount=0,
+                        CodeTime=time.timeCode,
+                        UserName=user.userName,
+                        UserToken=user.token,
+                        snooze=new Snooze() 
+                        {
+                            userId=dAlert.snooze.userId,
+                            snoozeCounter=(int)user.snoozeCounter,
+                            snoozePeriod=(int)user.snoozePeriod
+                        }
+                    });
+                }
+                
             //}
         }
 
@@ -257,6 +313,26 @@ namespace BL
 
             }
         }
+        //public static void EditSnoozeToUser(TimeOfAlertForUser dAlert)
+        //{
+        //    int countDelete = 0;
+        //    for (int i = 0; i < 24&&countDelete<4; i++)
+        //    {
+        //        for (int j = 0; j < 60 && countDelete < 4; j++)
+        //        {
+        //            DetailsAlert snoozeToRemove = _userDetailsOfAlert[i, j].FirstOrDefault(a => a.snooze.userId == dAlert.snooze.userId && a.CodeTime));
+                    
+        //            if (snoozeToRemove != null)
+        //            {
+        //                countSnooze = snoozeToRemove.AlertCount;
+        //                _userDetailsOfAlert[i, j].Remove(snoozeToRemove);
+        //                countDelete  ++;
+        //            }
+        //        }
+
+        //    }
+        //    AddTimesToMatForNewUser(dAlert);
+        //}
 
         public static int RemoveSnooze(CodeTimeToUser codeTimeToUser)
         {

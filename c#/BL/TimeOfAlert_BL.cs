@@ -16,14 +16,16 @@ namespace BL
         List<long> listCodeTime = new List<long>();
         public bool Add(TimeOfAlertForUser timeOfAlertForUser)
         {
-            if (_user_DAL.AddSnooze(timeOfAlertForUser.snooze))
+            if (_user_DAL.AddSnooze(timeOfAlertForUser.snooze))//V
             { 
-                if(_TimeOfDay_DAL.AddListTimeOfAlert(timeOfAlertForUser.timeOfDay))
+                if(_TimeOfDay_DAL.AddListTimeOfAlert(timeOfAlertForUser.timeOfDay))//V
                 {
-                    if (_MedicinesToChild_DAL.AddListMedicinesToUser(timeOfAlertForUser))
+                    //List<DetailsAlert>[] _DetailsOfAlert =_MedicinesToChild_DAL.AddListMedicinesToUser(timeOfAlertForUser);
+                    if (_MedicinesToChild_DAL.AddListMedicinesToUser(timeOfAlertForUser))//V
                     {
+                        Alert_BL.AddTimesToMatForNewUser(timeOfAlertForUser);//V
                         return true;
-                    } return false;
+                    }return false;
                 }return false;
             }
             return false;

@@ -13,7 +13,7 @@
           <Property Name="userId" Type="bigint" Nullable="false" />
           <Property Name="medicineToChild" Type="bigint" Nullable="false" />
           <Property Name="date" Type="datetime" Nullable="false" />
-          <Property Name="time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="time" Type="time" Precision="7" />
           <Property Name="onTime" Type="bit" />
         </EntityType>
         <EntityType Name="Guardian">
@@ -62,6 +62,7 @@
           <Property Name="userId" Type="bigint" Nullable="false" />
           <Property Name="Dosage" Type="int" Nullable="false" />
           <Property Name="kindOfDosage" Type="bigint" Nullable="false" />
+          <Property Name="date" Type="date" />
         </EntityType>
         <EntityType Name="TimeOfDay">
           <Key>
@@ -362,6 +363,7 @@
           <NavigationProperty Name="Medicine" Relationship="MediDBModel.fk_medicineId" FromRole="MedicinesToChild" ToRole="Medicine" />
           <NavigationProperty Name="User" Relationship="MediDBModel.fk_childId" FromRole="MedicinesToChild" ToRole="User" />
           <NavigationProperty Name="TimeToMedicinesForChilds" Relationship="MediDBModel.fk_MedicineToChild" FromRole="MedicinesToChild" ToRole="TimeToMedicinesForChild" />
+          <Property Name="date" Type="DateTime" Precision="0" />
         </EntityType>
         <Association Name="fk_KingOfDosage">
           <End Type="MediDBModel.KingOfDosage" Role="KingOfDosage" Multiplicity="1" />
@@ -484,7 +486,7 @@
           <Property Name="userId" Type="Int64" Nullable="false" />
           <Property Name="medicineToChild" Type="Int64" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="time" Type="Time" Precision="7" />
           <Property Name="onTime" Type="Boolean" />
         </EntityType>
       </Schema>
@@ -548,6 +550,7 @@
           <EntitySetMapping Name="MedicinesToChilds">
             <EntityTypeMapping TypeName="MediDBModel.MedicinesToChild">
               <MappingFragment StoreEntitySet="MedicinesToChild">
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="kindOfDosage" ColumnName="kindOfDosage" />
                 <ScalarProperty Name="Dosage" ColumnName="Dosage" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
