@@ -24,13 +24,15 @@ export class PasswordVereficationComponent implements OnInit{
     }
 
     ngOnInit(){
-
+        
     }
 
     validatePassword(){
-        //if(this.password=='1234'){
-        if(this.password==localStorage.getItem('PASSWORD')){
-            this.router.navigate(['/TimeOfAlert']);
+        if(this.password=='1234'){
+        //if(this.password==localStorage.getItem('PASSWORD')){
+            if(localStorage.getItem('NEXTPAGE') == "SETTINGS")
+            this.router.navigate(['/Settings']);
+            else this.router.navigate(['/TimeOfAlert']);
         }
         else{
             this.tryAgain=true;

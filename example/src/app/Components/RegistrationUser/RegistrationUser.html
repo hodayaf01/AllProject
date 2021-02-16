@@ -15,7 +15,7 @@
             <div >
                 <input class="formInput" placeholder="שם הגיבור" name="userName" [(ngModel)]="user.userName" type="text">
                 <input class="formInput" placeholder="תעודת זהות" name="userId" [(ngModel)]="user.childId" type="text">
-                <input class="formInput" placeholder="אימייל" name="userEmail" [(ngModel)]="user.email" type="email">
+                <input class="formInput" placeholder="אימייל" name="userEmail" [(ngModel)]="user.email" type="email"  onInvalid="showError('email')">
                 <select class="formInput" name="HMO" id="HmoCode" [(ngModel)]="user.userHMO">
                     <option value="0">קופת חולים</option>
                     <option value="1">כללית</option>
@@ -32,11 +32,8 @@
             <div>
                 <input class="formInput" placeholder="שם" type="text" [(ngModel)]="guardian.guardianName" name="guardianName">
                 <input class="formInput" placeholder="פלאפון" type="text" [(ngModel)]="guardian.PhoneNumber" name="PhoneNumber">
-                <!-- <input class="formInput submitButton smallInput" type="button" value="שלח סיסמא" (click)="sendPassword"> -->
-                <!-- <input class="formInput smallInput" placeholder="הכנס סיסמא" type="text" name="password" > -->
                 <input type="button" class="formInput smallInput" (click)="addGuardian()" [disabled]="isLessThanThreeGuardian" value="+" style="box-shadow:teal">
             </div>
-            <!-- <input class="formInput" placeholder="סיסמא" type="text" [(ngModel)]="user.password" name="password"> -->
             <input class="formInput submitButton" type="button" value="אישור" (click)="addUser()">
             <div class="containLink">
               <a class="link" href="/TermsOfUse">תנאי השימוש</a>
@@ -48,10 +45,7 @@
     </section>
 
     <footer>
-<<<<<<< HEAD
-=======
-        <a href="tel:+972-58-782-8027" >Call me</a>
->>>>>>> e6f4268018c193de355e1b153a630dbb0fd9f151
+        <!-- <a href="tel:+972-58-782-8027" >Call me</a> -->
     </footer>
 
 </body>

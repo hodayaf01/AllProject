@@ -11,6 +11,8 @@ import { MedicinesListService } from 'src/app/Services/MedicinesListService';
 })
 export class HomeComponent implements OnInit{
     subscribe: any;
+    currentHour: string;
+    currentMin: string;
 
     points: number;
     medicineListToUserByTime: MedicineToUserByTime = new MedicineToUserByTime();
@@ -25,28 +27,31 @@ export class HomeComponent implements OnInit{
 
     //call 4 times to medicine to chiled to user.
     ngOnInit(): void {
-        // this.medicineToUserByTimeResp1 = [
-        //     new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, false),
-        //     new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, true),
-        // ];
+        this.currentHour = (new Date().toString().split(' ')[4].split(':')[0]);
+        this.currentMin = (new Date().toString().split(' ')[4].split(':')[1]);
+       
+        this.medicineToUserByTimeResp1 = [
+            new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, false),
+            new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, true),
+        ];
 
-        // this.medicineToUserByTimeResp2 = [
-        //     new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, true),
-        //     new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, true),
-        //     new MedicineToUserByTimeResp(1, "אופטלגין", 2, "טיפות", null, true),
-        //     new MedicineToUserByTimeResp(1, "לאידוע", 2, "תרסיס", null, true),
-        // ];
+        this.medicineToUserByTimeResp2 = [
+            new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, true),
+            // new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, true),
+            // new MedicineToUserByTimeResp(1, "אופטלגין", 2, "טיפות", null, true),
+            // new MedicineToUserByTimeResp(1, "לאידוע", 2, "תרסיס", null, true),
+        ];
 
-        // this.medicineToUserByTimeResp3 = [
-        //     new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, true),
-        //     new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, true),
-        //     new MedicineToUserByTimeResp(1, "אופטלגין", 2, "טיפות", null, true),
-        // ];
+        this.medicineToUserByTimeResp3 = [
+            new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, true),
+            // new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, true),
+            // new MedicineToUserByTimeResp(1, "אופטלגין", 2, "טיפות", null, true),
+        ];
 
-        // this.medicineToUserByTimeResp4 = [
-        //     new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, true),
-        //     new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, true),
-        // ];
+        this.medicineToUserByTimeResp4 = [
+            new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, true),
+            new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, true),
+        ];
 
         this.points=125;
 
@@ -121,6 +126,12 @@ export class HomeComponent implements OnInit{
     }
 
     navigateToSettings(){
-        this.router.navigate(['/Settings']);
+        localStorage.setItem('NEXTPAGE', 'SETTINGS');
+        this.router.navigate(['/PasswordVerefication']);
+    }
+
+    navigateToMedicineList(val){
+        localStorage.setItem('TIMEOFALERT', val);
+        this.router.navigate(['/MedicinesList']);
     }
 }

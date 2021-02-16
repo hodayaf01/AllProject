@@ -2,12 +2,12 @@
 <html>
 <body dir="rtl">
         <header>
-            <div *ngIf="loggedIn==false">
+            <!-- <div *ngIf="loggedIn==false">
                 <div class="containLogo">
                     <img style="margin-right: 100px; margin-top: 50px;" class="mediLogoBGimg" src="../../../assets/images/LOGOBG.png" >
                 </div>
-            </div>
-            <div *ngIf="loggedIn==true" style="margin-top: 15px;">
+            </div> -->
+            <div  style="margin-top: 15px;">
                 <div class="containLogo">
                     <label class="titleRegistration">הגדרות</label>
                     <img class="qualaLogo" src="../../../assets/images/qualaBG.png" >
@@ -15,11 +15,11 @@
             </div>
         </header>
         <section>
-            <div style="margin-top: 100px;" *ngIf="loggedIn==false">
+            <!-- <div style="margin-top: 100px;" *ngIf="loggedIn==false">
                 <input class="formInput" type="password" name="userPassword" [(ngModel)]="password" placeholder="הקש סיסמא">
                 <button class="formInput submitButton" value="אישור" (click)="checkPasswordAndretriveSettings()">אישור</button>
-            </div>
-            <div *ngIf="loggedIn==true">
+            </div> -->
+            <div >
                 <div>
                    <label style="margin-right: 50px;">פרטי הגיבור</label>
                     <div >
@@ -59,19 +59,19 @@
                         <div  class="containTime">
                             <div style="margin-bottom: 10px;">
                                 <img src="../../../assets/images/morning.png" class="timeImg" >
-                                <input style="display: inline-block; vertical-align: bottom;" class="formInput" type="time"  [(ngModel)]="userDetails.TimeOfAlert[0].theTime">
+                                <input style="display: inline-block; vertical-align: bottom; width: 200px;" class="formInput" type="time"  [(ngModel)]="userDetails.TimeOfAlert[0].theTime">
                             </div>
                             <div style="margin-bottom: 10px;">
                                 <img src="../../../assets/images/noon.png" class="timeImg">
-                                <input style="display: inline-block; vertical-align: bottom;" class="formInput" type="time" [(ngModel)]="userDetails.TimeOfAlert[1].theTime">
+                                <input style="display: inline-block; vertical-align: bottom; width: 200px" class="formInput" type="time" [(ngModel)]="userDetails.TimeOfAlert[1].theTime">
                             </div>
                             <div style="margin-bottom: 10px;">
                                 <img src="../../../assets/images/evening.png" class="timeImg">
-                                <input style="display: inline-block; vertical-align: bottom;" class="formInput" type="time" [(ngModel)]="userDetails.TimeOfAlert[2].theTime">
+                                <input style="display: inline-block; vertical-align: bottom; width: 200px" class="formInput" type="time" [(ngModel)]="userDetails.TimeOfAlert[2].theTime">
                             </div>
                             <div>
-                                <img src="../../../assets/images/evening.png" class="timeImg">
-                                <input style="display: inline-block; vertical-align: bottom;" class="formInput" type="time" [(ngModel)]="userDetails.TimeOfAlert[3].theTime">
+                                <img src="../../../assets/images/night.png" class="timeImg">
+                                <input style="display: inline-block; vertical-align: bottom; width: 200px" class="formInput" type="time" [(ngModel)]="userDetails.TimeOfAlert[3].theTime">
                             </div>
                         </div>
                     </div>

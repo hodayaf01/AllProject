@@ -25,14 +25,14 @@ export class MedicinesListComponent implements OnInit{
         
     }
     ngOnInit() {
-        // this.medicineToUserByTimeResp = [
-        //     new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, false),
-        //     new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, false),
-        //     new MedicineToUserByTimeResp(1, "אופטלגין", 2, "טיפות", null, false),
-        //     new MedicineToUserByTimeResp(1, "לאידוע", 2, "תרסיס", null, false),
-        //     new MedicineToUserByTimeResp(1, "מוזר", 2, "שאיפה", null, false),
-        //     new MedicineToUserByTimeResp(1, "ישתנה", 2, "סירופ", null, false),
-        // ];
+        this.medicineToUserByTimeResp = [
+            new MedicineToUserByTimeResp(1, "אקמול", 2, "גלולות", null, false),
+            new MedicineToUserByTimeResp(1, "אדויל", 2, "זריקה",  null, false),
+            new MedicineToUserByTimeResp(1, "אופטלגין", 2, "טיפות", null, false),
+            new MedicineToUserByTimeResp(1, "לאידוע", 2, "תרסיס", null, false),
+            new MedicineToUserByTimeResp(1, "מוזר", 2, "שאיפה", null, false),
+            new MedicineToUserByTimeResp(1, "ישתנה", 2, "סירופ", null, false),
+        ];
         this.medicineListToUserByTime.UserID =  +(localStorage.getItem('USERCODE')); //30010; 
         this.medicineListToUserByTime.TimeOfDay = +(localStorage.getItem('TIMEOFALERT')); //1;
 
