@@ -107,7 +107,7 @@ input [type=button]{
 }
 .containPlusButton{
     width: fit-content;
-    margin-right: 280px;
+    margin-right: 232px;
     border: 1px solid #f6ad4e;
     border-radius: 30px;
     margin-top: 10px;

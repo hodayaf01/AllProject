@@ -31,21 +31,23 @@ import { TimeOfDay } from 'src/app/Models/TimeOfDay.model';
 
             this.PasswordToUser=new PasswordToUser();
             this.PasswordToUser.UserId=30010;
-            this.PasswordToUser.Password = this.password;
-            // //if(this.password=="1234"){
-            this.subscribe = this.settingsService.getSettings(this.PasswordToUser).subscribe(
-                result => {
-                    console.log(result);
-                    if(result==null){
-                        alert("password is incorrect");
-                    }
-                    else{
-                        this.loggedIn=true;
-                        this.userDetails=result;
-                    }
+            this.PasswordToUser.Password = localStorage.getItem('PASSWORD')// this.password;
+            if(this.password=="1234"){
+                this.loggedIn=true;
+            }
+            // this.subscribe = this.settingsService.getSettings(this.PasswordToUser).subscribe(
+            //     result => {
+            //         console.log(result);
+            //         if(result==null){
+            //             alert("password is incorrect");
+            //         }
+            //         else{
+            //             this.loggedIn=true;
+            //             this.userDetails=result;
+            //         }
                     
-                }
-            )
+            //     }
+            // )
        
         }
 
@@ -62,6 +64,8 @@ import { TimeOfDay } from 'src/app/Models/TimeOfDay.model';
             this.userDetails.TimeOfAlert[1]=new TimeOfDay(1, 1); this.userDetails.TimeOfAlert[1].theTime="08:00:00";
             this.userDetails.TimeOfAlert[2]=new TimeOfDay(1, 1); this.userDetails.TimeOfAlert[2].theTime="08:00:00";
             this.userDetails.TimeOfAlert[3]=new TimeOfDay(1, 1); this.userDetails.TimeOfAlert[3].theTime="08:00:00";
+
+            this.checkPasswordAndretriveSettings();
         }
 
 

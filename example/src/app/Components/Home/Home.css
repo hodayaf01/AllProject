@@ -46,12 +46,15 @@ label{
     vertical-align: top;
     margin-right: 35px;
 }
-
+/* .timeImg{
+    animation: timeGroth 1s infinite alternate;
+} */
 .conisNum{
-    font-size: 20px; 
+    font-size: 30px; 
     color:#369191; 
-    margin-right: 18px; 
+    margin-right: 24px; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 0;
 }
 
 .timeSpent{
@@ -62,3 +65,14 @@ label{
     color: red;
     font-weight: 600;
 }
+
+@keyframes timeGroth {
+     0% {
+     width: 30px;
+     height: 30px;
+     }
+     100% {
+     width: 40px;
+     height: 40px;
+     }
+ }

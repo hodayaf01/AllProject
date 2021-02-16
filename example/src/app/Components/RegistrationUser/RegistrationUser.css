@@ -7,9 +7,6 @@ label{
     color:#369191;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: inline-block;
-    width: 384px;
-    text-align: right;
-
 }
 button{
     font-size: 17px;
@@ -25,7 +22,7 @@ button{
     text-align: right;
     color: #369191;
     background-color: white;
-    border: 2px solid #f6ad4e;
+    border: 1px solid #f6ad4e;
     border-radius: 20px;
     width: 250px;
     height: 35px;
@@ -54,16 +51,18 @@ button{
     border-radius: 6px;
     position: absolute;
     z-index: 1;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
 }
 .tooltip{
     text-align: center; 
     width: 20px; 
     height: 20px; 
-    background-color: #f6ad4e; 
     border-radius: 50px;
+    border: 2px solid #f6ad4e;
+    color: #369191;
     position: relative;
     display: inline-block;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .tooltip:hover .tooltiptext {
     visibility: visible;
@@ -83,7 +82,7 @@ form{
     text-align: center;
 }
 .submitButton{
-    margin-top: 45px;
+    margin-top: 40px;
     background-color: #f6ad4e !important;
     text-align: center !important;
     font-size: 20px;

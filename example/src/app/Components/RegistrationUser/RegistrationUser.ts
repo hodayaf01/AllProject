@@ -7,6 +7,7 @@ import { from } from 'rxjs';
 import { Registration } from 'src/app/Models/Registration.model';
 import { MessagingService } from 'src/app/Services/messaging.service';
 
+
 @Component({
     selector: 'app-RegistrationUser',
     templateUrl: './RegistrationUser.html',
@@ -42,9 +43,14 @@ export class RegistrationUserComponent implements OnInit {
 
     addUser() {
         //validations: 
-
+        if(this.isValidIsraeliID(this.user.childId)==false)
+            alert("תעודת זהות אינה בפורמט הנכון") ;
+        if(/^[א-ת]+$/.test(this.user.userName)==false)
+            alert("שם אמור להכיל אותיות בלבד");
+    
         if(this.user.userHMO==0)
             alert("אנא בחר בית חולים");
+
         else{
             this.addGuardian();
             this.setPassword();
@@ -54,15 +60,6 @@ export class RegistrationUserComponent implements OnInit {
         }       
 
         this.subscribe = this.registrationService.add(this.registration).subscribe(
-            // result => {
-            //     this.user.childId = result.UserId;
-            //     if(this.user.password!=result.Password)
-            //         alert("סיסמא שגויה");
-            //     else{
-            //          localStorage.setItem('USERCODE', this.user.childId.toString());
-            //         this.router.navigate(['/TimeOfAlert']);
-            //     }   
-
                 result => {
                     this.user.childId = result.UserId;
                     localStorage.setItem('USERCODE', this.user.childId.toString());
@@ -93,4 +90,28 @@ export class RegistrationUserComponent implements OnInit {
         this.messagingService.receiveMessage()
         this.message = this.messagingService.currentMessage;
     }
+
+    showError(val){
+        alert(val + " is incorrect");
+
+    }
+
+    isValidIsraeliID(_id) {
+	let id = String(_id).trim();
+	if (id.length > 9 || id.length < 5 || isNaN(_id)) return false;
+
+	// Pad string with zeros up to 9 digits
+  	id = id.length < 9 ? ("00000000" + id).slice(-9) : id;
+
+      if(Array
+            .from(id, Number)
+  		    .reduce((counter, digit, i) => {
+			    const step = digit * ((i % 2) + 1);
+                return counter + (step > 9 ? step - 9 : step);
+    	    }) % 10 === 0){
+                return true;
+            }
+            else false;
+
+}
 }

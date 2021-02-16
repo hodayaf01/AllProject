@@ -8,29 +8,29 @@
 </head> -->
 
 <body dir="rtl">
-    <header>
+    <header style="margin-bottom: 20px;">
         <button class="containStettings" (click)="navigateToSettings()">
             <img class="settings" src="../../../assets/images/settingsIconBG.png">
          </button>
-        <div >
-            <img class="qualaLogo"  src="../../../assets/images/qualaBG.png" >
-        </div>
-        <div style="margin-right: 92px;">
-            <img style="width: 65px; height: 65px;" src="../../../assets/images/bag-iconBG.png" alt="">
+
+        <div style="margin-right: 78px;">
+            <img style="width: 90px; height: 90px; margin-top: 15px; margin-bottom: 10px;" src="../../../assets/images/coins.png" alt="">
             <span class="conisNum">{{points}}</span>
         </div>    
-        <div>   <a href="tel:+972-053-832-0860" >Call me</a></div>
+        <div >
+            <img style="height: 65px; width: 80px; margin-right: 63px;" class="qualaLogo"  src="../../../assets/images/qualaBG.png" >
+        </div>
     </header>
     
     <section>
-        <label class="titleHome">מה התוכניות שלנו להיום?</label>
+        <!-- <label class="titleHome">מה התוכניות שלנו להיום?</label> -->
         
-        <div *ngIf="medicineToUserByTimeResp1.length>0">
+        <div *ngIf="medicineToUserByTimeResp1.length>0" (click)="navigateToMedicineList(1)">
             <div  class="containTimeImg">
-                <img style="width: 35px; height: 35px;" src="../../../assets/images/morning.png">
+                <img style="width: 35px; height: 35px;" class="timeImg" src="../../../assets/images/morning.png">
             </div>
             <!-- <div class="timeInDay" [class.timeSpent]="currentTime > medicineToUserByTimeResp1[0].Time">  -->
-            <div class="timeInDay" [class.timeSpent]="1 == 1"> 
+            <div class="timeInDay" [class.timeSpent]="1 == 1" > 
                 <table style="width: 367px;">
                     <tbody>
                         <tr  *ngFor = "let time of medicineToUserByTimeResp1; let i = index">
@@ -50,7 +50,7 @@
             </div>
         </div>
         
-        <div *ngIf="medicineToUserByTimeResp2.length>0">
+        <div *ngIf="medicineToUserByTimeResp2.length>0" (click)="navigateToMedicineList(2)">
             <div  class="containTimeImg">
                 <img style="width: 35px; height: 35px;" src="../../../assets/images/noon.png">
             </div>
@@ -74,7 +74,7 @@
             </div>
         </div>
         
-        <div *ngIf="medicineToUserByTimeResp3.length>0">
+        <div *ngIf="medicineToUserByTimeResp3.length>0" (click)="navigateToMedicineList(3)">
             <div class="containTimeImg">
                 <img style="width: 35px; height: 35px;" src="../../../assets/images/evening.png">
             </div>
@@ -98,9 +98,9 @@
             </div>
         </div>
         
-        <div *ngIf="medicineToUserByTimeResp4.length>0">
+        <div *ngIf="medicineToUserByTimeResp4.length>0" (click)="navigateToMedicineList(4)">
             <div class="containTimeImg">
-                <img style="width: 35px; height: 35px;" src="../../../assets/images/evening.png">
+                <img style="width: 35px; height: 35px;" src="../../../assets/images/night.png">
             </div>
             <div class="timeInDay"  [class.timeSpent]="currentTime > medicineToUserByTimeResp1[0].Time">
                 <table style="width: 367px;">
@@ -123,7 +123,13 @@
         </div>
         
     </section>
-    <footer></footer>
+    <footer>
+
+        <div style="margin-left: auto; margin-top: 20px; margin-right: auto; width: fit-content;">
+            <img src="../../../assets/images/telephoneBG.png" alt="">   
+            <a href="tel:+972-058-782-8027" ></a>
+        </div>
+    </footer>
 </body>
 
 </html>
