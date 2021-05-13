@@ -25,6 +25,7 @@ namespace DAL
         {
             foreach (var time in _details)
             {
+                
                 _DB.TimeOfDays.Add(time);
             }
             if (_DB.SaveChanges() == 0)

@@ -104,7 +104,7 @@ namespace BL
                                 body = "הגיע הזמן לקחת תרופה",
                                 title = "שלום לך!",
                                 badge = 1,
-                                click_action = "http://localhost:4200/Alert/30010/" + childrenAlert.CodeTime,//לשלוח קוד ילד
+                                click_action = "http://localhost:4200/Alert/" + childrenAlert.snooze.userId+"/"+ childrenAlert.CodeTime,//לשלוח קוד ילד
                                 icon = "C:/Users/User/Desktop/AllProject/example/src/assets/images/LOGO.PNG"
                             },
                             data = new
@@ -178,47 +178,7 @@ namespace BL
                 
             }
 
-                //---------------------
-                //List<TimeOfDay> allTimes = _timeOfDay_DAL.GetAll();
-
-                //var allHours = allTimes.GroupBy(t => new { t.theTime.Hours, t.theTime.Minutes });
-                ////fill userDetailsAlert matrix in detailes
-                //foreach (var hour in allHours)
-                //{
-                //    //_userToken[hour.Key.Hours, hour.Key.Minutes] = hour.ToList().Select(t => t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.token).ToList();
-                //    if (hour.ToList().FirstOrDefault(t => t.TimeToMedicinesForChilds.Count > 0) != null)
-                //    {
-
-                //        _userDetailsOfAlert[hour.Key.Hours, hour.Key.Minutes] = hour.ToList().Select(t => new DetailsAlert
-                //        {
-                //            UserToken = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.token,
-                //            AlertCount = 0,
-                //            UserName = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.userName,
-                //            snooze = new Snooze
-                //            {
-                //                userId = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.userId,
-                //                snoozePeriod = (int)t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.snoozePeriod,
-                //                snoozeCounter = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.snoozeCounter.Value,
-                //            },
-                //            CodeTime = t.timeCode
-                //        }).ToList();
-                //    }
-                //}
-                //----------------------------------
-
-                //foreach (var hour in allHours)
-                ////t is imstance of TimeOfDay which contain all detaild about the child by kishrey gomlin
-                //{
-                //    timeOfChildrenMat[hour.Key.Hours, hour.Key.Minutes] = hour.ToList().Select(t => new ChildMedicin {
-                //        userName = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.userName,
-                //        Dosage = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.Dosage,
-                //        kindOfDosageName = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.KingOfDosage.kindOfDosageName,
-                //        userId = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.User.Id,
-                //        medicineToChildId = t.TimeToMedicinesForChilds.FirstOrDefault().idMedicineToChild,
-                //        medicineName = t.TimeToMedicinesForChilds.FirstOrDefault().MedicinesToChild.Medicine.midicineName
-                //    }).ToList();
-                //}
-            
+        
         }
         public static void AddTimesToMatForNewUser(TimeOfAlertForUser dAlert)//V
         {
@@ -248,27 +208,27 @@ namespace BL
         //פונקצי לשליחת הודעה דרך אסאמס4יו
         static async Task SendUsingAPIAsync(string guardianPhone, string childName)
         {
-            Console.WriteLine("send massage to guardian");
-            //HttpClient client = new HttpClient();
-            ////Define the Required Variables
-            //string key = "YnPDiagST";
-            //string user = "0587828027";
-            //string pass = "65576266";
-            //string sender = "Medi";
-            ////string recipient = "0538320860";
-            ////string recipient = _registrationTest.Guardians[0].PhoneNumber;
-            //string recipient = guardianPhone;
-            //string msg = "Your Child- " + childName + " has not yet taken his medication";
-            //var values = new Dictionary<string, string>
-            //{
-            //    { "key", key }, { "user", user },{ "pass", pass },
-            //    { "sender", sender }, { "recipient", recipient },
-            //    { "msg", msg }
-            //};
-            //var content = new FormUrlEncodedContent(values); //Encode the Data
-            //var response = await client.PostAsync("https://www.sms4free.co.il/ApiSMS/SendSMS", content);
-            //var responseString = await response.Content.ReadAsStringAsync();
-            //Console.WriteLine(responseString); //Gives You How many Recipients the message was sent to
+            //Console.WriteLine("send massage to guardian");
+            HttpClient client = new HttpClient();
+            //Define the Required Variables
+            string key = "YnPDiagST";
+            string user = "0587828027";
+            string pass = "65576266";
+            string sender = "Medi";
+            //string recipient = "0538320860";
+            //string recipient = _registrationTest.Guardians[0].PhoneNumber;
+            string recipient = guardianPhone;
+            string msg = "שים לב- " + childName + " עדיין לא לקח את התרופות";
+            var values = new Dictionary<string, string>
+            {
+                { "key", key }, { "user", user },{ "pass", pass },
+                { "sender", sender }, { "recipient", recipient },
+                { "msg", msg }
+            };
+            var content = new FormUrlEncodedContent(values); //Encode the Data
+            var response = await client.PostAsync("https://www.sms4free.co.il/ApiSMS/SendSMS", content);
+            var responseString = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(responseString); //Gives You How many Recipients the message was sent to
         }
 
         //הפעלת נודניק על ידי הילד. 
@@ -288,8 +248,7 @@ namespace BL
         }
 
 
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //public static void PlaySnooze(CodeTimeToUser _codeTimeToUser, long timeId)
+
         public static void PlaySnooze(long userId, DateTime time)
         //מקבל קוד ילד וזמן שההתראה התבצעה
         {

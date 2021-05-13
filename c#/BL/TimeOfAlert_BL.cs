@@ -17,7 +17,11 @@ namespace BL
         public bool Add(TimeOfAlertForUser timeOfAlertForUser)
         {
             if (_user_DAL.AddSnooze(timeOfAlertForUser.snooze))//V
-            { 
+            {
+                foreach (var item in timeOfAlertForUser.timeOfDay)
+                {
+                    item.userId = timeOfAlertForUser.snooze.userId;
+                }
                 if(_TimeOfDay_DAL.AddListTimeOfAlert(timeOfAlertForUser.timeOfDay))//V
                 {
                     //List<DetailsAlert>[] _DetailsOfAlert =_MedicinesToChild_DAL.AddListMedicinesToUser(timeOfAlertForUser);

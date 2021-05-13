@@ -75,7 +75,7 @@ namespace BL
                     timeToMedicinesForChild.status = true;
                     _TimeToMedicinesForChild_DAL.Edit(timeToMedicinesForChild);
                     ArchiveTakeMedicine archiveTake= archives.Find(a=>a.medicineToChild==timeToMedicinesForChild.Id);
-                    archiveTake.time = DateTime.Now.TimeOfDay;
+                    //archiveTake.time = DateTime.Now.TimeOfDay;
                     //archiveTake.onTime = !(_details.CountSnooze > timeToMedicinesForChild.MedicinesToChild.User.snoozeCounter);
                     User user = _User_DAL.GetByIdentity(_details.CodeTimeToUser.UserID);
                     int maxMinute = (int)user.snoozePeriod * (int)user.snoozeCounter;
@@ -98,14 +98,14 @@ namespace BL
                         if (count <= timeToMedicinesForChild.MedicinesToChild.User.snoozeCounter / 2) user.points += 2;
                         //if(temp <= timeToMedicinesForChild.TimeOfDay.theTime.Add(new TimeSpan(0,(int)timeToMedicinesForChild.MedicinesToChild.User.snoozeCounter / 2* (int)timeToMedicinesForChild.MedicinesToChild.User.snoozePeriod,0)))
                         else user.points += 1;
-                        archiveTake.onTime = true;
+                        //archiveTake.onTime = true;
                         //למחוק מההתראות
                         Alert_BL.RemoveSnooze(_details.CodeTimeToUser);
                     }
                     else archiveTake.onTime = false;
                     //else if (_details.CountSnooze <= timeToMedicinesForChild.MedicinesToChild.User.snoozeCounter)
                     _User_DAL.Edit(user);
-                    _archiveDAL.Edit(archiveTake);
+                    //_archiveDAL.Edit(archiveTake);
 
 
                 }
