@@ -13,6 +13,7 @@ namespace DAL
         public void Add(ArchiveTakeMedicine archiveTakeMedicine)
         {
             _DB.ArchiveTakeMedicines.Add(archiveTakeMedicine);
+            //_DB.ArchiveTakeMedicines.Add(archiveTakeMedicine);
             _DB.SaveChanges();
         }
 
